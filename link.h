@@ -1,15 +1,19 @@
-CXX = g++
-CXXFLAGS = -std=c++14 -g -Wall -MMD -Werror=vla
-EXEC = raiinet
-OBJECTS = main.o game.o grid.o cell.o player.o link.o
-DEPENDS = ${OBJECTS:.o=.d}
+// Type of link
+enum class LinkType {Virus, Data};
 
-${EXEC}: ${OBJECTS}
-	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} -lX11
+class Link {
+    LinkType type; // Type of link
+    int strength; // Strength of link
+    
 
--include ${DEPENDS}
+    public:
+        Link(LinkType type, int strength); // Creates the link with given type and strength
+        bool battle(Link *other); // Battles another link and returns 1 if survived, and 0 otherwise
 
-.PHONY: clean
-
-clean:
-	rm ${OBJECTS} ${EXEC} ${DEPENDS}
+        // Getters/Accessors for fields
+        LinkType getType();
+        void setType(LinkType newType);
+        LinkType getStrength();
+        void setStrength(int newStrength);
+        
+};
