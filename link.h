@@ -1,19 +1,24 @@
-// Type of link
-enum class LinkType {Virus, Data};
+enum class LinkType {Virus, Data};  // Types of a Link
 
 class Link {
-    LinkType type; // Type of link
-    int strength; // Strength of link
-    
+        LinkType type;  // LinkType of Link
+        int strength;   // strength of Link
+        char name;      // 'a-h' for Player 1
+                        // 'A-H' for Player 2
 
     public:
-        Link(LinkType type, int strength); // Creates the link with given type and strength
-        bool battle(Link *other); // Battles another link and returns 1 if survived, and 0 otherwise
+        // Constructor for a Link
+        //   The Link has given type, strength and name
+        Link(LinkType type, int strength, char name);
 
-        // Getters/Accessors for fields
+        // Accessor/setter for type
         LinkType getType();
         void setType(LinkType newType);
-        LinkType getStrength();
+
+        // Accessor/setter for strength
+        int getStrength();
         void setStrength(int newStrength);
-        
+
+        // Accessor for name
+        char getName();
 };

@@ -1,25 +1,33 @@
 #include <vector>
 #include <utility>
 #include "cell.h"
+using std::vector;
 
-enum class Direction {Up, Down, Left, Right}; // directions of movement
+const int SIZE = 8;  // Sets board side length constant
+
+enum class Direction {Up, Down, Left, Right};  // Directions of movement
 
 class Link;
 
 class Grid {
-    std::vector<std::vector<Cell>> theGrid;
-    std::vector<std::vector<std::pair<int, int>>> linkLocations;
+        // 8*8 2D array of Cell's
+        vector<vector<Cell>> cells;
+
+        // Every Player's each of the 8 Links have a row-col coordianate pair.
+        //   If a Link perishes its coordianate pair is set to <-1, -1>
+        vector<vector<std::pair<int, int>>> locationOfLinks;
 
     public:
         // Constructor for a Grid
-        //   Instantiates cells with the vector of links in a 
-        //   size x size grid
-        Grid(int size, std::vector<Link *> links);
+        //   Instantiates Cells with the vector of Links in a size*size Grid
+        Grid(int size, vector<Link *> links);
 
-        // move(int, int, int, Direction) 
-        //   Moves player p's link l by d spaces in the direction dir
-        void move(int p, int l, int d, Direction dir);
+        // Additional construction may go here if necessary
+        void init();
 
-        // prints the grid
+        // Moves Player player's Link link, towards Direction dir
+        void move(int player, int link, Direction dir);
+
+        // Calls any type of Display to draw
         void print();
 };

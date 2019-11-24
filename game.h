@@ -3,20 +3,22 @@
 #include "player.h"
 
 class Game {
-    Grid g;
-    std::vector<Player> players;
+        Grid grid;     // grid is the Grid that the game takes place in
+        std::vector<Player> players;    // a vector of two Player's
 
     public:
-        // Constructor for Game
-        //  Instantiates a grid and a vector of players
-        //  Uses link information from each player to instantiate grid
+        // Constructor for a Game
+        //   Instantiates a grid and a vector of players
+        //   Uses link information from each player to instantiate grid
         Game();
 
+        // Additional construction may go here if necessary
+        void init();
+
+        // Calls Grid's print()
         void print();
 
-        // move (int, int , int, Direction)
-        // return type: void
-        //
-        // // moves the player p's vector-l by d, towards direction d;
-        void move(int p, int l, int d, Direction d);
+        // Moves Link-link towards Direction dir;
+        //   Parses link and calls Grid's move() with parsed information
+        void move(char link, Direction dir);
 };
