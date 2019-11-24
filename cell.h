@@ -36,7 +36,7 @@ class Cell {
         //   This is used in case of a Link crosses the opponent border
         void removeAndDownload();
 
-        // TO BE DISCUSSED
+        //////// TO BE DISCUSSED ////////
         void setLink(Link *link); 
 
 };

@@ -3,8 +3,8 @@
 #include "player.h"
 
 class Game {
-        Grid g;
-        std::vector<Player> players;
+        Grid grid;     // grid is the Grid that the game takes place in
+        std::vector<Player> players;    // a vector of two Player's
 
     public:
         // Constructor for a Game

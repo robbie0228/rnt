@@ -11,4 +11,7 @@ class Player {
 
         // Additional construction may go here if necessary
         void init();
+
+        //////// FOR TESTING ////////
+        void print();
 };
