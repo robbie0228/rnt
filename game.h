@@ -7,17 +7,18 @@ class Game {
     std::vector<Player> players;
 
     public:
-        // Constructor for Game
-        //   Instantiates a grid and a vector of players
-        //   Uses link information from each player to instantiate grid
+        // Constructor for a Game
+        //    Instantiates a grid and a vector of players
+        //    Uses link information from each player to instantiate grid
         Game();
 
-        // Additional construction may go here
+        // Additional construction may go here if necessary
         void init();
 
-        // Calls any type of Display to draw
+        // Calls Grid's print()
         void print();
 
-        // Moves Player player's Link-link, towards Direction d;
-        void move(int player, int link, Direction d);
+        // Moves Player player's Link-link, towards Direction dir;
+        //    Calls Grid's move()
+        void move(int player, int link, Direction dir);
 };
