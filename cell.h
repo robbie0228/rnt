@@ -19,9 +19,9 @@ class Cell {
         Cell(Link *l = nullptr);
 
         // Moves a Link from the given cell to this Cell
-        //    If this Cell has a Link, battle is taken care of
-        //    If this Cell has a firewall, consequences are taken care of
-        //    If this Cell has a server port, consequences are taken care of
+        //   If this Cell has a Link, battle is taken care of
+        //   If this Cell has a firewall, consequences are taken care of
+        //   If this Cell has a server port, consequences are taken care of
         bool moveCellHere(Cell &cell); 
 
         // Returns this Cell's link (pointer)
@@ -33,9 +33,10 @@ class Cell {
         // Sets this Cell's link (pointer) to nullptr
         // Takes care of recording the download by the owner of the now perished
         //  Link
-        //    This is used in case of a Link crosses the opponent border
+        //   This is used in case of a Link crosses the opponent border
         void removeAndDownload();
 
         // TO BE DISCUSSED
         void setLink(Link *link); 
+
 };
