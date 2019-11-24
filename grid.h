@@ -1,7 +1,7 @@
 #include <vector>
 #include <utility>
 #include "cell.h"
-using vector;
+using std::vector;
 
 const int SIZE = 8;  // Sets board side length constant
 
@@ -14,7 +14,7 @@ class Grid {
         vector<vector<Cell>> cells;
 
         // Every Player's each of the 8 Links have a row-col coordianate pair.
-        //   If a Link perishes its coordianet pair is set to <-1, -1>
+        //   If a Link perishes its coordianate pair is set to <-1, -1>
         vector<vector<std::pair<int, int>>> locationOfLinks;
 
     public:
@@ -25,7 +25,7 @@ class Grid {
         // Additional construction may go here if necessary
         void init();
 
-        // Moves Player player's Link-link, towards Direction dir
+        // Moves Player player's Link link, towards Direction dir
         void move(int player, int link, Direction dir);
 
         // Calls any type of Display to draw

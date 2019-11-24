@@ -1,10 +1,10 @@
 enum class LinkType {Virus, Data};  // Types of a Link
 
 class Link {
-        LinkType type;  // Type of Link
+        LinkType type;  // LinkType of Link
         int strength;   // strength of Link
-        char name;      // 'A-H' for Player 1
-                        // 'a-h' for Player 2
+        char name;      // 'a-h' for Player 1
+                        // 'A-H' for Player 2
 
     public:
         // Constructor for a Link

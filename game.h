@@ -18,7 +18,7 @@ class Game {
         // Calls Grid's print()
         void print();
 
-        // Moves Link link towards Direction dir;
+        // Moves Link-link towards Direction dir;
         //   Parses link and calls Grid's move() with parsed information
         void move(char link, Direction dir);
 };
