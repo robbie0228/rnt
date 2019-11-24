@@ -1,6 +1,8 @@
 #include "link.h"
 #include <vector>
 
+enum class Status {Win, Lose, InPlay};
+
 class Player {
     vector<Link>links; // List of links that the player owns
 
