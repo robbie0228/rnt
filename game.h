@@ -8,15 +8,16 @@ class Game {
 
     public:
         // Constructor for Game
-        //  Instantiates a grid and a vector of players
-        //  Uses link information from each player to instantiate grid
+        //   Instantiates a grid and a vector of players
+        //   Uses link information from each player to instantiate grid
         Game();
 
+        // Additional construction may go here
+        void init();
+
+        // Calls any type of Display to draw
         void print();
 
-        // move (int, int , int, Direction)
-        // return type: void
-        //
-        // // moves the player p's vector-l by d, towards direction d;
-        void move(int p, int l, int d, Direction d);
+        // Moves Player player's Link-link, towards Direction d;
+        void move(int player, int link, Direction d);
 };
