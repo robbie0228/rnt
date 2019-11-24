@@ -11,6 +11,7 @@ class Link;
 class Grid {
         std::vector<std::vector<Cell>> cells;
         std::vector<std::vector<std::pair<int, int>>> locationOfLinks;
+        
     public:
         // Constructor for a Grid
         //   Instantiates Cells with the vector of Links in a size*size Grid

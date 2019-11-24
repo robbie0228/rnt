@@ -3,8 +3,8 @@
 #include "player.h"
 
 class Game {
-    Grid g;
-    std::vector<Player> players;
+        Grid g;
+        std::vector<Player> players;
 
     public:
         // Constructor for a Game
@@ -18,7 +18,7 @@ class Game {
         // Calls Grid's print()
         void print();
 
-        // Moves Player player's Link-link, towards Direction dir;
-        //    Calls Grid's move()
-        void move(int player, int link, Direction dir);
+        // Moves Link link towards Direction dir;
+        //   Parses link and calls Grid's move() with parsed information
+        void move(char link, Direction dir);
 };
