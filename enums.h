@@ -1,3 +1,6 @@
+#ifndef ENUMS_H
+#define ENUMS_H
+
 // Ability names
 enum class Ability {
     Firewall,
@@ -29,3 +32,5 @@ enum class Status {
     Lose, 
     InPlay
 };
+
+#endif

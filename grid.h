@@ -1,3 +1,5 @@
+#ifndef GRID_H
+#define GRID_H
 #include <vector>
 #include <utility>
 #include "cell.h"
@@ -30,3 +32,5 @@ class Grid {
         // Calls any type of Display to draw
         void print();
 };
+
+#endif

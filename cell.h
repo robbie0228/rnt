@@ -1,3 +1,5 @@
+#ifndef CELL_H
+#define CELL_H
 #include "link.h"
 
 class Cell {
@@ -41,3 +43,5 @@ class Cell {
         void setLink(Link *newLink);
 
 };
+
+#endif
