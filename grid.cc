@@ -72,7 +72,7 @@ void Grid::move(int player, int link, Direction dir) {
             moveToCell.moveCellHere(cellWithLink);
         }
     } else if (dir == Direction::Left) {
-        if (colOfLink - 1 <= 0) {
+        if (colOfLink - 1 < 0) {
             cellWithLink.removeAndDownload();
         } else {
             Cell &moveToCell = cells[rowOfLink][colOfLink - 1];
@@ -86,7 +86,7 @@ void Grid::move(int player, int link, Direction dir) {
             moveToCell.moveCellHere(cellWithLink);
         }
     } else {
-        if (rowOfLink - 1 <= 0) {
+        if (rowOfLink - 1 < 0) {
             cellWithLink.removeAndDownload();
         } else {
             Cell &moveToCell = cells[rowOfLink - 1][colOfLink];
