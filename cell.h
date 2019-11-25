@@ -28,10 +28,6 @@ class Cell {
         // Returns this Cell's link (pointer)
         Link *getLink() const;
 
-        // Returns this Cell's link's name
-        // NOTE: Will be removed once getInfo is implemented
-        char getName() const;
-
         // Sets this Cell's link (pointer) to nullptr
         void removeLink();
 
