@@ -31,7 +31,7 @@ void Game::init() {
 
 void Game::move(char link, Direction dir) {
     this->grid.move(currentPlayer, charLinkToInt(link), dir);
-    if (currentPlayer == 0 {
+    if (currentPlayer == 0) {
         currentPlayer = 1;
     } else if (currentPlayer == 1) {
         currentPlayer = 0;
