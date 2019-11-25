@@ -1,5 +1,5 @@
 #include "cell.h"
-Cell::Cell(Link *link, int serverPort): link{link}, serverPort{serverPort} {}
+Cell::Cell(int row, int col, Link *link, int serverPort): link{link}, row{row}, col{col}, firewall{0},  serverPort{serverPort} {}
 
 bool Cell::moveCellHere(Cell &cell) {
     if (serverPort) {

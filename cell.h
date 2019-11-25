@@ -16,7 +16,7 @@ class Cell {
 
     public:
         // Constructor for Cell, default to an empty Cell
-        Cell(Link *link = nullptr, int serverPort = 0);
+        Cell(int row, int col, Link *link = nullptr, int serverPort = 0);
 
         // Moves a Link from the given cell to this Cell
         //   If this Cell has a Link, battle is taken care of
