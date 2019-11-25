@@ -37,7 +37,7 @@ class Cell {
         //   This is used in case of a Link crosses the opponent border
         void removeAndDownload();
 
-        // Set's this Cell's link (pointer) to newLink
+        // Set this Cell's link (pointer) to newLink
         void setLink(Link *newLink);
 
 };
