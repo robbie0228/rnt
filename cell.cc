@@ -24,8 +24,15 @@ bool Cell::moveCellHere(Cell &cell) {
     }
 }
 
-Link *Cell::getLink() {
+Link *Cell::getLink() const{
     return link;
+}
+
+char Cell::getName() const {
+    if (link == nullptr) {
+        return '.';
+    }
+    return link->getName();
 }
 
 void Cell::removeLink() {
