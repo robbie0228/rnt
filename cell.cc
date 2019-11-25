@@ -6,7 +6,7 @@ bool Cell::moveCellHere(Cell &cell) {
         // TODO: Tell player to download link
     } else if (link == nullptr) {
         link = cell.getLink();
-        return true;
+        return false;
     } else {
         Link *otherLink = cell.getLink();
         if (otherLink == nullptr) {
