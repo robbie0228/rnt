@@ -13,6 +13,9 @@ bool Cell::moveCellHere(Cell &cell) {
         if (otherLink == nullptr) {
             throw "Cannot move empty cell to cell with link";
         }
+        if (otherLink->getName() - link->getName() < 8) {
+            throw "Cannot move a link onto another of your links";
+        }
         if (otherLink->getStrength() >= link->getStrength()) {
             // TODO: Tell player that owns link to download link
             link = otherLink;
