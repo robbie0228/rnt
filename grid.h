@@ -1,3 +1,5 @@
+#ifndef GRID_H
+#define GRID_H
 #include <vector>
 #include <utility>
 #include <iostream>
@@ -29,3 +31,5 @@ class Grid {
         // Calls any type of Display to draw
         friend std::ostream &operator<<(std::ostream &out, const Grid &grid);
 };
+
+#endif
