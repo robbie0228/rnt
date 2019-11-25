@@ -25,10 +25,7 @@ class Grid {
         //   Instantiates Cells in a size*size Grid
         Grid(int size = SIZE);
 
-        // Additional construction may go here if necessary
-        void init();
-
-        // Moves Player player's Link link, towards Direction dir
+        // Moves Player (player + 1)'s Link (link + 1), towards Direction dir
         void move(int player, int link, Direction dir);
 
         // Calls any type of Display to draw

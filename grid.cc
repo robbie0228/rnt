@@ -1,22 +1,30 @@
 #include "grid.h"
 
+using namespace std;
+
 Grid::Grid(int size) {
-    // Initialize links
+    // Initialize links and locations
     for (size_t player = 0; player < size; ++player) {
         // Create a vector of links to contain the links in that row
-        std::vector<Link> playerLinks;
+        vector<Link> playerLinks;
+        vector<pair<int, int>> linkLocations;
         for (size_t link = 0; link < 4; ++link) {
+            // Initialize link
             playerLinks.emplace_back(Link(LinkType::Data, link, 'a' + link));
+            // Initialize location
+            linkLocations.emplace_back(pair<int, int>(player, link));
         }
         for (size_t link = 0; link < 4; ++link) {
-            playerLinks.emplace_back(Link(LinkType::Data, link, 'e' + link));
+            playerLinks.emplace_back(Link(LinkType::Virus, link, 'e' + link));
+            linkLocations.emplace_back(pair<int, int>(player, link + 4));
         }
         links.emplace_back(playerLinks);
+        locationOfLinks.emplace_back(linkLocations);
     }
 
     // Loop through each row
     for (size_t r = 0; r < size; ++r) {
-        std::vector<Cell> row;
+        vector<Cell> row;
         // Loop through each column
         for (size_t c = 0; c < size; ++c) {
             if (r == 0) {
@@ -51,20 +59,48 @@ Grid::Grid(int size) {
     }
 }
 
-void Grid::init() {
-
-}
-
 void Grid::move(int player, int link, Direction dir) {
-
-}
-
-std::ostream &operator<<(std::ostream &out, const Grid &grid) {
-    for (size_t r = 0; r < n; ++r) {
-        for (size_t c = 0; c < n; ++c) {
-            out << grid.cells[r][c].getName();
+    pair<int, int> locationOfLink = locationOfLinks[player][link];
+    int rowOfLink = locationOfLink.first;
+    int colOfLink = locationOfLink.second;
+    Cell &cellWithLink = cells[rowOfLink][colOfLink];
+    if (dir == Direction::Down) {
+        if (rowOfLink + 1 >= 8) {
+            cellWithLink.removeAndDownload();
+        } else {
+            Cell &moveToCell = cells[rowOfLink + 1][colOfLink];
+            moveToCell.moveCellHere(cellWithLink);
+        }
+    } else if (dir == Direction::Left) {
+        if (colOfLink - 1 <= 0) {
+            cellWithLink.removeAndDownload();
+        } else {
+            Cell &moveToCell = cells[rowOfLink][colOfLink - 1];
+            moveToCell.moveCellHere(cellWithLink);
+        }
+    } else if (dir == Direction::Right) {
+        if (colOfLink + 1 >= 8) {
+            cellWithLink.removeAndDownload();
+        } else {
+            Cell &moveToCell = cells[rowOfLink][colOfLink + 1];
+            moveToCell.moveCellHere(cellWithLink);
+        }
+    } else {
+        if (rowOfLink - 1 <= 0) {
+            cellWithLink.removeAndDownload();
+        } else {
+            Cell &moveToCell = cells[rowOfLink - 1][colOfLink];
+            moveToCell.moveCellHere(cellWithLink);
         }
     }
-    out << std::endl;
+}
+
+ostream &operator<<(ostream &out, const Grid &grid) {
+    for (size_t r = 0; r < 8; ++r) {
+        for (size_t c = 0; c < 8; ++c) {
+            out << grid.cells[r][c].getLink().getName();
+        }
+    }
+    out << endl;
     return out; // Return out for chaining
 }
