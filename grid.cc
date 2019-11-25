@@ -12,11 +12,19 @@ Grid::Grid(int size) {
             // Initialize link
             playerLinks.emplace_back(Link(LinkType::Data, link, (char)('a' + link)));
             // Initialize location
-            linkLocations.emplace_back(pair<int, int>(player, link));
+            if (link == 3) {
+                linkLocations.emplace_back(pair<int, int>(player == 0 ? 1 : 6, link));
+            } else {
+                linkLocations.emplace_back(pair<int, int>(player == 0 ? 0 : 7, link));
+            }
         }
         for (int link = 0; link < 4; ++link) {
             playerLinks.emplace_back(Link(LinkType::Virus, link, (char)('e' + link)));
-            linkLocations.emplace_back(pair<int, int>(player, link + 4));
+            if (link == 0) {
+                linkLocations.emplace_back(pair<int, int>(player == 0 ? 1 : 6, link + 4));
+            } else {
+                linkLocations.emplace_back(pair<int, int>(player == 0 ? 0 : 7, link + 4));
+            }
         }
         links.emplace_back(playerLinks);
         locationOfLinks.emplace_back(linkLocations);
