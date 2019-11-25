@@ -1,5 +1,5 @@
-#include "grid.h"
 #include <vector>
+#include "grid.h"
 #include "player.h"
 
 class Game {

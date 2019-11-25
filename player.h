@@ -1,8 +1,6 @@
 #include "link.h"
 #include <vector>
 
-enum class Status {Win, Lose, InPlay};
-
 class Player {
         int downloadedDataCount;
         int downloadedVirusCount;
@@ -13,6 +11,9 @@ class Player {
 
         // Additional construction may go here if necessary
         void init();
+
+        // Checks the current status of the Player
+        Status checkStatus();
 
         //////// FOR TESTING ////////
         void print();

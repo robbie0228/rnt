@@ -1,11 +1,10 @@
 #include <vector>
 #include <utility>
 #include "cell.h"
+#include "enums.h"
 using std::vector;
 
 const int SIZE = 8;  // Sets board side length constant
-
-enum class Direction {Up, Down, Left, Right};  // Directions of movement
 
 class Link;
 
