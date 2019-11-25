@@ -39,7 +39,7 @@ void Game::move(char link, Direction dir) {
 }
 
 ostream &operator<<(ostream &out, const Game &g) {
-    out << this->grid;
+    out << g.grid;
     return out;
 }
 
