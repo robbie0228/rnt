@@ -2,7 +2,7 @@
 #include "grid.h"
 #include "player.h"
 
-const int numOfPlayers = 2;
+const int NUMPLAYERS = 2;
 
 class Game {
         Grid grid;     // grid is the Grid that the game takes place in
