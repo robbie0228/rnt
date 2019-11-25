@@ -1,36 +1,22 @@
-#include <vector>
 #include "game.h"
-#include "grid.h"
-#include "player.h"
-#include "enums.h"
 using namespace std;
 
 // helper functions
 
 int charLinkToInt(char c) {
-    if (c == 'a' || c == 'A') {
-        return 0;
-    } if (c == 'b' || c == 'B') {
-        return 1;
-    } if (c == 'c' || c == 'C') {
-        return 2;
-    } if (c == 'd' || c == 'D') {
-        return 3;
-    } if (c == 'e' || c == 'E') {
-        return 4;
-    } if (c == 'f' || c == 'F') {
-        return 5;
-    } if (c == 'g' || c == 'G') {
-        return 6;
-    } if (c == 'h' || c == 'H') {
-        return 7;
+    if ('a' <= c && c <= 'h') {
+        return c - 'a';
+    } if ('A' <= c && c <= 'H') {
+        return c - 'A';
     }
 }
 
 
 //implementations
 
-Game::Game() : grid { Grid() }, currentPlayer{ 1 } {
+Game::Game(): 
+    grid{Grid()}, currentPlayer{0} {
+
     Player p1 = Player();
     Player p2 = Player();
 
@@ -44,15 +30,15 @@ void Game::init() {
 
 void Game::move(char link, Direction dir) {
     this->grid.move(currentPlayer, charLinkToInt(link), dir);
-    if (currentPlayer == 1) {
-        currentPlayer = 2;
-    } else if (currentPlayer == 2) {
+    if (currentPlayer == 0 {
         currentPlayer = 1;
+    } else if (currentPlayer == 1) {
+        currentPlayer = 0;
     }
 }
 
 ostream &operator<<(ostream &out, const Game &g) {
-    out << this->grid << endl;
+    out << this->grid;
     return out;
 }
 
