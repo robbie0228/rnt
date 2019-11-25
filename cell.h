@@ -1,3 +1,5 @@
+#ifndef CELL_H
+#define CELL_H
 #include "link.h"
 
 class Cell {
@@ -16,12 +18,13 @@ class Cell {
 
     public:
         // Constructor for Cell, default to an empty Cell
-        Cell(Link *l = nullptr);
+        Cell(int row, int col, Link *link = nullptr, int serverPort = 0);
 
         // Moves a Link from the given cell to this Cell
         //   If this Cell has a Link, battle is taken care of
         //   If this Cell has a firewall, consequences are taken care of
         //   If this Cell has a server port, consequences are taken care of
+        // Returns true if link stayed the same, otherwise false.
         bool moveCellHere(Cell &cell); 
 
         // Returns this Cell's link (pointer)
@@ -37,6 +40,8 @@ class Cell {
         void removeAndDownload();
 
         //////// TO BE DISCUSSED ////////
-        void setLink(Link *link); 
+        void setLink(Link *newLink);
 
 };
+
+#endif

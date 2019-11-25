@@ -1,3 +1,5 @@
+#ifndef LINK_H
+#define LINK_H
 #include "enums.h"
 
 class Link {
@@ -22,3 +24,5 @@ class Link {
         // Accessor for name
         char getName();
 };
+
+#endif

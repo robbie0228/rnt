@@ -1,3 +1,5 @@
+#ifndef GAME_H
+#define GAME_H
 #include <vector>
 #include <iostream>
 #include "grid.h"
@@ -24,4 +26,4 @@ class Game {
         friend std::ostream &operator<<(std::ostream &out, const Game &g);
 };
 
-
+#endif

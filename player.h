@@ -1,3 +1,5 @@
+#ifndef PLAYER_H
+#define PLAYER_H
 #include "link.h"
 #include <vector>
 
@@ -18,3 +20,5 @@ class Player {
         //////// FOR TESTING ////////
         void print();
 };
+
+#endif
