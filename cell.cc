@@ -24,7 +24,7 @@ bool Cell::moveCellHere(Cell &cell) {
     }
 }
 
-Link *Cell::getLink() {
+Link *Cell::getLink() const{
     return link;
 }
 

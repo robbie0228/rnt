@@ -28,7 +28,7 @@ class Cell {
         bool moveCellHere(Cell &cell); 
 
         // Returns this Cell's link (pointer)
-        Link *getLink();
+        Link *getLink() const;
 
         // Sets this Cell's link (pointer) to nullptr
         void removeLink();
@@ -39,7 +39,7 @@ class Cell {
         //   This is used in case of a Link crosses the opponent border
         void removeAndDownload();
 
-        //////// TO BE DISCUSSED ////////
+        // Set this Cell's link (pointer) to newLink
         void setLink(Link *newLink);
 
 };

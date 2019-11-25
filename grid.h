@@ -2,15 +2,17 @@
 #define GRID_H
 #include <vector>
 #include <utility>
+#include <iostream>
 #include "cell.h"
 #include "enums.h"
 using std::vector;
 
-const int SIZE = 8;  // Sets board side length constant
-
 class Link;
 
 class Grid {
+        // Every Player's each of the 8 links;
+        vector<vector<Link>> links;
+
         // 8*8 2D array of Cell's
         vector<vector<Cell>> cells;
 
@@ -20,17 +22,14 @@ class Grid {
 
     public:
         // Constructor for a Grid
-        //   Instantiates Cells with the vector of Links in a size*size Grid
-        Grid(int size, vector<Link *> links);
+        //   Instantiates Cells in a size*size Grid
+        Grid(int size = GRIDSIZE);
 
-        // Additional construction may go here if necessary
-        void init();
-
-        // Moves Player player's Link link, towards Direction dir
+        // Moves Player (player + 1)'s Link (link + 1), towards Direction dir
         void move(int player, int link, Direction dir);
 
         // Calls any type of Display to draw
-        void print();
+        friend std::ostream &operator<<(std::ostream &out, const Grid &grid);
 };
 
 #endif
