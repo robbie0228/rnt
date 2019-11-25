@@ -1,4 +1,4 @@
-enum class LinkType {Virus, Data};  // Types of a Link
+#include "enums.h"
 
 class Link {
         LinkType type;  // LinkType of Link
