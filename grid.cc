@@ -74,6 +74,9 @@ void Grid::move(int player, int link, Direction dir) {
     Cell &cellWithLink = cells[rowOfLink][colOfLink];
     if (dir == Direction::Down) {
         if (rowOfLink + 1 >= 8) {
+            if (player == 1) {
+                throw "Invalid move";
+            }
             cellWithLink.removeAndDownload();
         } else {
             Cell &moveToCell = cells[rowOfLink + 1][colOfLink];
@@ -95,6 +98,9 @@ void Grid::move(int player, int link, Direction dir) {
         }
     } else {
         if (rowOfLink - 1 < 0) {
+            if (player == 0) {
+                throw "Invalid move";
+            }
             cellWithLink.removeAndDownload();
         } else {
             Cell &moveToCell = cells[rowOfLink - 1][colOfLink];
