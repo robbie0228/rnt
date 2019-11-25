@@ -6,7 +6,7 @@ using namespace std;
 int charLinkToInt(char c) {
     if ('a' <= c && c <= 'h') {
         return c - 'a';
-    } if ('A' <= c && c <= 'H') {
+    } else if ('A' <= c && c <= 'H') {
         return c - 'A';
     }
     throw "Invalid Link";
