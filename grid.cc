@@ -4,18 +4,18 @@ using namespace std;
 
 Grid::Grid(int size) {
     // Initialize links and locations
-    for (size_t player = 0; player < size; ++player) {
+    for (int player = 0; player < size; ++player) {
         // Create a vector of links to contain the links in that row
         vector<Link> playerLinks;
         vector<pair<int, int>> linkLocations;
-        for (size_t link = 0; link < 4; ++link) {
+        for (int link = 0; link < 4; ++link) {
             // Initialize link
-            playerLinks.emplace_back(Link(LinkType::Data, link, 'a' + link));
+            playerLinks.emplace_back(Link(LinkType::Data, link, (char)('a' + link)));
             // Initialize location
             linkLocations.emplace_back(pair<int, int>(player, link));
         }
-        for (size_t link = 0; link < 4; ++link) {
-            playerLinks.emplace_back(Link(LinkType::Virus, link, 'e' + link));
+        for (int link = 0; link < 4; ++link) {
+            playerLinks.emplace_back(Link(LinkType::Virus, link, (char)('e' + link)));
             linkLocations.emplace_back(pair<int, int>(player, link + 4));
         }
         links.emplace_back(playerLinks);
@@ -23,10 +23,10 @@ Grid::Grid(int size) {
     }
 
     // Loop through each row
-    for (size_t r = 0; r < size; ++r) {
+    for (int r = 0; r < size; ++r) {
         vector<Cell> row;
         // Loop through each column
-        for (size_t c = 0; c < size; ++c) {
+        for (int c = 0; c < size; ++c) {
             if (r == 0) {
                 if (c == 3 || c == 4) {
                     row.emplace_back(Cell(r, c, nullptr, 1));
@@ -96,9 +96,9 @@ void Grid::move(int player, int link, Direction dir) {
 }
 
 ostream &operator<<(ostream &out, const Grid &grid) {
-    for (size_t r = 0; r < 8; ++r) {
-        for (size_t c = 0; c < 8; ++c) {
-            out << grid.cells[r][c].getLink().getName();
+    for (int r = 0; r < 8; ++r) {
+        for (int c = 0; c < 8; ++c) {
+            out << grid.cells[r][c].getLink()->getName();
         }
     }
     out << endl;
