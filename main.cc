@@ -54,4 +54,5 @@ int main()
             cout << e << endl;
         }
     }
+    cout << "Testing suite/pipeline job to fail" << endl;
 }
