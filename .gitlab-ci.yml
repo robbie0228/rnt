@@ -19,7 +19,7 @@ build:
       - "*.d"
 
 # run tests using the binary built before
-# test:
-#   stage: test
-#   script:
-#     - ./runmytests.sh
+test:
+  stage: test
+  script:
+    - ./runSuite.sh
