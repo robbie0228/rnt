@@ -1,3 +1,5 @@
+#ifndef GAME_H
+#define GAME_H
 #include <vector>
 #include "grid.h"
 #include "player.h"
@@ -22,3 +24,5 @@ class Game {
         //   Parses link and calls Grid's move() with parsed information
         void move(char link, Direction dir);
 };
+
+#endif
