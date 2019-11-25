@@ -81,14 +81,14 @@ void Grid::move(int player, int link, Direction dir) {
         }
     } else if (dir == Direction::Left) {
         if (colOfLink - 1 < 0) {
-            cellWithLink.removeAndDownload();
+            throw "Invalid move"
         } else {
             Cell &moveToCell = cells[rowOfLink][colOfLink - 1];
             moveToCell.moveCellHere(cellWithLink);
         }
     } else if (dir == Direction::Right) {
         if (colOfLink + 1 >= 8) {
-            cellWithLink.removeAndDownload();
+            throw "Invalid move"
         } else {
             Cell &moveToCell = cells[rowOfLink][colOfLink + 1];
             moveToCell.moveCellHere(cellWithLink);
