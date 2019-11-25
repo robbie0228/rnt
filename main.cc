@@ -34,7 +34,7 @@ int main()
         }
         else if (cmd == "board")
         {
-            // game.print();
+            cout << game;
         }
         else if (cmd == "sequence")
         {
