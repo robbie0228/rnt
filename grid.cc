@@ -4,11 +4,11 @@ using namespace std;
 
 Grid::Grid(int size) {
     // Initialize links and locations
-    for (int player = 0; player < size; ++player) {
+    for (int player = 0; player < NUMPLAYERS; ++player) {
         // Create a vector of links to contain the links in that row
         vector<Link> playerLinks;
         vector<pair<int, int>> linkLocations;
-        for (int link = 0; link < 4; ++link) {
+        for (int link = 0; link < (size / 2); ++link) {
             // Initialize link
             playerLinks.emplace_back(Link(LinkType::Data, link, (char)('a' + link)));
             // Initialize location
@@ -18,7 +18,7 @@ Grid::Grid(int size) {
                 linkLocations.emplace_back(pair<int, int>(player == 0 ? 0 : 7, link));
             }
         }
-        for (int link = 0; link < 4; ++link) {
+        for (int link = 0; link < (size / 2); ++link) {
             playerLinks.emplace_back(Link(LinkType::Virus, link, (char)('e' + link)));
             if (link == 0) {
                 linkLocations.emplace_back(pair<int, int>(player == 0 ? 1 : 6, link + 4));
@@ -81,14 +81,14 @@ void Grid::move(int player, int link, Direction dir) {
         }
     } else if (dir == Direction::Left) {
         if (colOfLink - 1 < 0) {
-            throw "Invalid move"
+            throw "Invalid move";
         } else {
             Cell &moveToCell = cells[rowOfLink][colOfLink - 1];
             moveToCell.moveCellHere(cellWithLink);
         }
     } else if (dir == Direction::Right) {
         if (colOfLink + 1 >= 8) {
-            throw "Invalid move"
+            throw "Invalid move";
         } else {
             Cell &moveToCell = cells[rowOfLink][colOfLink + 1];
             moveToCell.moveCellHere(cellWithLink);

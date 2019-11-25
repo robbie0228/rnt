@@ -5,8 +5,6 @@
 #include "enums.h"
 using std::vector;
 
-const int SIZE = 8;  // Sets board side length constant
-
 class Link;
 
 class Grid {
@@ -23,7 +21,7 @@ class Grid {
     public:
         // Constructor for a Grid
         //   Instantiates Cells in a size*size Grid
-        Grid(int size = SIZE);
+        Grid(int size = GRIDSIZE);
 
         // Moves Player (player + 1)'s Link (link + 1), towards Direction dir
         void move(int player, int link, Direction dir);

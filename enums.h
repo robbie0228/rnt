@@ -1,3 +1,6 @@
+const int GRIDSIZE = 8;  // Board side length
+const int NUMPLAYERS = 2; // Number of players
+
 // Ability names
 enum class Ability {
     Firewall,
