@@ -9,6 +9,7 @@ int charLinkToInt(char c) {
     } if ('A' <= c && c <= 'H') {
         return c - 'A';
     }
+    throw "Invalid Link";
 }
 
 
