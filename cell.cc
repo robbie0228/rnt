@@ -37,5 +37,5 @@ void Cell::removeAndDownload() {
 }
 
 void Cell::setLink(Link *newLink) {
-    link = link;
+    link = newLink;
 }
