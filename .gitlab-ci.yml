@@ -25,3 +25,7 @@ build:
 #   stage: test
 #   script:
 #     - ./runmytests.sh
+
+job:
+    tags:
+        - run
