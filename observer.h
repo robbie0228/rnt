@@ -1,7 +1,5 @@
-#ifndef _OBSERVER_H_
-#define _OBSERVER_H_
-
-// DO NOT MODIFY THIS FILE!
+#ifndef OBSERVER_H_
+#define OBSERVER_H_
 
 class Subject;
 
