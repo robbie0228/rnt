@@ -77,6 +77,7 @@ void Grid::move(int player, int link, Direction dir) {
             if (player == 1) {
                 throw "Invalid move";
             }
+            locationOfLinks[player][link] = pair<int, int>(-1, -1);
             cellWithLink.removeAndDownload();
         } else {
             Cell &moveToCell = cells[rowOfLink + 1][colOfLink];
@@ -116,6 +117,7 @@ void Grid::move(int player, int link, Direction dir) {
             if (player == 0) {
                 throw "Invalid move";
             }
+            locationOfLinks[player][link] = pair<int, int>(-1, -1);
             cellWithLink.removeAndDownload();
         } else {
             Cell &moveToCell = cells[rowOfLink - 1][colOfLink];
@@ -126,6 +128,33 @@ void Grid::move(int player, int link, Direction dir) {
             }
             cellWithLink.removeLink();
         }
+    }
+}
+
+void Grid::useAbility(Ability a, vector<char> v) {
+    if (a == Ability::Firewall) {
+        int row = v[0] - '0';
+        int col = v[1] - '0';
+        cells[row][col].useAbility(Ability::Firewall);
+    } else {
+        char linkName = v[0];
+        pair<int, int> locationOfLink;
+        if ('a' <= linkName && linkName <= 'h') { 
+            locationOfLink = locationOfLinks[0][linkName - 'a'];
+        } else if ('A' <= linkName && linkName <= 'H') {
+            locationOfLink = locationOfLinks[1][linkName - 'A'];    
+        }
+        int rowOfLink = locationOfLink.first;
+        int colOfLink = locationOfLink.second;
+
+        /*if (a == Ability::Download) {
+            cells[rowOfLink][colOfLink].useAbility(Ability::Download);
+        } else if (a == Ability::Boost) {
+            cells[rowOfLink][colOfLink].useAbility(Ability::Boost);
+        } else if (a == Ability::Polarize) {
+            cells[rowOfLink][colOfLink].useAbility(Ability::Polarize);
+        }*/
+        cells[rowOfLink][colOfLink].useAbility(a);
     }
 }
 

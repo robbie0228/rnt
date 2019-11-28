@@ -28,6 +28,9 @@ class Grid {
         // Moves Player (player + 1)'s Link (link + 1), towards Direction dir
         void move(int player, int link, Direction dir);
 
+        // Uses ability
+        void useAbility(Ability a, vector<char> v);
+
         // Calls any type of Display to draw
         friend std::ostream &operator<<(std::ostream &out, const Grid &grid);
 };
