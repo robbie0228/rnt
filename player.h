@@ -2,8 +2,9 @@
 #define PLAYER_H
 #include "link.h"
 #include <vector>
+#include "observer.h"
 
-class Player {
+class Player : public Observer {
         int downloadedDataCount;
         int downloadedVirusCount;
 
@@ -19,6 +20,8 @@ class Player {
 
         //////// FOR TESTING ////////
         void print();
+
+        void notify(Subject &whoFrom);
 };
 
 #endif

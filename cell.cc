@@ -1,5 +1,13 @@
 #include "cell.h"
 #include <cstdlib>
+
+using namespace std;
+
+int getPlayerNumFromLink(Link *link) {
+    char name = link->getName();
+    return name < 'A' ? 1 : 0;
+}
+
 Cell::Cell(int row, int col, Link *link, int serverPort): 
     link{link}, row{row}, col{col}, firewall{0}, serverPort{serverPort} {}
 
@@ -18,13 +26,27 @@ bool Cell::moveCellHere(Cell &cell) {
             throw "Cannot move a link onto another of your links";
         }
         if (otherLink->getStrength() >= link->getStrength()) {
-            // TODO: Tell player that owns link to download link
+            map<string, string> state;
+            state.insert(pair<string, string>("downloadingPlayer", to_string(getPlayerNumFromLink(otherLink))));
+            state.insert(pair<string, string>("downloadingLink", to_string(link->getName())));
+            setState(state);
             link = otherLink;
             return false;
         } else {
-            // TODO: Tell player that owns otherLink to download otherLink
+            map<string, string> state;
+            state.insert(pair<string, string>("downloadingPlayer", to_string(getPlayerNumFromLink(link))));
+            state.insert(pair<string, string>("downloadingLink", to_string(otherLink->getName())));
+            setState(state);
             return true;
         }
+    }
+}
+
+char Cell::getName() const{
+    if (link == nullptr) {
+        return '.';
+    } else {
+        return link->getName();
     }
 }
 
@@ -43,4 +65,12 @@ void Cell::removeAndDownload() {
 
 void Cell::setLink(Link *newLink) {
     link = newLink;
+}
+
+map<string, string> Cell::getInfo() const{
+    map<string, string> info;
+    info.insert(pair<string, string>("row", to_string(row)));
+    info.insert(pair<string, string>("col", to_string(col)));
+    info.insert(pair<string, string>("name", string(1, getName())));
+    return info;
 }

@@ -1,8 +1,9 @@
 #ifndef CELL_H
 #define CELL_H
 #include "link.h"
+#include "subject.h"
 
-class Cell {
+class Cell : public Subject {
         Link *link; // If Cell contains a Link: link points to that Link;
                     //               otherwise: link is a nullptr
         int row;    // 1 <= row <= 8
@@ -27,6 +28,9 @@ class Cell {
         // Returns true if link stayed the same, otherwise false.
         bool moveCellHere(Cell &cell); 
 
+        // Returns this Cell's name
+        char getName() const;
+
         // Returns this Cell's link (pointer)
         Link *getLink() const;
 
@@ -42,6 +46,7 @@ class Cell {
         // Set this Cell's link (pointer) to newLink
         void setLink(Link *newLink);
 
+        std::map<std::string, std::string> getInfo() const;
 };
 
 #endif

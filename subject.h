@@ -2,14 +2,20 @@
 #define SUBJECT_H
 #include <vector>
 #include <map>
+#include <string>
 #include "observer.h"
 
+using std::string, std::map, std::vector;
+
 class Subject {
-		std::vector<Observer *> observers;
+		vector<Observer *> observers;
+		map<string, string> state;
 	public:
 		void attach(Observer *o);  
 		void notifyObservers();
-		virtual std::map<std::string, std::string> getInfo() const = 0;
+		void setState(map<string, string> newS);
+		map<string, string> getState() const;
+		virtual map<string, string> getInfo() const = 0;
 };
 
 void Subject::attach(Observer *o) {
@@ -19,5 +25,9 @@ void Subject::attach(Observer *o) {
 void Subject::notifyObservers() {
   for (auto &ob : observers) ob->notify(*this);
 }
+
+void Subject::setState(map<string, string> newS) { state = newS; }
+
+map<string, string> Subject::getState() const { return state; }
 
 #endif
