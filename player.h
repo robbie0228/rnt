@@ -21,7 +21,7 @@ class Player {
 
         // Print out the player's abilities, each with an ID number and a status
         //  of if it has been used
-        void printAbilities(ostream& out);
+        void printAbilities(std::ostream& out);
 
         //////// FOR TESTING ////////
         void print();
