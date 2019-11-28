@@ -28,7 +28,7 @@ class Game {
         // Calls current player's printAbilities()
         void printAbilities(std::ostream& out);
 
-        friend std::ostream &operator<<(std::ostream& out, const Game &g);
+        friend std::ostream &operator<<(std::ostream &out, const Game &g);
 };
 
 #endif
