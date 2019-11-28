@@ -5,7 +5,7 @@ using namespace std;
 
 int getPlayerNumFromLink(Link *link) {
     char name = link->getName();
-    return name < 'A' ? 1 : 0;
+    return name < 'a' ? 2 : 1;
 }
 
 Cell::Cell(int row, int col, Link *link, int serverPort): 
