@@ -7,7 +7,7 @@ class Player {
         int downloadedDataCount;
         int downloadedVirusCount;
 
-        vector<pair<Ability, bool>> ability;
+        std::vector<std::pair<Ability, bool>> ability;
 
     public:
         // Constructor for a Player
