@@ -6,6 +6,7 @@ Cell::Cell(int row, int col, Link *link, int serverPort):
 bool Cell::moveCellHere(Cell &cell) {
     if (serverPort) {
         // TODO: Tell player to download link
+        return true;
     } else if (link == nullptr) {
         link = cell.getLink();
         return false;
@@ -30,6 +31,10 @@ bool Cell::moveCellHere(Cell &cell) {
 
 Link *Cell::getLink() const{
     return link;
+}
+
+void Cell::useAbility(Ability a) {
+    return;
 }
 
 void Cell::removeLink() {

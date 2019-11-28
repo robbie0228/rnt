@@ -131,17 +131,18 @@ void Grid::move(int player, int link, Direction dir) {
     }
 }
 
-void useAbility(Ability a, vector<char> v) {
+void Grid::useAbility(Ability a, vector<char> v) {
     if (a == Ability::Firewall) {
         int row = v[0] - '0';
         int col = v[1] - '1';
         cells[row][col].useAbility(Ability::Firewall);
     } else {
         char linkName = v[0];
+        pair<int, int> locationOfLink;
         if ('a' <= linkName && linkName <= 'h') { 
-            pair<int, int> locationOfLink = locationOfLinks[0][linkName - 'a'];
+            locationOfLink = locationOfLinks[0][linkName - 'a'];
         } else if ('A' <= linkName && linkName <= 'H') {
-            pair<int, int> locationOfLink = locationOfLinks[1][linkName - 'A'];    
+            locationOfLink = locationOfLinks[1][linkName - 'A'];    
         }
         int rowOfLink = locationOfLink.first;
         int colOfLink = locationOfLink.second;
@@ -150,8 +151,8 @@ void useAbility(Ability a, vector<char> v) {
             cells[rowOfLink][colOfLink].useAbility(Ability::Download);
         } else if (a == Ability::Boost) {
             cells[rowOfLink][colOfLink].useAbility(Ability::Boost);
-        } else if (a == Ability::Poloarize) {
-            cells[rowOfLink][colOfLink].useAbility(Ability::Poloarize);
+        } else if (a == Ability::Polarize) {
+            cells[rowOfLink][colOfLink].useAbility(Ability::Polarize);
         }
     }
 }

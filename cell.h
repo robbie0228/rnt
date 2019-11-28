@@ -30,6 +30,9 @@ class Cell {
         // Returns this Cell's link (pointer)
         Link *getLink() const;
 
+        // Uses the specified ability on this cell
+        void useAbility(Ability a);
+
         // Sets this Cell's link (pointer) to nullptr
         void removeLink();
 
