@@ -27,7 +27,7 @@ int main()
                 game.move(link, dir);
             }
             else if (cmd == "abilities")
-            {   
+            {
                 game.printAbilities(cout);
             }
             else if (cmd == "ability")
