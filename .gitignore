@@ -1,0 +1,6 @@
+// Ignore compiled dependencies and object files
+*.d
+*.o
+
+// Ignore compiled program
+raiinet
