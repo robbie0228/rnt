@@ -147,13 +147,14 @@ void Grid::useAbility(Ability a, vector<char> v) {
         int rowOfLink = locationOfLink.first;
         int colOfLink = locationOfLink.second;
 
-        if (a == Ability::Download) {
+        /*if (a == Ability::Download) {
             cells[rowOfLink][colOfLink].useAbility(Ability::Download);
         } else if (a == Ability::Boost) {
             cells[rowOfLink][colOfLink].useAbility(Ability::Boost);
         } else if (a == Ability::Polarize) {
             cells[rowOfLink][colOfLink].useAbility(Ability::Polarize);
-        }
+        }*/
+        cells[rowOfLink][colOfLink].useAbility(a);
     }
 }
 
