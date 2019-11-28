@@ -3,7 +3,11 @@
 using namespace std;
 
 Player::Player(): downloadedDataCount{0}, downloadedVirusCount{0} {
-    ability = {make_pair(1, 2)}
+    ability = {make_pair(Ability::Firewall, 1),
+               make_pair(Ability::Download, 1),
+               make_pair(Ability::Boost, 1),
+               make_pair(Ability::Scan, 1),
+               make_pair(Ability::Polarize, 1)};
 }
 
 Status Player::checkStatus() {
@@ -15,3 +19,10 @@ Status Player::checkStatus() {
 void Player::printAbilities(ostream& out) {
     out << "not implemented yet, print abilities with ID and used status" << std::endl;
 }
+
+Ability Player::useAbility(int abilityID) {
+    bool isAvailable = ability[abilityID - 1].second;
+    if (isAvailable) return ability[abilityID - 1].first;
+    else throw "invalid ability";
+}
+

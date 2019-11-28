@@ -4,6 +4,7 @@
 #include <iostream>
 #include "grid.h"
 #include "player.h"
+#include <string>
 
 class Game {
         Grid grid;     // grid is the Grid that the game takes place in
@@ -23,7 +24,7 @@ class Game {
         //   Parses link and calls Grid's move() with parsed information
         void move(char link, Direction dir);
 
-        void useAbility(char abilityID, vector<string>);
+        void useAbility(char abilityID, vector<char> useAbilityInfo);
 
         // Calls current player's printAbilities()
         void printAbilities(std::ostream& out);

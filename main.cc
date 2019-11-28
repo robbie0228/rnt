@@ -32,7 +32,12 @@ int main()
             }
             else if (cmd == "ability")
             {
-                // ITERATION II
+                int abilityID;
+                cin >> abilityID;
+                char info1, info2, info3;
+                cin >> info1 >> info2 >> info3;
+                vector<char> useAbilityInfo = {info1, info2, info3};
+                game.useAbility(abilityID, useAbilityInfo);
             }
             else if (cmd == "board")
             {

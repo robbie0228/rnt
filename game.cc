@@ -46,3 +46,8 @@ ostream &operator<<(ostream &out, const Game &g) {
 void Game::printAbilities(ostream& out){
     players[currentPlayer].printAbilities(out);
 }
+
+void Game::useAbility(char abilityID, vector<char> useAbilityInfo) {
+    Ability abilityName = players[currentPlayer].useAbility(abilityID);
+    grid.useAbility(abilityName, useAbilityInfo);
+}
