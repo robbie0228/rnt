@@ -7,6 +7,13 @@ int getPlayerNumFromLink(Link *link) {
     return link->getName() < 'a' ? 2 : 1;
 }
 
+map<string, string> initializeState(int player, char link) {
+    map<string, string> state;
+    state.insert(pair<string, string>("downloadingPlayer", to_string(player)));
+    state.insert(pair<string, string>("downloadingLink", to_string(link)));
+    return state;
+}
+
 Cell::Cell(int row, int col, Link *link, int serverPort): 
     link{link}, row{row}, col{col}, firewall{0}, serverPort{serverPort} {}
 
@@ -26,17 +33,14 @@ bool Cell::moveCellHere(Cell &cell) {
             throw "Cannot move a link onto another of your links";
         }
         if (otherLink->getStrength() >= link->getStrength()) {
-            map<string, string> state;
-            state.insert(pair<string, string>("downloadingPlayer", to_string(getPlayerNumFromLink(otherLink))));
-            state.insert(pair<string, string>("downloadingLink", to_string(link->getName())));
-            setState(state);
+            setState(initializeState(getPlayerNumFromLink(otherLink), link->getName()));
+            notifyObservers();
             link = otherLink;
+            notifyObservers();
             return false;
         } else {
-            map<string, string> state;
-            state.insert(pair<string, string>("downloadingPlayer", to_string(getPlayerNumFromLink(link))));
-            state.insert(pair<string, string>("downloadingLink", to_string(otherLink->getName())));
-            setState(state);
+            setState(initializeState(getPlayerNumFromLink(otherLink), link->getName()));
+            notifyObservers();
             return true;
         }
     }
@@ -59,11 +63,13 @@ Link *Cell::getLink() const{
 }
 
 void Cell::removeLink() {
+    notifyObservers();
     link = nullptr;
 }
 
 void Cell::removeAndDownload() {
-    // TODO: Tell player to download link
+    setState(initializeState(getPlayerNumFromLink(link), link->getName()));
+    notifyObservers();
     removeLink();
 }
 
