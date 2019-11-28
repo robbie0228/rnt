@@ -46,6 +46,10 @@ bool Cell::moveCellHere(Cell &cell) {
 char Cell::getName() const{
     if (link == nullptr) {
         return '.';
+    } else if (serverPort != 0) {
+        return 'S';
+    } else if (firewall != 0) {
+        return getPlayerNumFromLink(link) == 1 ? 'm' : 'w';
     } else {
         return link->getName();
     }
