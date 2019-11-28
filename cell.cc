@@ -34,7 +34,6 @@ bool Cell::moveCellHere(Cell &cell) {
         }
         if (otherLink->getStrength() >= link->getStrength()) {
             setState(initializeState(getPlayerNumFromLink(otherLink), link->getName()));
-            notifyObservers();
             link = otherLink;
             notifyObservers();
             return false;
