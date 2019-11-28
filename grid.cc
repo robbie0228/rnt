@@ -161,11 +161,7 @@ void Grid::useAbility(Ability a, vector<char> v) {
 ostream &operator<<(ostream &out, const Grid &grid) {
     for (int r = 0; r < 8; ++r) {
         for (int c = 0; c < 8; ++c) {
-            if (grid.cells[r][c].getLink() == nullptr) {
-                out << ".";
-            } else {
-                out << grid.cells[r][c].getLink()->getName();
-            }
+            out << grid.cells[r][c].getName();
         }
         out << endl;
     }
