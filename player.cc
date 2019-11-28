@@ -17,7 +17,7 @@ Status Player::checkStatus() {
 }
 
 void Player::printAbilities(ostream& out) {
-    out << "not implemented yet, print abilities with ID and used status" << std::endl;
+    out << "not implemented yet, print abilities with ID and used status" << endl;
 }
 
 Ability Player::useAbility(int abilityID) {
