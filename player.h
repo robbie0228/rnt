@@ -7,6 +7,8 @@ class Player {
         int downloadedDataCount;
         int downloadedVirusCount;
 
+        vector<pair<Ability, bool>> ability;
+
     public:
         // Constructor for a Player
         Player();
@@ -17,8 +19,14 @@ class Player {
         // Checks the current status of the Player
         Status checkStatus();
 
+        // Print out the player's abilities, each with an ID number and a status
+        //  of if it has been used
+        void printAbilities(ostream& out);
+
         //////// FOR TESTING ////////
         void print();
+
+        Ability useAbility(int abilityID);
 };
 
 #endif

@@ -43,4 +43,6 @@ ostream &operator<<(ostream &out, const Game &g) {
     return out;
 }
 
-
+void Game::printAbilities(ostream& out){
+    players[currentPlayer].printAbilities(out);
+}

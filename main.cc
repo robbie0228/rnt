@@ -27,8 +27,8 @@ int main()
                 game.move(link, dir);
             }
             else if (cmd == "abilities")
-            {
-                // ITERATION II
+            {   
+                game.printAbilities(cout);
             }
             else if (cmd == "ability")
             {
