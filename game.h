@@ -23,6 +23,11 @@ class Game {
         //   Parses link and calls Grid's move() with parsed information
         void move(char link, Direction dir);
 
+        void useAbility(char abilityID, vector<char> useAbilityInfo);
+
+        // Calls current player's printAbilities()
+        void printAbilities(std::ostream& out);
+
         friend std::ostream &operator<<(std::ostream &out, const Game &g);
 };
 

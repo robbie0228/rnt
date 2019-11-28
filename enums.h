@@ -10,10 +10,14 @@ enum class Ability {
     Firewall,
     Download,
     Boost,
+    Scan,
     Polarize,
-    Scan
 
-    // new ones: Uber, Whey, Cop
+    Uber, 
+    Whey, 
+    Cop,
+
+    NotAvailable
 };
 
 // Types of a Link
