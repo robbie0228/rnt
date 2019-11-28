@@ -14,6 +14,7 @@ Cell::Cell(int row, int col, Link *link, int serverPort):
 bool Cell::moveCellHere(Cell &cell) {
     if (serverPort) {
         // TODO: Tell player to download link
+        return true;
     } else if (link == nullptr) {
         link = cell.getLink();
         return false;

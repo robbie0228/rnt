@@ -5,7 +5,9 @@
 #include <string>
 #include "observer.h"
 
-using std::string, std::map, std::vector;
+using std::string;
+using std::map;
+using std::vector;
 
 class Subject {
 		vector<Observer *> observers;
@@ -16,18 +18,7 @@ class Subject {
 		void setState(map<string, string> newS);
 		map<string, string> getState() const;
 		virtual map<string, string> getInfo() const = 0;
+    	virtual ~Subject() {};
 };
-
-void Subject::attach(Observer *o) {
-  observers.emplace_back(o);
-}
-
-void Subject::notifyObservers() {
-  for (auto &ob : observers) ob->notify(*this);
-}
-
-void Subject::setState(map<string, string> newS) { state = newS; }
-
-map<string, string> Subject::getState() const { return state; }
 
 #endif
