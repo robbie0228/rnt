@@ -4,8 +4,7 @@
 using namespace std;
 
 int getPlayerNumFromLink(Link *link) {
-    char name = link->getName();
-    return name < 'a' ? 2 : 1;
+    return link->getName() < 'a' ? 2 : 1;
 }
 
 Cell::Cell(int row, int col, Link *link, int serverPort): 
