@@ -10,7 +10,7 @@ Grid::Grid(int size) {
         vector<pair<int, int>> linkLocations;
         for (int link = 0; link < (size / 2); ++link) {
             // Initialize link
-            playerLinks.emplace_back(Link(LinkType::Data, link, (char)('a' + link)));
+            playerLinks.emplace_back(Link(LinkType::Data, link, (char)((player == 0 ? 'a' : 'A') + link)));
             // Initialize location
             if (link == 3) {
                 linkLocations.emplace_back(pair<int, int>(player == 0 ? 1 : 6, link));
@@ -19,7 +19,7 @@ Grid::Grid(int size) {
             }
         }
         for (int link = 0; link < (size / 2); ++link) {
-            playerLinks.emplace_back(Link(LinkType::Virus, link, (char)('e' + link)));
+            playerLinks.emplace_back(Link(LinkType::Virus, link, (char)((player == 0 ? 'e' : 'E') + link)));
             if (link == 0) {
                 linkLocations.emplace_back(pair<int, int>(player == 0 ? 1 : 6, link + 4));
             } else {
@@ -80,21 +80,36 @@ void Grid::move(int player, int link, Direction dir) {
             cellWithLink.removeAndDownload();
         } else {
             Cell &moveToCell = cells[rowOfLink + 1][colOfLink];
-            moveToCell.moveCellHere(cellWithLink);
+            bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
+            if (!linkStayedTheSame) {
+                locationOfLinks[player][link] =
+                    pair<int, int>(rowOfLink + 1, colOfLink);
+            }
+            cellWithLink.removeLink();
         }
     } else if (dir == Direction::Left) {
         if (colOfLink - 1 < 0) {
             throw "Invalid move";
         } else {
             Cell &moveToCell = cells[rowOfLink][colOfLink - 1];
-            moveToCell.moveCellHere(cellWithLink);
+            bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
+            if (!linkStayedTheSame) {
+                locationOfLinks[player][link] =
+                    pair<int, int>(rowOfLink, colOfLink - 1);
+            }
+            cellWithLink.removeLink();
         }
     } else if (dir == Direction::Right) {
         if (colOfLink + 1 >= 8) {
             throw "Invalid move";
         } else {
             Cell &moveToCell = cells[rowOfLink][colOfLink + 1];
-            moveToCell.moveCellHere(cellWithLink);
+            bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
+            if (!linkStayedTheSame) {
+                locationOfLinks[player][link] =
+                    pair<int, int>(rowOfLink, colOfLink + 1);
+            }
+            cellWithLink.removeLink();
         }
     } else {
         if (rowOfLink - 1 < 0) {
@@ -104,7 +119,12 @@ void Grid::move(int player, int link, Direction dir) {
             cellWithLink.removeAndDownload();
         } else {
             Cell &moveToCell = cells[rowOfLink - 1][colOfLink];
-            moveToCell.moveCellHere(cellWithLink);
+            bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
+            if (!linkStayedTheSame) {
+                locationOfLinks[player][link] =
+                    pair<int, int>(rowOfLink - 1, colOfLink);
+            }
+            cellWithLink.removeLink();
         }
     }
 }
@@ -112,9 +132,13 @@ void Grid::move(int player, int link, Direction dir) {
 ostream &operator<<(ostream &out, const Grid &grid) {
     for (int r = 0; r < 8; ++r) {
         for (int c = 0; c < 8; ++c) {
-            out << grid.cells[r][c].getLink()->getName();
+            if (grid.cells[r][c].getLink() == nullptr) {
+                out << ".";
+            } else {
+                out << grid.cells[r][c].getLink()->getName();
+            }
         }
+        out << endl;
     }
-    out << endl;
     return out; // Return out for chaining
 }

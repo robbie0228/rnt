@@ -1,4 +1,5 @@
 #include "cell.h"
+#include <cstdlib>
 Cell::Cell(int row, int col, Link *link, int serverPort): 
     link{link}, row{row}, col{col}, firewall{0}, serverPort{serverPort} {}
 
@@ -12,6 +13,9 @@ bool Cell::moveCellHere(Cell &cell) {
         Link *otherLink = cell.getLink();
         if (otherLink == nullptr) {
             throw "Cannot move empty cell to cell with link";
+        }
+        if (abs(otherLink->getName() - link->getName()) < 8) {
+            throw "Cannot move a link onto another of your links";
         }
         if (otherLink->getStrength() >= link->getStrength()) {
             // TODO: Tell player that owns link to download link
