@@ -134,7 +134,7 @@ void Grid::move(int player, int link, Direction dir) {
 void Grid::useAbility(Ability a, vector<char> v) {
     if (a == Ability::Firewall) {
         int row = v[0] - '0';
-        int col = v[1] - '1';
+        int col = v[1] - '0';
         cells[row][col].useAbility(Ability::Firewall);
     } else {
         char linkName = v[0];
