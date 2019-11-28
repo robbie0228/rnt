@@ -51,7 +51,7 @@ char Cell::getName() const{
     } else if (serverPort != 0) {
         return 'S';
     } else if (firewall != 0) {
-        return getPlayerNumFromLink(link) == 1 ? 'm' : 'w';
+        return firewall == 1 ? 'm' : 'w';
     } else {
         return '.';
     }
