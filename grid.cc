@@ -84,7 +84,7 @@ void Grid::move(int player, int link, Direction dir) {
             Cell &moveToCell = cells[rowOfLink + linkSpeed][colOfLink];
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
-                locationOfLinks[player][link] = 
+                locationOfLinks[player][link] =
                     make_pair(rowOfLink + linkSpeed, colOfLink);
             }
             cellWithLink.removeLink();
