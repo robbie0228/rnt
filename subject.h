@@ -35,7 +35,7 @@ class Subject {
 		void setState(StateType newS);
 		StateType getState() const;
 		virtual InfoType getInfo() const = 0;
-    	virtual ~Subject() {};
+		virtual ~Subject() {};
 };
 
 #endif
