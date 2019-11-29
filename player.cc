@@ -26,7 +26,7 @@ void Player::printAbilities(ostream& out) {
     out << "not implemented yet, print abilities with ID and used status";
 }
 
-Ability Player::useAbility(int abilityID) {
+Ability Player::getAbility(int abilityID) {
     bool isAvailable = ability[abilityID - 1].second;
     if (isAvailable) {
         return ability[abilityID - 1].first;

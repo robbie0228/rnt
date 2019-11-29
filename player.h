@@ -26,7 +26,7 @@ class Player {
         //////// FOR TESTING ////////
         void print();
 
-        Ability useAbility(int abilityID);
+        Ability getAbility(int abilityID);
 };
 
 #endif
