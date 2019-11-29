@@ -18,8 +18,8 @@ int charLinkToInt(char c) {
 Game::Game(): 
     grid{Grid()}, currentPlayer{0} {
 
-    Player p1 = Player();
-    Player p2 = Player();
+    Player p1 = Player(1);
+    Player p2 = Player(2);
 
     this->players.push_back(p1);
     this->players.push_back(p2);

@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-Player::Player(): downloadedDataCount{0}, downloadedVirusCount{0} {
+Player::Player(int playerNumber): downloadedDataCount{0}, downloadedVirusCount{0}, playerNumber{playerNumber} {
     ability = {make_pair(Ability::Firewall, 1),
                make_pair(Ability::Download, 1),
                make_pair(Ability::Boost, 1),
@@ -24,5 +24,16 @@ Ability Player::useAbility(int abilityID) {
     bool isAvailable = ability[abilityID - 1].second;
     if (isAvailable) return ability[abilityID - 1].first;
     else throw "invalid ability";
+}
+
+void Player::notify(Subject &whoFrom) {
+    StateType state = whoFrom.getState();
+    if (state.downloadingPlayer == playerNumber) {
+        if (state.downloadingLinkType == LinkType::Data) {
+            downloadedDataCount += 1;
+        } else {
+            downloadedVirusCount += 1;
+        }
+    }
 }
 
