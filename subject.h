@@ -17,6 +17,8 @@ struct StateType {
 };
 
 struct InfoType {
+	int row;
+	int col;
 	char name;
 	LinkType type;
 	int strength;
