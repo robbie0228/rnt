@@ -1,5 +1,4 @@
 #include "player.h"
-#include <iostream>
 using namespace std;
 
 Player::Player(): downloadedDataCount{0}, downloadedVirusCount{0} {

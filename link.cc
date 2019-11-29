@@ -1,7 +1,7 @@
 #include "link.h"
 
 Link::Link(LinkType type, int strength, char name): 
-    type{type}, strength{strength}, name{name} {}
+    type{type}, speed{1}, strength{strength}, name{name} {}
 
 LinkType Link::getType() {
     return type;
