@@ -39,7 +39,9 @@ void Game::move(char link, Direction dir) {
 }
 
 ostream &operator<<(ostream &out, const Game &g) {
+    g.players[0].print(out);
     out << g.grid;
+    g.players[1].print(out);
     return out;
 }
 
