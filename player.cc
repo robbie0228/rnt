@@ -29,7 +29,21 @@ pair<Ability, bool> Player::getAbility(int abilityID) {
     return ability[abilityID - 1];
 }
 
-Ability Player::useAbility(int abilityID) {
+Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
+    if (ability[abilityID - 1].first == Ability::Boost) {
+        if (playerNumber == 1 && 'a' > abilityInfo[0] && abilityInfo[0] > 'h') {
+            throw "Invalid ability";
+        } else if (playerNumber == 2 && 'A' > abilityInfo[0] && abilityInfo[0] > 'H') {
+            throw "Invalid ability";
+        }
+    } else if (ability[abilityID - 1].first == Ability::Polarize) {
+        if ((abilityInfo[0] < 'A' 
+            || ('H' < abilityInfo[0] && abilityInfo[0] < 'a') 
+            ||  abilityInfo[0] > 'h') 
+        {
+            throw "Invalid ability";
+        }
+    }
     ability[abilityID - 1].second = false;
     return ability[abilityID - 1].first;
 }

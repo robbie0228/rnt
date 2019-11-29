@@ -58,6 +58,13 @@ void Cell::useAbility(Ability a) {
     if (a == Ability::Boost) {
         int currSpeed = this->link->getSpeed();
         this->link->setSpeed(1 + currSpeed);
+    } else if (a == Ability::Polarize) {
+        LinkType currType = this->link->getType();
+        if (currType == LinkType::Data) {
+            this->link->setType(LinkType::Virus);
+        } else {
+            this->link->setType(LinkType::Data);
+        }
     }
 }
 
