@@ -47,7 +47,19 @@ void Game::printAbilities(ostream& out){
     players[currentPlayer].printAbilities(out);
 }
 
-void Game::useAbility(char abilityID, vector<char> useAbilityInfo) {
-    Ability abilityName = players[currentPlayer].getAbility(abilityID);
+pair<int, bool> Game::verifyAbility(int abilityID) {
+    pair<Ability, bool> abilityPair = players[currentPlayer].getAbility(abilityID);
+    if (abilityPair.first == Ability::Firewall) {
+        return make_pair(2, abilityPair.second);
+    } else if (abilityPair.first == Ability::Download || abilityPair.first == Ability::Boost || 
+        abilityPair.first == Ability::Scan || abilityPair.first == Ability::Polarize) {
+        return make_pair(1, abilityPair.second);
+    }
+    return make_pair(0, false);
+}
+
+void Game::useAbility(int abilityID, vector<char> useAbilityInfo) {
+    Ability abilityName = players[currentPlayer].getAbility(abilityID).first;
+    players[currentPlayer].useAbility(abilityID);
     grid.useAbility(abilityName, useAbilityInfo);
 }

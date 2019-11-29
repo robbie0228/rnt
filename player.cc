@@ -1,5 +1,4 @@
 #include "player.h"
-#include <iostream>
 using namespace std;
 
 Player::Player(int playerNumber): downloadedDataCount{0}, downloadedVirusCount{0}, playerNumber{playerNumber} {
@@ -26,14 +25,12 @@ void Player::printAbilities(ostream& out) {
     out << "not implemented yet, print abilities with ID and used status";
 }
 
-Ability Player::getAbility(int abilityID) {
-    bool isAvailable = ability[abilityID - 1].second;
-    if (isAvailable) {
-        return ability[abilityID - 1].first;
-    }
-    else {
-        throw "invalid ability";
-    }
+pair<Ability, bool> Player::getAbility(int abilityID) {
+    return ability[abilityID - 1];
+}
+
+void Player::useAbility(int abilityID) {
+    ability[abilityID - 1].second = false;
 }
 
 void Player::notify(Subject &whoFrom) {

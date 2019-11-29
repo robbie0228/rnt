@@ -23,7 +23,12 @@ class Game {
         //   Parses link and calls Grid's move() with parsed information
         void move(char link, Direction dir);
 
-        void useAbility(char abilityID, vector<char> useAbilityInfo);
+        // Verifies if the player has the specified ability, and returns
+        //   how many chars of information the ability requires
+        std::pair<int, bool> verifyAbility(int abilityID);
+
+        // Player consumes an ability
+        void useAbility(int abilityID, vector<char> useAbilityInfo);
 
         // Calls current player's printAbilities()
         void printAbilities(std::ostream& out);

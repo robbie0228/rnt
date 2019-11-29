@@ -2,6 +2,7 @@
 #define PLAYER_H
 #include "link.h"
 #include "subject.h"
+#include <iostream>
 #include <vector>
 
 class Player : public Observer {
@@ -29,7 +30,11 @@ class Player : public Observer {
         //////// FOR TESTING ////////
         void print();
 
-        Ability getAbility(int abilityID);
+        // returns the ability that is associated with the ID
+        std::pair<Ability, bool> getAbility(int abilityID);
+
+        // marks the ability specified as used
+        void useAbility(int abilityID);
 
         void notify(Subject &whoFrom);
 };
