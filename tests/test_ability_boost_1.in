@@ -1,0 +1,11 @@
+board
+move a down
+board
+move A up
+board
+ability 3 a
+move a down
+board
+move B up
+board
+quit
