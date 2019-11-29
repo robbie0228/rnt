@@ -12,11 +12,6 @@ build:
   artifacts:
     paths:
       - raiinet
-  # cache outputs to reduce the build time
-  cache:
-    paths:
-      - "*.o"
-      - "*.d"
 
 # run tests using the binary built before
 test:
