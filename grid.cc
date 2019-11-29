@@ -72,7 +72,7 @@ void Grid::move(int player, int link, Direction dir) {
     int rowOfLink = locationOfLink.first;
     int colOfLink = locationOfLink.second;
     Cell &cellWithLink = cells[rowOfLink][colOfLink];
-    int linkSpeed = links[player][link].getSpeed();
+    int linkSpeed = cellWithLink.getLink()->getSpeed();
     if (dir == Direction::Down) {
         if (rowOfLink + linkSpeed >= 8) {
             if (player == 1) {
