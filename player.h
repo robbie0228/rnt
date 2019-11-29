@@ -1,17 +1,20 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "link.h"
+#include "subject.h"
 #include <vector>
 
-class Player {
+class Player : public Observer {
         int downloadedDataCount;
         int downloadedVirusCount;
+
+        int playerNumber;
 
         std::vector<std::pair<Ability, bool>> ability;
 
     public:
         // Constructor for a Player
-        Player();
+        Player(int playerNumber);
 
         // Additional construction may go here if necessary
         void init();
@@ -27,6 +30,8 @@ class Player {
         void print();
 
         Ability getAbility(int abilityID);
+
+        void notify(Subject &whoFrom);
 };
 
 #endif
