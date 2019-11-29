@@ -31,7 +31,7 @@ class Player : public Observer {
         void print();
 
         // returns the ability that is associated with the ID
-        Ability getAbility(int abilityID);
+        std::pair<Ability, bool> getAbility(int abilityID);
 
         // marks the ability specified as used
         void useAbility(int abilityID);
