@@ -35,6 +35,10 @@ Ability Player::getAbility(int abilityID) {
     }
 }
 
+void Player::useAbility(int abilityID) {
+    ability[abilityID - 1].second = false;
+}
+
 void Player::notify(Subject &whoFrom) {
     StateType state = whoFrom.getState();
     if (state.downloadingPlayer == playerNumber) {

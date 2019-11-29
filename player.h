@@ -30,7 +30,11 @@ class Player : public Observer {
         //////// FOR TESTING ////////
         void print();
 
+        // returns the ability that is associated with the ID
         Ability getAbility(int abilityID);
+
+        // marks the ability specified as used
+        void useAbility(int abilityID);
 
         void notify(Subject &whoFrom);
 };
