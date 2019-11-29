@@ -33,11 +33,11 @@ void Player::print(ostream& out) const{
 }
 
 pair<Ability, bool> Player::getAbility(int abilityID) {
-    return ability[abilityID - 1];
+    return abilities[abilityID - 1];
 }
 
 void Player::useAbility(int abilityID) {
-    ability[abilityID - 1].second = false;
+    abilities[abilityID - 1].second = false;
 }
 
 void Player::notify(Subject &whoFrom) {
