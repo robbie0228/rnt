@@ -7,10 +7,6 @@ int getPlayerNumFromLink(Link *link) {
     return link->getName() < 'a' ? 2 : 1;
 }
 
-StateType initializeState(int player, Link *link) {
-    return StateType{player, link->getType()};
-}
-
 Cell::Cell(int row, int col, Link *link, int serverPort): 
     link{link}, row{row}, col{col}, firewall{0}, serverPort{serverPort} {}
 
@@ -30,12 +26,12 @@ bool Cell::moveCellHere(Cell &cell) {
             throw "Cannot move a link onto another of your links";
         }
         if (otherLink->getStrength() >= link->getStrength()) {
-            setState(initializeState(getPlayerNumFromLink(otherLink), link));
+            setState(StateType{getPlayerNumFromLink(otherLink), link->getType()});
             link = otherLink;
             notifyObservers();
             return false;
         } else {
-            setState(initializeState(getPlayerNumFromLink(link), otherLink));
+            setState(StateType{getPlayerNumFromLink(link), otherLink->getType()});
             notifyObservers();
             return true;
         }
@@ -68,7 +64,7 @@ void Cell::removeLink() {
 }
 
 void Cell::removeAndDownload() {
-    setState(initializeState(getPlayerNumFromLink(link), link));
+    setState(StateType{getPlayerNumFromLink(link), link->getType()});
     notifyObservers();
     removeLink();
 }
@@ -77,10 +73,6 @@ void Cell::setLink(Link *newLink) {
     link = newLink;
 }
 
-map<string, string> Cell::getInfo() const{
-    map<string, string> info;
-    info.insert(pair<string, string>("row", to_string(row)));
-    info.insert(pair<string, string>("col", to_string(col)));
-    info.insert(pair<string, string>("name", string(1, getName())));
-    return info;
+InfoType Cell::getInfo() const{
+    return InfoType{row, col, getName(), link->getType(), link->getStrength()};
 }
