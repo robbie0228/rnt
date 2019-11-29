@@ -29,8 +29,9 @@ pair<Ability, bool> Player::getAbility(int abilityID) {
     return ability[abilityID - 1];
 }
 
-void Player::useAbility(int abilityID) {
+Ability Player::useAbility(int abilityID) {
     ability[abilityID - 1].second = false;
+    return ability[abilityID - 1].first;
 }
 
 void Player::notify(Subject &whoFrom) {
