@@ -4,7 +4,7 @@
 
 class Link {
         LinkType type;  // LinkType of Link
-        int speed;
+        int speed;      // speed of Link
         int strength;   // strength of Link
         char name;      // 'a-h' for Player 1
                         // 'A-H' for Player 2
