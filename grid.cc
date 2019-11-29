@@ -13,17 +13,17 @@ Grid::Grid(vector<Player *> players, int size) {
             playerLinks.emplace_back(Link(LinkType::Data, link, (char)((player == 0 ? 'a' : 'A') + link)));
             // Initialize location
             if (link == 3) {
-                linkLocations.emplace_back(pair<int, int>(player == 0 ? 1 : 6, link));
+                linkLocations.emplace_back(make_pair(player == 0 ? 1 : 6, link));
             } else {
-                linkLocations.emplace_back(pair<int, int>(player == 0 ? 0 : 7, link));
+                linkLocations.emplace_back(make_pair(player == 0 ? 0 : 7, link));
             }
         }
         for (int link = 0; link < (size / 2); ++link) {
             playerLinks.emplace_back(Link(LinkType::Virus, link, (char)((player == 0 ? 'e' : 'E') + link)));
             if (link == 0) {
-                linkLocations.emplace_back(pair<int, int>(player == 0 ? 1 : 6, link + 4));
+                linkLocations.emplace_back(make_pair(player == 0 ? 1 : 6, link + 4));
             } else {
-                linkLocations.emplace_back(pair<int, int>(player == 0 ? 0 : 7, link + 4));
+                linkLocations.emplace_back(make_pair(player == 0 ? 0 : 7, link + 4));
             }
         }
         links.emplace_back(playerLinks);
@@ -76,59 +76,60 @@ void Grid::move(int player, int link, Direction dir) {
     int rowOfLink = locationOfLink.first;
     int colOfLink = locationOfLink.second;
     Cell &cellWithLink = cells[rowOfLink][colOfLink];
+    int linkSpeed = cellWithLink.getLink()->getSpeed();
     if (dir == Direction::Down) {
-        if (rowOfLink + 1 >= 8) {
+        if (rowOfLink + linkSpeed >= 8) {
             if (player == 1) {
                 throw "Invalid move";
             }
-            locationOfLinks[player][link] = pair<int, int>(-1, -1);
+            locationOfLinks[player][link] = make_pair(-1, -1);
             cellWithLink.removeAndDownload();
         } else {
-            Cell &moveToCell = cells[rowOfLink + 1][colOfLink];
+            Cell &moveToCell = cells[rowOfLink + linkSpeed][colOfLink];
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
                 locationOfLinks[player][link] =
-                    pair<int, int>(rowOfLink + 1, colOfLink);
+                    make_pair(rowOfLink + linkSpeed, colOfLink);
             }
             cellWithLink.removeLink();
         }
     } else if (dir == Direction::Left) {
-        if (colOfLink - 1 < 0) {
+        if (colOfLink - linkSpeed < 0) {
             throw "Invalid move";
         } else {
-            Cell &moveToCell = cells[rowOfLink][colOfLink - 1];
+            Cell &moveToCell = cells[rowOfLink][colOfLink - linkSpeed];
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
                 locationOfLinks[player][link] =
-                    pair<int, int>(rowOfLink, colOfLink - 1);
+                    make_pair(rowOfLink, colOfLink - linkSpeed);
             }
             cellWithLink.removeLink();
         }
     } else if (dir == Direction::Right) {
-        if (colOfLink + 1 >= 8) {
+        if (colOfLink + linkSpeed >= 8) {
             throw "Invalid move";
         } else {
-            Cell &moveToCell = cells[rowOfLink][colOfLink + 1];
+            Cell &moveToCell = cells[rowOfLink][colOfLink + linkSpeed];
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
                 locationOfLinks[player][link] =
-                    pair<int, int>(rowOfLink, colOfLink + 1);
+                    make_pair(rowOfLink, colOfLink + linkSpeed);
             }
             cellWithLink.removeLink();
         }
     } else {
-        if (rowOfLink - 1 < 0) {
+        if (rowOfLink - linkSpeed < 0) {
             if (player == 0) {
                 throw "Invalid move";
             }
-            locationOfLinks[player][link] = pair<int, int>(-1, -1);
+            locationOfLinks[player][link] = make_pair(-1, -1);
             cellWithLink.removeAndDownload();
         } else {
-            Cell &moveToCell = cells[rowOfLink - 1][colOfLink];
+            Cell &moveToCell = cells[rowOfLink - linkSpeed][colOfLink];
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
                 locationOfLinks[player][link] =
-                    pair<int, int>(rowOfLink - 1, colOfLink);
+                    make_pair(rowOfLink - linkSpeed, colOfLink);
             }
             cellWithLink.removeLink();
         }

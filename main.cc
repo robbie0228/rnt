@@ -1,6 +1,7 @@
 #include "game.h"
 #include <iostream>
 #include <string>
+#include <utility>
 using namespace std;
 
 int main()
@@ -34,10 +35,19 @@ int main()
             {
                 int abilityID;
                 cin >> abilityID;
-                char info1, info2, info3;
-                cin >> info1 >> info2 >> info3;
-                vector<char> useAbilityInfo = {info1, info2, info3};
-                game.useAbility(abilityID, useAbilityInfo);
+                pair<int, bool> abilityInfo = game.verifyAbility(abilityID);
+                char c;
+                vector<char> useAbilityInfo;
+                for (int i = 0; i < abilityInfo.first; i++) {
+                    cin >> c;
+                    useAbilityInfo.emplace_back(c);
+                }
+                if (abilityInfo.second) {
+                    game.useAbility(abilityID, useAbilityInfo);
+                }
+                else {
+                    cout << "invalid ability" << endl;
+                }
             }
             else if (cmd == "board")
             {
