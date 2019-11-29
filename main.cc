@@ -34,9 +34,13 @@ int main()
             {
                 int abilityID;
                 cin >> abilityID;
-                char info1, info2, info3;
-                cin >> info1 >> info2 >> info3;
-                vector<char> useAbilityInfo = {info1, info2, info3};
+                int numChar = game.verifyAbility(abilityID);
+                char c;
+                vector<char> useAbilityInfo;
+                for (int i = 0; i < numChar; i++) {
+                    cin >> c;
+                    useAbilityInfo.emplace_back(c);
+                }
                 game.useAbility(abilityID, useAbilityInfo);
             }
             else if (cmd == "board")
