@@ -29,7 +29,7 @@ class Player : public Observer {
         //////// FOR TESTING ////////
         void print();
 
-        Ability useAbility(int abilityID);
+        Ability getAbility(int abilityID);
 
         void notify(Subject &whoFrom);
 };
