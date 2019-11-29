@@ -11,6 +11,14 @@ void Link::setType(LinkType newType) {
     type = newType;
 }
 
+int Link::getSpeed() {
+    return speed;
+}
+
+void Link::setSpeed(int newSpeed) {
+    speed = newSpeed;
+}
+
 int Link::getStrength() {
     return strength;
 }

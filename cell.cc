@@ -62,7 +62,10 @@ Link *Cell::getLink() const{
 }
 
 void Cell::useAbility(Ability a) {
-    return;
+    if (a == Ability::Boost) {
+        int currSpeed = this->link.getSpeed();
+        this->link.setSpeed(1 + currSpeed);
+    }
 }
 
 void Cell::removeLink() {
