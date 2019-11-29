@@ -26,12 +26,12 @@ bool Cell::moveCellHere(Cell &cell) {
             throw "Cannot move a link onto another of your links";
         }
         if (otherLink->getStrength() >= link->getStrength()) {
-            setState(StateType{getPlayerNumFromLink(otherLink), link->getType()});
+            setState(StateType{getPlayerNumFromLink(otherLink), link->getName(), link->getType()});
             link = otherLink;
             notifyObservers();
             return false;
         } else {
-            setState(StateType{getPlayerNumFromLink(link), otherLink->getType()});
+            setState(StateType{getPlayerNumFromLink(link), otherLink->getName(), otherLink->getType()});
             notifyObservers();
             return true;
         }
@@ -64,7 +64,7 @@ void Cell::removeLink() {
 }
 
 void Cell::removeAndDownload() {
-    setState(StateType{getPlayerNumFromLink(link), link->getType()});
+    setState(StateType{getPlayerNumFromLink(link), link->getName(), link->getType()});
     notifyObservers();
     removeLink();
 }

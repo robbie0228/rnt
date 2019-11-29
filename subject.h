@@ -12,6 +12,7 @@ using std::vector;
 
 struct StateType {
 	int downloadingPlayer;
+	char downloadingLinkName;
 	LinkType downloadingLinkType;
 	bool linkIsUpdated;
 	bool linkIsRevealed;
