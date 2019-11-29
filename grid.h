@@ -5,6 +5,9 @@
 #include <iostream>
 #include "cell.h"
 #include "enums.h"
+#include <memory>
+#include "text_display.h"
+#include <string>
 using std::vector;
 
 class Link;
@@ -19,6 +22,8 @@ class Grid {
         // Every Player's each of the 8 Links have a row-col coordianate pair.
         //   If a Link perishes its coordianate pair is set to <-1, -1>
         vector<vector<std::pair<int, int>>> locationOfLinks;
+
+        std::unique_ptr<TextDisplay> textDisplay;
 
     public:
         // Constructor for a Grid

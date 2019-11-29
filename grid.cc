@@ -1,4 +1,5 @@
 #include "grid.h"
+#include "enums.h"
 
 using namespace std;
 
@@ -65,6 +66,33 @@ Grid::Grid(int size) {
         }
         cells.emplace_back(row); // Add row of cells to grid
     }
+
+    // construct the TextDisplay
+
+    vector<vector<pair<char, string>>> displayLinks = 
+        vector<vector<pair<char, string>>>(2, vector<pair<char, string>>(8, make_pair('%', "re")));
+    vector<vector<char>> displayGrid =
+        vector<vector<char>>(8, vector<char>(8, '&'));
+
+    for (int playerAt = 0; playerAt < NUMPLAYERS; ++playerAt) {
+        for (int linkAt = 0; linkAt < GRIDSIZE; ++linkAt) {
+            Link currentLink = links[playerAt][linkAt];
+            displayLinks[playerAt][linkAt].first = currentLink.getName();
+            string linkTypeAndStrength = 
+                    (currentLink.getType() == LinkType::Data ? "D" : "V") + 
+                     to_string(currentLink.getStrength());
+            displayLinks[playerAt][linkAt].second = linkTypeAndStrength;
+        }
+    }
+
+    for (int row = 0; row < GRIDSIZE; ++row) {
+        for (int col = 0; col < GRIDSIZE; ++col) {
+            displayGrid[row][col] = cells[row][col].getName();
+        }
+    }
+    
+    //textDisplay = make_unique<TextDisplay>(displayGrid, displayLinks);
+    new TextDisplay(displayGrid, displayLinks);
 }
 
 void Grid::move(int player, int link, Direction dir) {

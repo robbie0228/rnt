@@ -21,9 +21,10 @@ class TextDisplay {
         vector<vector<bool>> knownLinks;
         
     public:
-        TextDisplay();
-        void notify(Subject&);
-        friend ostream& operator<< (ostream&, TextDisplay&);
+        TextDisplay(vector<vector<char>> grid, 
+                    vector<vector<std::pair<char, std::string>>> links);
+        void notify(Subject& subject);
+        friend ostream& operator<< (ostream& out, TextDisplay& display);
 };
 
 
