@@ -11,19 +11,29 @@ Player::Player(int playerNumber): downloadedDataCount{0}, downloadedVirusCount{0
 }
 
 Status Player::checkStatus() {
-    if (downloadedDataCount >= 4) return Status::Win;
-    else if (downloadedVirusCount >= 4) return Status::Lose;
-    else return Status::InPlay;
+    if (downloadedDataCount >= 4) {
+        return Status::Win;
+    }
+    else if (downloadedVirusCount >= 4) {
+        return Status::Lose;
+    }
+    else {
+        return Status::InPlay;
+    }
 }
 
 void Player::printAbilities(ostream& out) {
-    out << "not implemented yet, print abilities with ID and used status" << endl;
+    out << "not implemented yet, print abilities with ID and used status";
 }
 
-Ability Player::useAbility(int abilityID) {
+Ability Player::getAbility(int abilityID) {
     bool isAvailable = ability[abilityID - 1].second;
-    if (isAvailable) return ability[abilityID - 1].first;
-    else throw "invalid ability";
+    if (isAvailable) {
+        return ability[abilityID - 1].first;
+    }
+    else {
+        throw "invalid ability";
+    }
 }
 
 void Player::notify(Subject &whoFrom) {
