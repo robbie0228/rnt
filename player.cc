@@ -58,13 +58,13 @@ pair<Ability, bool> Player::getAbility(int abilityID) {
 }
 
 Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
-    if (ability[abilityID - 1].first == Ability::Boost) {
+    if (abilities[abilityID - 1].first == Ability::Boost) {
         if (playerNumber == 1 && 'a' > abilityInfo[0] && abilityInfo[0] > 'h') {
             throw "Invalid ability";
         } else if (playerNumber == 2 && 'A' > abilityInfo[0] && abilityInfo[0] > 'H') {
             throw "Invalid ability";
         }
-    } else if (ability[abilityID - 1].first == Ability::Polarize) {
+    } else if (abilities[abilityID - 1].first == Ability::Polarize) {
         if (abilityInfo[0] < 'A' 
             || ('H' < abilityInfo[0] && abilityInfo[0] < 'a') 
             ||  abilityInfo[0] > 'h') 
@@ -72,8 +72,8 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
             throw "Invalid ability";
         }
     }
-    ability[abilityID - 1].second = false;
-    return ability[abilityID - 1].first;
+    abilities[abilityID - 1].second = false;
+    return abilities[abilityID - 1].first;
 }
 
 void Player::notify(Subject &whoFrom) {
