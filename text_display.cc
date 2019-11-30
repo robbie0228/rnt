@@ -18,7 +18,7 @@ TextDisplay::TextDisplay(vector<vector<char>> grid,
 
     downloadedCounts = vector<pair<int, int>>(2, pair<int, int>(0, 0));
 
-    abilityRemainingCounts = vector<int>(2, 0);
+    abilityRemainingCounts = vector<int>(2, 5);
 }
 
 void TextDisplay::notify(Subject&) {
