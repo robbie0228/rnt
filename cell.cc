@@ -36,15 +36,14 @@ bool Cell::moveCellHere(Cell &cell) {
                           getPlayerNumFromLink(otherLink),
                           otherLink->getName(),
                           otherLink->getType(),
-                          true, false, 0);
+                          true, false, -1);
         return true;
     } else if (link == nullptr) {
         link = cell.getLink();
         setStateAndNotify(*this, -1, '.', LinkType::NoType,
-                          false, false, 0);
+                          false, false, -1);
         return false;
     } else {
-        Link *otherLink = cell.getLink();
         if (abs(otherLink->getName() - link->getName()) < 8) {
             throw "Cannot move a link onto another of your links";
         }
@@ -54,7 +53,7 @@ bool Cell::moveCellHere(Cell &cell) {
                               getPlayerNumFromLink(link),
                               otherLink->getName(),
                               otherLink->getType(),
-                              true, true, 0);
+                              true, true, -1);
             notifyObservers();
             return false;
         } else {
@@ -62,7 +61,7 @@ bool Cell::moveCellHere(Cell &cell) {
                               getPlayerNumFromLink(link),
                               otherLink->getName(),
                               otherLink->getType(),
-                              true, true, 0);
+                              true, true, -1);
             return true;
         }
     }
