@@ -50,7 +50,15 @@ void Player::print(ostream& out) const{
     out << "Player " << playerNumber << ":" << endl;
     out << "Downloaded: " << downloadedDataCount << "D, "
         << downloadedVirusCount << "V" << endl;
-    out << "Abilities: " << abilities.size() << endl;
+
+    int abilityCount = 0;
+    for (int i = 0; i < 5; ++i) {
+        if (abilities[i].second) {
+            ++abilityCount;
+        }
+    }
+    
+    out << "Abilities: " << abilityCount << endl;
 }
 
 pair<Ability, bool> Player::getAbility(int abilityID) {
