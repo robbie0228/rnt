@@ -2,11 +2,12 @@
 #define GAME_H
 #include <vector>
 #include <iostream>
+#include <memory>
 #include "grid.h"
 #include "player.h"
 
 class Game {
-        Grid grid;     // grid is the Grid that the game takes place in
+        std::unique_ptr<Grid> grid;     // grid is the Grid that the game takes place in
         std::vector<Player> players;    // a vector of two Player's
         int currentPlayer; // an integer that holds info on the current Player
 

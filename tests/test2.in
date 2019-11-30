@@ -2,10 +2,12 @@ board
 move a up  
 move a left
 move a right
+move A down
 move a down
 move A down
 move A left
 move A right
+move a up
 move A up
 board
 move a down
