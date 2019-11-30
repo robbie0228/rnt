@@ -23,6 +23,9 @@ struct StateType {
 	//   LinkType::NoType if no link
 	LinkType downloadingLinkType;
 
+	// Whether or not the link being downloaded is being revealed
+	bool downloadingLinkIsRevealed;
+
 	// Whether or not the link at this cell is being revealed
 	bool linkIsRevealed;
 

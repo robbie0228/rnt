@@ -3,42 +3,66 @@
 
 using namespace std;
 
+void setStateAndNotify(Cell &cell,
+                       int downloadingPlayer, 
+                       char downloadingLinkName, 
+                       LinkType downloadingLinkType, 
+                       bool downloadingLinkIsRevealed, 
+                       bool linkIsRevealed, 
+                       int playerUsingAbility) {
+    cell.setState(StateType{downloadingPlayer,
+                        downloadingLinkName,
+                        downloadingLinkType,
+                        downloadingLinkIsRevealed,
+                        linkIsRevealed,
+                        playerUsingAbility});
+    cell.notifyObservers();
+}
+
 int getPlayerNumFromLink(Link *link) {
     return link->getName() < 'a' ? 2 : 1;
 }
 
-Cell::Cell(int row, int col, Link *link, int serverPort): 
+Cell::Cell(int row, int col, Link *link, int serverPort):
     link{link}, row{row}, col{col}, firewall{0}, serverPort{serverPort} {}
 
 bool Cell::moveCellHere(Cell &cell) {
+    Link *otherLink = cell.getLink();
+    if (otherLink == nullptr) {
+        throw "Cannot move empty cell, must move your own link";
+    }
     if (serverPort) {
-        // TODO: Tell player to download link
+        setStateAndNotify(*this,
+                          getPlayerNumFromLink(otherLink),
+                          otherLink->getName(),
+                          otherLink->getType(),
+                          true, false, 0);
         return true;
     } else if (link == nullptr) {
         link = cell.getLink();
+        setStateAndNotify(*this, -1, '.', LinkType::NoType,
+                          false, false, 0);
         return false;
     } else {
         Link *otherLink = cell.getLink();
-        if (otherLink == nullptr) {
-            throw "Cannot move empty cell to cell with link";
-        }
         if (abs(otherLink->getName() - link->getName()) < 8) {
             throw "Cannot move a link onto another of your links";
         }
         if (otherLink->getStrength() >= link->getStrength()) {
-            setState(StateType{getPlayerNumFromLink(otherLink),
-                               link->getName(),
-                               link->getType(),
-                               false, 0});
             link = otherLink;
+            setStateAndNotify(*this,
+                              getPlayerNumFromLink(link),
+                              otherLink->getName(),
+                              otherLink->getType(),
+                              true, true, 0);
             notifyObservers();
             return false;
         } else {
-            setState(StateType{getPlayerNumFromLink(link),
-                               otherLink->getName(),
-                               otherLink->getType(),
-                               false, 0});
-            notifyObservers();
+            setStateAndNotify(*this,
+                              getPlayerNumFromLink(link),
+                              otherLink->getName(),
+                              otherLink->getType(),
+                              true, true, 0);
             return true;
         }
     }
@@ -64,24 +88,24 @@ void Cell::useAbility(Ability a) {
     if (a == Ability::Boost) {
         int currSpeed = this->link->getSpeed();
         this->link->setSpeed(1 + currSpeed);
-        setState(StateType{-1, '.', LinkType::NoType,
-                           false, getPlayerNumFromLink(this->link)});
+        setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
+                          false, getPlayerNumFromLink(this->link));
     }
     notifyObservers();
 }
 
 void Cell::removeLink() {
-    setState(StateType{-1, '.', LinkType::NoType,
-                       false, -1});
+    setStateAndNotify(*this, -1, '.', LinkType::NoType,
+                      false, false, -1);
     notifyObservers();
     link = nullptr;
 }
 
 void Cell::removeAndDownload() {
-    setState(StateType{getPlayerNumFromLink(link),
-                       link->getName(),
-                       link->getType(),
-                       false, 0});
+    setStateAndNotify(*this, getPlayerNumFromLink(link),
+                      link->getName(),
+                      link->getType(),
+                      false, false, -1);
     notifyObservers();
     removeLink();
 }
@@ -91,7 +115,7 @@ void Cell::setLink(Link *newLink) {
 }
 
 InfoType Cell::getInfo() const{
-    return InfoType{row, col, getName(), 
-                    link == nullptr ? LinkType::NoType : link->getType(),
-                    link == nullptr ? -1 : link->getStrength()};
+    return {row, col, getName(),
+            (link == nullptr ? LinkType::NoType : link->getType()),
+            (link == nullptr ? -1 : link->getStrength())};
 }
