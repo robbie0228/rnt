@@ -18,12 +18,14 @@ std::vector<Link *> Player::init() {
     for (int link = 0; link < 8; ++link) {
         // Initialize link
         links.emplace_back(
-            Link(link < 4 ? LinkType::Data : LinkType::Virus,
+            Link((link < 4 ? LinkType::Data : LinkType::Virus),
                  link,
-                 (char)((playerNumber == 0 ? 'a' : 'A') + link)
+                 (char)((playerNumber == 1 ? 'a' : 'A') + link)
             )
         );
-        linkPointers.emplace_back(&(links[link]));
+    }
+    for (int i = 0; i < links.size(); ++i) {
+        linkPointers.emplace_back(&(links[i]));
     }
     return linkPointers;
 }
