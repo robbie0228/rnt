@@ -22,11 +22,15 @@ Game::Game(): currentPlayer{0} {
     this->players.push_back(p1);
     this->players.push_back(p2);
 
+    vector<Player *> playerPointers;
+    for (int i = 0; i < players.size(); ++i) {
+        playerPointers.emplace_back(&(players[i]));
+    }
     vector<vector<Link *>> allLinks;
     for (int i = 0; i < players.size(); ++i) {
         allLinks.emplace_back(players[i].init());
     }
-    grid = make_unique<Grid>(allLinks);
+    grid = make_unique<Grid>(playerPointers, allLinks);
 }
 
 void Game::init() {
@@ -47,7 +51,9 @@ void Game::move(char link, Direction dir) {
 }
 
 ostream &operator<<(ostream &out, const Game &g) {
+    g.players[0].print(out);
     out << *(g.grid);
+    g.players[1].print(out);
     return out;
 }
 

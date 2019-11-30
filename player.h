@@ -14,7 +14,7 @@ class Player : public Observer {
 
         std::vector<Link> links;
 
-        std::vector<std::pair<Ability, bool>> ability;
+        std::vector<std::pair<Ability, bool>> abilities;
 
     public:
         // Constructor for a Player
@@ -28,10 +28,10 @@ class Player : public Observer {
 
         // Print out the player's abilities, each with an ID number and a status
         //  of if it has been used
-        void printAbilities(std::ostream& out);
+        void printAbilities(std::ostream& out) const;
 
         //////// FOR TESTING ////////
-        void print();
+        void print(std::ostream& out) const;
 
         // returns the ability that is associated with the ID
         std::pair<Ability, bool> getAbility(int abilityID);
