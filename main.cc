@@ -54,6 +54,7 @@ int main()
             {
                 // cout << game;
                 game.printBoard();
+                cout << endl;
             }
             else if (cmd == "sequence")
             {

@@ -14,9 +14,6 @@ using std::vector;
 class Link;
 
 class Grid {
-        // Every Player's each of the 8 links;
-        vector<vector<Link>> links;
-
         // 8*8 2D array of Cell's
         vector<vector<Cell>> cells;
 

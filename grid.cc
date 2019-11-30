@@ -43,17 +43,20 @@ Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers, int si
     // construct the TextDisplay
 
     vector<vector<pair<char, string>>> displayLinks = 
-        vector<vector<pair<char, string>>>(2, vector<pair<char, string>>(8, make_pair('%', "re")));
+        vector<vector<pair<char, string>>>(2,
+        vector<pair<char, string>>(8,
+        make_pair('%', "re")));
     vector<vector<char>> displayGrid =
-        vector<vector<char>>(8, vector<char>(8, '&'));
+        vector<vector<char>>(8,
+        vector<char>(8, '&'));
 
     for (int playerAt = 0; playerAt < NUMPLAYERS; ++playerAt) {
         for (int linkAt = 0; linkAt < GRIDSIZE; ++linkAt) {
-            Link currentLink = links[playerAt][linkAt];
-            displayLinks[playerAt][linkAt].first = currentLink.getName();
+            Link * currentLink = linkPointers[playerAt][linkAt];
+            displayLinks[playerAt][linkAt].first = currentLink->getName();
             string linkTypeAndStrength = 
-                    (currentLink.getType() == LinkType::Data ? "D" : "V") + 
-                     to_string(currentLink.getStrength());
+                    (currentLink->getType() == LinkType::Data ? "D" : "V") + 
+                     to_string(currentLink->getStrength());
             displayLinks[playerAt][linkAt].second = linkTypeAndStrength;
         }
     }
@@ -64,8 +67,9 @@ Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers, int si
         }
     }
     
+    
+
     textDisplay = make_unique<TextDisplay>(displayGrid, displayLinks);
-    //new TextDisplay(displayGrid, displayLinks);
 }
 
 void Grid::move(int player, int link, Direction dir) {
