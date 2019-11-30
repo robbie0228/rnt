@@ -37,7 +37,7 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
             throw "Invalid ability";
         }
     } else if (ability[abilityID - 1].first == Ability::Polarize) {
-        if ((abilityInfo[0] < 'A' 
+        if (abilityInfo[0] < 'A' 
             || ('H' < abilityInfo[0] && abilityInfo[0] < 'a') 
             ||  abilityInfo[0] > 'h') 
         {
