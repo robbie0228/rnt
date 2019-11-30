@@ -1,8 +1,8 @@
 Player 1:
 Downloaded: 0D, 0V
-Abilities: 0
-a: D0   b: D1   c: D2   d: D3
-e: V4   f: V5   g: V6   h: V7
+Abilities: 5
+a: D1   b: D2   c: D3   d: D4
+e: V1   f: V2   g: V3   h: V4
 ========
 abcSSfgh
 ...de...
@@ -15,13 +15,13 @@ ABCSSFGH
 ========
 Player 2:
 Downloaded: 0D, 0V
-Abilities: 0
+Abilities: 5
 A: ?    B: ?    C: ?    D: ?
 E: ?    F: ?    G: ?    H: ?
 
 Player 1:
 Downloaded: 0D, 0V
-Abilities: 0
+Abilities: 5
 a: ?    b: ?    c: ?    d: ?
 e: ?    f: ?    g: ?    h: ?
 ========
@@ -36,15 +36,15 @@ ABCSSFGH
 ========
 Player 2:
 Downloaded: 0D, 0V
-Abilities: 0
-A: D0   B: D1   C: D2   D: D3
-E: V4   F: V5   G: V6   H: V7
+Abilities: 5
+A: D1   B: D2   C: D3   D: D4
+E: V1   F: V2   G: V3   H: V4
 
 Player 1:
 Downloaded: 0D, 0V
-Abilities: 0
-a: D0   b: D1   c: D2   d: D3
-e: V4   f: V5   g: V6   h: V7
+Abilities: 5
+a: D1   b: D2   c: D3   d: D4
+e: V1   f: V2   g: V3   h: V4
 ========
 abcSSfgh
 ...de...
@@ -57,14 +57,14 @@ ABCSSFGH
 ========
 Player 2:
 Downloaded: 0D, 0V
-Abilities: 0
+Abilities: 5
 A: ?    B: ?    C: ?    D: ?
 E: ?    F: ?    G: ?    H: ?
 
 invalid ability
 Player 1:
 Downloaded: 0D, 0V
-Abilities: 0
+Abilities: 5
 a: ?    b: ?    c: ?    d: ?
 e: ?    f: ?    g: ?    h: ?
 ========
@@ -79,7 +79,7 @@ ABCSSFGH
 ========
 Player 2:
 Downloaded: 0D, 0V
-Abilities: 0
-A: D0   B: D1   C: D2   D: D3
-E: V4   F: V5   G: V6   H: V7
+Abilities: 5
+A: D1   B: D2   C: D3   D: D4
+E: V1   F: V2   G: V3   H: V4
 

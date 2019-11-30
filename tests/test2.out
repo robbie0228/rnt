@@ -1,6 +1,9 @@
 Player 1:
 Downloaded: 0D, 0V
 Abilities: 5
+a: D1   b: D2   c: D3   d: D4
+e: V1   f: V2   g: V3   h: V4
+========
 abcSSfgh
 ...de...
 ........
@@ -9,9 +12,13 @@ abcSSfgh
 ........
 ...DE...
 ABCSSFGH
+========
 Player 2:
 Downloaded: 0D, 0V
 Abilities: 5
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
 Invalid move
 Invalid move
 Cannot move a link onto another of your links
@@ -23,42 +30,63 @@ Cannot move opponent's piece
 Player 1:
 Downloaded: 0D, 0V
 Abilities: 5
-.bcSSfgh
-a..de...
-........
-........
-........
-........
-A..DE...
-.BCSSFGH
-Player 2:
-Downloaded: 0D, 0V
-Abilities: 5
-Player 1:
-Downloaded: 0D, 0V
-Abilities: 5
-.bcSSfgh
-...de...
-........
-a.......
-A.......
-........
-...DE...
-.BCSSFGH
-Player 2:
-Downloaded: 0D, 0V
-Abilities: 5
-Player 1:
-Downloaded: 1D, 0V
-Abilities: 5
-.bcSSfgh
+a: D1   b: D2   c: D3   d: D4
+e: V1   f: V2   g: V3   h: V4
+========
+abcSSfgh
 ...de...
 ........
 ........
-a.......
+........
 ........
 ...DE...
-.BCSSFGH
+ABCSSFGH
+========
 Player 2:
 Downloaded: 0D, 0V
 Abilities: 5
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 5
+a: D1   b: D2   c: D3   d: D4
+e: V1   f: V2   g: V3   h: V4
+========
+abcSSfgh
+...de...
+........
+........
+........
+........
+...DE...
+ABCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 5
+a: ?    b: ?    c: ?    d: ?
+e: ?    f: ?    g: ?    h: ?
+========
+abcSSfgh
+...de...
+........
+........
+........
+........
+...DE...
+ABCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: D1   B: D2   C: D3   D: D4
+E: V1   F: V2   G: V3   H: V4
+
