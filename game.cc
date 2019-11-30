@@ -26,7 +26,11 @@ Game::Game(): currentPlayer{0} {
     for (int i = 0; i < players.size(); ++i) {
         playerPointers.emplace_back(&(players[i]));
     }
-    grid = make_unique<Grid>(playerPointers);
+    vector<vector<Link *>> allLinks;
+    for (int i = 0; i < players.size(); ++i) {
+        allLinks.emplace_back(players[i].init());
+    }
+    grid = make_unique<Grid>(playerPointers, allLinks);
 }
 
 void Game::init() {
@@ -34,6 +38,10 @@ void Game::init() {
 }
 
 void Game::move(char link, Direction dir) {
+    if ((link < 'a' && currentPlayer == 0) || 
+        (link >= 'a' && currentPlayer == 1)) {
+            throw "Cannot move opponent's piece";
+    }
     this->grid->move(currentPlayer, charLinkToInt(link), dir);
     if (currentPlayer == 0) {
         currentPlayer = 1;
