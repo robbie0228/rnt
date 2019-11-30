@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Grid::Grid(vector<vector<Link *>> linkPointers, int size) {
+Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers, int size) {
     locationOfLinks = vector<vector<pair<int, int>>>(2, 
                       vector<pair<int, int>>(8, 
                       make_pair(-1, -1)));
@@ -30,6 +30,10 @@ Grid::Grid(vector<vector<Link *>> linkPointers, int size) {
                 }
             } else {
                 row.emplace_back(Cell(r, c)); 
+            }
+
+            for (int player = 0; player < 2; ++player) {
+                row[row.size() - 1].attach(players[player]);
             }
         }
         cells.emplace_back(row); // Add row of cells to grid

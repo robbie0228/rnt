@@ -6,7 +6,7 @@ using namespace std;
 Player::Player(int playerNumber): 
     downloadedDataCount{0}, downloadedVirusCount{0}, 
     playerNumber{playerNumber} {
-    ability = {make_pair(Ability::Firewall, 1),
+    abilities = {make_pair(Ability::Firewall, 1),
                make_pair(Ability::Download, 1),
                make_pair(Ability::Boost, 1),
                make_pair(Ability::Scan, 1),
@@ -42,12 +42,19 @@ Status Player::checkStatus() {
     }
 }
 
-void Player::printAbilities(ostream& out) {
+void Player::printAbilities(ostream& out) const{
     out << "not implemented yet, print abilities with ID and used status";
 }
 
+void Player::print(ostream& out) const{
+    out << "Player " << playerNumber << ":" << endl;
+    out << "Downloaded: " << downloadedDataCount << "D, "
+        << downloadedVirusCount << "V" << endl;
+    out << "Abilities: " << abilities.size() << endl;
+}
+
 pair<Ability, bool> Player::getAbility(int abilityID) {
-    return ability[abilityID - 1];
+    return abilities[abilityID - 1];
 }
 
 Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
@@ -79,4 +86,5 @@ void Player::notify(Subject &whoFrom) {
         }
     }
 }
+
 
