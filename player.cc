@@ -57,7 +57,7 @@ void Player::print(ostream& out) const{
             ++abilityCount;
         }
     }
-    
+
     out << "Abilities: " << abilityCount << endl;
 }
 
@@ -66,20 +66,23 @@ pair<Ability, bool> Player::getAbility(int abilityID) {
 }
 
 Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
-    if (abilities[abilityID - 1].first == Ability::Boost) {
-        if (playerNumber == 1 && 'a' > abilityInfo[0] && abilityInfo[0] > 'h') {
-            throw "Invalid ability";
-        } else if (playerNumber == 2 && 'A' > abilityInfo[0] && abilityInfo[0] > 'H') {
-            throw "Invalid ability";
-        }
-    } else if (abilities[abilityID - 1].first == Ability::Polarize) {
-        if (abilityInfo[0] < 'A' 
-            || ('H' < abilityInfo[0] && abilityInfo[0] < 'a') 
-            ||  abilityInfo[0] > 'h') 
-        {
-            throw "Invalid ability";
-        }
+    switch(abilities[abilityID - 1].first) {
+        case Ability::Boost :
+            if (playerNumber == 1 && 'a' > abilityInfo[0] && abilityInfo[0] > 'h') {
+                throw "Invalid use of ability";
+            } else if (playerNumber == 2 && 'A' > abilityInfo[0] && abilityInfo[0] > 'H') {
+                throw "Invalid use of ability";
+            }
+            break;
+        case Ability::Polarize :
+            if (abilityInfo[0] < 'A'
+                || ('H' < abilityInfo[0] && abilityInfo[0] < 'a')
+                || abilityInfo[0] > 'h')
+            {
+                throw "Invalid use of ability";
+            }
     }
+    
     abilities[abilityID - 1].second = false;
     return abilities[abilityID - 1].first;
 }
