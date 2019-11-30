@@ -1,15 +1,18 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "link.h"
 #include "subject.h"
 #include <iostream>
 #include <vector>
+
+class Link;
 
 class Player : public Observer {
         int downloadedDataCount;
         int downloadedVirusCount;
 
         int playerNumber;
+
+        std::vector<Link> links;
 
         std::vector<std::pair<Ability, bool>> ability;
 
@@ -18,7 +21,7 @@ class Player : public Observer {
         Player(int playerNumber);
 
         // Additional construction may go here if necessary
-        void init();
+        std::vector<Link *> init();
 
         // Checks the current status of the Player
         Status checkStatus();
