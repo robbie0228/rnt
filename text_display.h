@@ -19,10 +19,24 @@ class TextDisplay {
         // 2 player's 8 of the other player's links' reveal status
         //   true means revealed to this player
         vector<vector<bool>> knownLinks;
+
+        /*// 2 player's 16 of all player's links' reveal status
+        // true means revealed to this player
+        // player 1's 8 pieces' status are followed by player 2's
+        vector<vector<bool>> knownLinks;*/
+
+        // 2 player's pair(downloaded data, downloaded virus)
+        vector<std::pair<int, int>> downloadedCounts;
+
+        // remaining ability counters for all players
+        vector<int> abilityRemainingCounts;
+
+        int currentPlayer;
         
     public:
         TextDisplay(vector<vector<char>> grid, 
-                    vector<vector<std::pair<char, std::string>>> links);
+                    vector<vector<std::pair<char, std::string>>> links,
+                    int currentPlayer = 1);
         void notify(Subject& subject);
         friend ostream& operator<< (ostream& out, TextDisplay& display);
 };

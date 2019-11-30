@@ -91,8 +91,8 @@ Grid::Grid(int size) {
         }
     }
     
-    //textDisplay = make_unique<TextDisplay>(displayGrid, displayLinks);
-    new TextDisplay(displayGrid, displayLinks);
+    textDisplay = make_unique<TextDisplay>(displayGrid, displayLinks);
+    //new TextDisplay(displayGrid, displayLinks);
 }
 
 void Grid::move(int player, int link, Direction dir) {
