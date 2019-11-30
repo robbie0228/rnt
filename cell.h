@@ -49,7 +49,7 @@ class Cell : public Subject {
         // Set this Cell's link (pointer) to newLink
         void setLink(Link *newLink);
 
-        std::map<std::string, std::string> getInfo() const;
+        InfoType getInfo() const;
 };
 
 #endif

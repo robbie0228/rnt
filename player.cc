@@ -1,13 +1,33 @@
 #include "player.h"
-#include <iostream>
+#include "link.h"
+
 using namespace std;
 
-Player::Player(): downloadedDataCount{0}, downloadedVirusCount{0} {
-    ability = {make_pair(Ability::Firewall, 1),
+Player::Player(int playerNumber): 
+    downloadedDataCount{0}, downloadedVirusCount{0}, 
+    playerNumber{playerNumber} {
+    abilities = {make_pair(Ability::Firewall, 1),
                make_pair(Ability::Download, 1),
                make_pair(Ability::Boost, 1),
                make_pair(Ability::Scan, 1),
                make_pair(Ability::Polarize, 1)};
+}
+
+std::vector<Link *> Player::init() {
+    vector<Link *> linkPointers;
+    for (int link = 0; link < 8; ++link) {
+        // Initialize link
+        links.emplace_back(
+            Link((link < 4 ? LinkType::Data : LinkType::Virus),
+                 link,
+                 (char)((playerNumber == 1 ? 'a' : 'A') + link)
+            )
+        );
+    }
+    for (int i = 0; i < links.size(); ++i) {
+        linkPointers.emplace_back(&(links[i]));
+    }
+    return linkPointers;
 }
 
 Status Player::checkStatus() {
@@ -22,17 +42,35 @@ Status Player::checkStatus() {
     }
 }
 
-void Player::printAbilities(ostream& out) {
+void Player::printAbilities(ostream& out) const{
     out << "not implemented yet, print abilities with ID and used status";
 }
 
-Ability Player::getAbility(int abilityID) {
-    bool isAvailable = ability[abilityID - 1].second;
-    if (isAvailable) {
-        return ability[abilityID - 1].first;
-    }
-    else {
-        throw "invalid ability";
+void Player::print(ostream& out) const{
+    out << "Player " << playerNumber << ":" << endl;
+    out << "Downloaded: " << downloadedDataCount << "D, "
+        << downloadedVirusCount << "V" << endl;
+    out << "Abilities: " << abilities.size() << endl;
+}
+
+pair<Ability, bool> Player::getAbility(int abilityID) {
+    return abilities[abilityID - 1];
+}
+
+Ability Player::useAbility(int abilityID) {
+    abilities[abilityID - 1].second = false;
+    return abilities[abilityID - 1].first;
+}
+
+void Player::notify(Subject &whoFrom) {
+    StateType state = whoFrom.getState();
+    if (state.downloadingPlayer == playerNumber) {
+        if (state.downloadingLinkType == LinkType::Data) {
+            downloadedDataCount += 1;
+        } else {
+            downloadedVirusCount += 1;
+        }
     }
 }
+
 

@@ -2,11 +2,12 @@
 #define GAME_H
 #include <vector>
 #include <iostream>
+#include <memory>
 #include "grid.h"
 #include "player.h"
 
 class Game {
-        Grid grid;     // grid is the Grid that the game takes place in
+        std::unique_ptr<Grid> grid;     // grid is the Grid that the game takes place in
         std::vector<Player> players;    // a vector of two Player's
         int currentPlayer; // an integer that holds info on the current Player
 
@@ -23,7 +24,12 @@ class Game {
         //   Parses link and calls Grid's move() with parsed information
         void move(char link, Direction dir);
 
-        void useAbility(char abilityID, vector<char> useAbilityInfo);
+        // Verifies if the player has the specified ability, and returns
+        //   how many chars of information the ability requires
+        std::pair<int, bool> verifyAbility(int abilityID);
+
+        // Player consumes an ability
+        void useAbility(int abilityID, vector<char> useAbilityInfo);
 
         // Calls current player's printAbilities()
         void printAbilities(std::ostream& out);

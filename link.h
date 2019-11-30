@@ -4,6 +4,7 @@
 
 class Link {
         LinkType type;  // LinkType of Link
+        int speed;      // speed of Link
         int strength;   // strength of Link
         char name;      // 'a-h' for Player 1
                         // 'A-H' for Player 2
@@ -16,6 +17,10 @@ class Link {
         // Accessor/setter for type
         LinkType getType();
         void setType(LinkType newType);
+
+        // Accessor/setter for speed;
+        int getSpeed();
+        void setSpeed(int newSpeed);
 
         // Accessor/setter for strength
         int getStrength();
