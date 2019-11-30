@@ -23,7 +23,8 @@ enum class Ability {
 // Types of a Link
 enum class LinkType {
     Virus,
-    Data
+    Data,
+    NoType
 };
 
 // Directions of movement

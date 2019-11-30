@@ -26,12 +26,18 @@ bool Cell::moveCellHere(Cell &cell) {
             throw "Cannot move a link onto another of your links";
         }
         if (otherLink->getStrength() >= link->getStrength()) {
-            setState(StateType{getPlayerNumFromLink(otherLink), link->getName(), link->getType(), false, false});
+            setState(StateType{getPlayerNumFromLink(otherLink),
+                               link->getName(),
+                               link->getType(),
+                               false, 0});
             link = otherLink;
             notifyObservers();
             return false;
         } else {
-            setState(StateType{getPlayerNumFromLink(link), otherLink->getName(), otherLink->getType(), false, false});
+            setState(StateType{getPlayerNumFromLink(link),
+                               otherLink->getName(),
+                               otherLink->getType(),
+                               false, 0});
             notifyObservers();
             return true;
         }
@@ -58,16 +64,24 @@ void Cell::useAbility(Ability a) {
     if (a == Ability::Boost) {
         int currSpeed = this->link->getSpeed();
         this->link->setSpeed(1 + currSpeed);
+        setState(StateType{-1, '.', LinkType::NoType,
+                           false, getPlayerNumFromLink(this->link)});
     }
+    notifyObservers();
 }
 
 void Cell::removeLink() {
+    setState(StateType{-1, '.', LinkType::NoType,
+                       false, -1});
     notifyObservers();
     link = nullptr;
 }
 
 void Cell::removeAndDownload() {
-    setState(StateType{getPlayerNumFromLink(link), link->getName(), link->getType(), false, false});
+    setState(StateType{getPlayerNumFromLink(link),
+                       link->getName(),
+                       link->getType(),
+                       false, 0});
     notifyObservers();
     removeLink();
 }
@@ -77,5 +91,7 @@ void Cell::setLink(Link *newLink) {
 }
 
 InfoType Cell::getInfo() const{
-    return InfoType{row, col, getName(), link->getType(), link->getStrength()};
+    return InfoType{row, col, getName(), 
+                    link == nullptr ? LinkType::NoType : link->getType(),
+                    link == nullptr ? -1 : link->getStrength()};
 }
