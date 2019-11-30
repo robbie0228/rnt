@@ -19,7 +19,7 @@ std::vector<Link *> Player::init() {
         // Initialize link
         links.emplace_back(
             Link((link < 4 ? LinkType::Data : LinkType::Virus),
-                 link,
+                 (link % 4) + 1,
                  (char)((playerNumber == 1 ? 'a' : 'A') + link)
             )
         );
