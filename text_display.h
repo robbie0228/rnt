@@ -30,15 +30,13 @@ class TextDisplay {
 
         // remaining ability counters for all players
         vector<int> abilityRemainingCounts;
-
-        int currentPlayer;
         
     public:
         TextDisplay(vector<vector<char>> grid, 
-                    vector<vector<std::pair<char, std::string>>> links,
-                    int currentPlayer = 1);
+                    vector<vector<std::pair<char, std::string>>> links);
         void notify(Subject& subject);
-        friend ostream& operator<< (ostream& out, TextDisplay& display);
+        // friend ostream& operator<< (ostream& out, TextDisplay& display);
+        void draw(int currentPlayer);
 };
 
 

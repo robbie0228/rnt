@@ -37,7 +37,8 @@ class Grid {
         void useAbility(Ability a, vector<char> v);
 
         // Calls any type of Display to draw
-        friend std::ostream &operator<<(std::ostream &out, const Grid &grid);
+        // friend std::ostream &operator<<(std::ostream &out, const Grid &grid);
+        void printBoard(int currentPlayer);
 };
 
 #endif

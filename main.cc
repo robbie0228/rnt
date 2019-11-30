@@ -23,7 +23,8 @@ int main()
                 if (dirtemp == "left") dir = Direction::Left;
                 else if (dirtemp == "right") dir = Direction::Right;
                 else if (dirtemp == "up") dir = Direction::Up;
-                else dir = Direction::Down;   // note the absence of error checking
+                else if (dirtemp == "down") dir = Direction::Down;
+                else throw "invalid direction";
                 game.move(link, dir);
             }
             else if (cmd == "abilities")
@@ -41,7 +42,8 @@ int main()
             }
             else if (cmd == "board")
             {
-                cout << game;
+                // cout << game;
+                game.printBoard();
             }
             else if (cmd == "sequence")
             {

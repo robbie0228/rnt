@@ -38,9 +38,13 @@ void Game::move(char link, Direction dir) {
     }
 }
 
-ostream &operator<<(ostream &out, const Game &g) {
+/*ostream &operator<<(ostream &out, const Game &g) {
     out << g.grid;
     return out;
+}*/
+
+void Game::printBoard() {
+    grid.printBoard(currentPlayer);
 }
 
 void Game::printAbilities(ostream& out){
