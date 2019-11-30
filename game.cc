@@ -65,7 +65,6 @@ pair<int, bool> Game::verifyAbility(int abilityID) {
 }
 
 void Game::useAbility(int abilityID, vector<char> useAbilityInfo) {
-    Ability abilityName = players[currentPlayer].getAbility(abilityID).first;
-    players[currentPlayer].useAbility(abilityID);
+    Ability abilityName = players[currentPlayer].useAbility(abilityID);
     grid->useAbility(abilityName, useAbilityInfo);
 }

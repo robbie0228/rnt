@@ -34,7 +34,7 @@ class Player : public Observer {
         std::pair<Ability, bool> getAbility(int abilityID);
 
         // marks the ability specified as used
-        void useAbility(int abilityID);
+        Ability useAbility(int abilityID);
 
         void notify(Subject &whoFrom);
 };
