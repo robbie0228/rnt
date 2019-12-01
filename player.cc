@@ -88,9 +88,9 @@ pair<Ability, bool> Player::getAbility(int abilityID) {
 Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
     switch(abilities[abilityID - 1].first) {
         case Ability::Boost :
-            if (playerNumber == 1 && 'a' > abilityInfo[0] && abilityInfo[0] > 'h') {
+            if (playerNumber == 1 && ('a' > abilityInfo[0] || abilityInfo[0] > 'h')) {
                 throw "Invalid use of ability";
-            } else if (playerNumber == 2 && 'A' > abilityInfo[0] && abilityInfo[0] > 'H') {
+            } else if (playerNumber == 2 && ('A' > abilityInfo[0] || abilityInfo[0] > 'H')) {
                 throw "Invalid use of ability";
             }
             break;
@@ -101,6 +101,16 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
             {
                 throw "Invalid use of ability";
             }
+            break;
+        case Ability::Download :
+            if (playerNumber == 1 && (abilityInfo[0] < 'A' || 'H' < abilityInfo[0])) {
+                throw "Invalid use of ability";
+            } else if (playerNumber == 2 && (abilityInfo[0] < 'a' || 'h' < abilityInfo[0])) {
+                throw "Invalid use of ability";
+            }
+            break;
+        default :
+            break;
     }
     
     abilities[abilityID - 1].second = false;
