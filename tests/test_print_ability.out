@@ -34,8 +34,12 @@ Player 1's Abilities:
 3: Link Boost, Used
 4: Scan, Used
 5: Polarize, Unused
-invalid ability
-Only use one ability per turn
+Player 1's Abilities:
+1: Firewall, Unused
+2: Download, Unused
+3: Link Boost, Used
+4: Scan, Used
+5: Polarize, Unused
 Player 1's Abilities:
 1: Firewall, Unused
 2: Download, Unused
@@ -48,4 +52,9 @@ Player 2's Abilities:
 3: Link Boost, Unused
 4: Scan, Unused
 5: Polarize, Unused
-Only use one ability per turn
+Player 2's Abilities:
+1: Firewall, Used
+2: Download, Unused
+3: Link Boost, Used
+4: Scan, Unused
+5: Polarize, Unused
