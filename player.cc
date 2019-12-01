@@ -43,7 +43,34 @@ Status Player::checkStatus() {
 }
 
 void Player::printAbilities(ostream& out) const{
-    out << "not implemented yet, print abilities with ID and used status";
+    out << "Player " << playerNumber << "'s Abilities:" << endl;
+    for (int i = 0; i < 5; ++i) {
+        string abilityName;
+
+        if (abilities[i].first == Ability::Boost) 
+            abilityName = "Link Boost";
+        else if (abilities[i].first == Ability::Download) 
+            abilityName = "Download";
+        else if (abilities[i].first == Ability::Firewall) 
+            abilityName = "Firewall";
+        else if (abilities[i].first == Ability::Polarize) 
+            abilityName = "Polarize";
+        else if (abilities[i].first == Ability::Scan) 
+            abilityName = "Scan";
+        else if (abilities[i].first == Ability::Steal) 
+            abilityName = "Steal";
+        else if (abilities[i].first == Ability::Uber) 
+            abilityName = "Uber";
+        else if (abilities[i].first == Ability::Whey) 
+            abilityName = "Whey";
+        else 
+            throw "there is a not available ability";
+
+        out << i + 1 << ": " << abilityName << ", ";
+
+        if (abilities[i].second) out << "Unused" << endl;
+        else out << "Used" << endl;
+    }
 }
 
 void Player::print(ostream& out) const{
