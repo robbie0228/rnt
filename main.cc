@@ -31,6 +31,7 @@ int main()
             else if (cmd == "abilities")
             {
                 game.printAbilities(cout);
+                cout << endl;
             }
             else if (cmd == "ability")
             {
@@ -48,6 +49,7 @@ int main()
                 }
                 else {
                     cout << "invalid ability" << endl;
+                    cout << endl;
                 }
             }
             else if (cmd == "board")
@@ -69,6 +71,7 @@ int main()
             }
         } catch (char const *e) {
             cout << e << endl;
+            cout << endl;
         }
     }
 }

@@ -20,6 +20,7 @@ A: ?    B: ?    C: ?    D: ?
 E: ?    F: ?    G: ?    H: ?
 
 Invalid use of ability
+
 Player 1:
 Downloaded: 1D, 0V
 Abilities: 4
@@ -63,7 +64,9 @@ A: D1   B: D2   C: D3   D: D4
 E: V1   F: V2   G: V3   H: V4
 
 Invalid move
+
 invalid ability
+
 Player 1:
 Downloaded: 1D, 0V
 Abilities: 4
