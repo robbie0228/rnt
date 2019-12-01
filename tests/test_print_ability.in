@@ -1,5 +1,11 @@
 abilities
-ability 4 a
+ability 4 B
 abilities
-ability 5 b
+move a down
+abilities
+ability 1 3 4
+abilities
+move C up
+abilities
+ability 3 a
 abilities

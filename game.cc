@@ -73,7 +73,7 @@ pair<int, bool> Game::verifyAbility(int abilityID) {
 }
 
 void Game::useAbility(int abilityID, vector<char> useAbilityInfo) {
-    if (abilityUsedCount > MAXABILITYUSE) throw "Only use one ability per turn";
+    if (abilityUsedCount == MAXABILITYUSE) throw "Only use one ability per turn";
     else {
         Ability abilityName = 
             players[currentPlayer].useAbility(abilityID, useAbilityInfo);

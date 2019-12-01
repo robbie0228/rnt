@@ -2,3 +2,4 @@ test1
 test2
 test_ability_boost_1
 test_ability_polarize_1
+test_print_ability
