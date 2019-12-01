@@ -139,7 +139,7 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
                 locationOfLink = locationOfLinks[1][linkIndex];
                 locationOfLinks[1][linkIndex] = make_pair(-1, -1);
             } else {
-                locationOfLink = locationOfLinks[0][linkIndex] = locationOfLinks[0][linkIndex];
+                locationOfLink = locationOfLinks[0][linkIndex];
                 locationOfLinks[1][linkIndex] = make_pair(-1, -1);
             }
         } else if (a == Ability::Boost) {
