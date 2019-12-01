@@ -181,6 +181,9 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
     if (a == Ability::Firewall) {
         int row = v[0] - '0';
         int col = v[1] - '0';
+        if (row < 0 || row >= 8 || col < 0 || col >= 8) {
+            throw "Invalid use of ability";
+        }
         cells[row][col].useAbility(Ability::Firewall, user);
     } else {
         char linkName = v[0];

@@ -32,13 +32,42 @@ bool Cell::moveCellHere(Cell &cell) {
     if (otherLink == nullptr) {
         throw "Cannot move empty cell, must move your own link";
     }
+
+    int attackPlayer = getPlayerNumFromLink(otherLink);
+    int defensePlayer = (attackPlayer + 1) % 2;
+
     if (serverPort) {
-        setStateAndNotify(*this,
-                          getPlayerNumFromLink(otherLink),
-                          otherLink->getName(),
-                          otherLink->getType(),
-                          true, false, -1);
-        return true;
+        if (serverPort == defensePlayer) {
+            setStateAndNotify(*this,
+                              attackPlayer,
+                              otherLink->getName(),
+                              otherLink->getType(),
+                              true, false, -1);
+            return true;
+        } else {
+            throw "Invalid move";
+        }
+    } else if (firewall) {
+        if (firewall == defensePlayer) {
+            if (otherLink->getType() == LinkType::Virus) {
+                setStateAndNotify(*this,
+                                  attackPlayer,
+                                  otherLink->getName(),
+                                  otherLink->getType(),
+                                  true, false, -1);
+                return true;
+            } else {
+                link = otherLink;
+                setStateAndNotify(*this, -1, '.', LinkType::NoType,
+                                  false, true, -1);
+                return false;
+            }
+        } else {
+            link = otherLink;
+            setStateAndNotify(*this, -1, '.', LinkType::NoType,
+                          false, false, -1);
+            return false;
+        }
     } else if (link == nullptr) {
         link = cell.getLink();
         setStateAndNotify(*this, -1, '.', LinkType::NoType,
@@ -53,14 +82,14 @@ bool Cell::moveCellHere(Cell &cell) {
             LinkType downloadLinkType = link->getType();
             link = otherLink;
             setStateAndNotify(*this,
-                              getPlayerNumFromLink(otherLink),
+                              attackPlayer,
                               downloadLinkName,
                               downloadLinkType,
                               true, true, -1);
             return false;
         } else {
             setStateAndNotify(*this,
-                              getPlayerNumFromLink(link),
+                              defensePlayer,
                               otherLink->getName(),
                               otherLink->getType(),
                               true, true, -1);
@@ -111,6 +140,10 @@ void Cell::useAbility(Ability a, int user) {
         {
             this->removeAndDownload(user, user);
             break;
+        }
+        case Ability::Firewall : 
+        {
+            this->firewall = user;
         }
         default :
         {
