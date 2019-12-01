@@ -108,23 +108,23 @@ void Cell::useAbility(Ability a, int user) {
             break;
         }
     }
-    notifyObservers();
 }
 
 void Cell::removeLink() {
+    link = nullptr;
     setStateAndNotify(*this, -1, '.', LinkType::NoType,
                       false, false, -1);
-    notifyObservers();
-    link = nullptr;
 }
 
 void Cell::removeAndDownload() {
-    setStateAndNotify(*this, getPlayerNumFromLink(link),
-                      link->getName(),
-                      link->getType(),
+    char linkName = link->getName();
+    LinkType linkType = link->getType();
+    int linkPlayer = getPlayerNumFromLink(link);
+    link = nullptr;
+    setStateAndNotify(*this, linkPlayer,
+                      linkName,
+                      linkType,
                       false, false, -1);
-    notifyObservers();
-    removeLink();
 }
 
 void Cell::setLink(Link *newLink) {
