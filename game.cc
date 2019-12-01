@@ -23,11 +23,11 @@ Game::Game(): currentPlayer{0} {
     this->players.push_back(p2);
 
     vector<Player *> playerPointers;
-    for (int i = 0; i < players.size(); ++i) {
+    for (unsigned int i = 0; i < players.size(); ++i) {
         playerPointers.emplace_back(&(players[i]));
     }
     vector<vector<Link *>> allLinks;
-    for (int i = 0; i < players.size(); ++i) {
+    for (unsigned int i = 0; i < players.size(); ++i) {
         allLinks.emplace_back(players[i].init());
     }
     grid = make_unique<Grid>(playerPointers, allLinks);
