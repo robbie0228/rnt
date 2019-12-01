@@ -1,5 +1,6 @@
 #include "game.h"
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <utility>
 using namespace std;
@@ -10,17 +11,31 @@ int main()
 
     string cmd;
 
-    while (cin >> cmd)
+    istream *stream = &cin;
+    ifstream file;
+
+    while (true)
     {
+        
+        if (!((*stream) >> cmd)) {
+            if (stream != &cin) {
+                stream = &cin;
+                if (!((*stream) >> cmd)) {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
         try
         {
             if (cmd == "move")
             {
                 char link;
-                cin >> link;
+                (*stream) >> link;
                 Direction dir;
                 string dirtemp;
-                cin >> dirtemp;
+                (*stream) >> dirtemp;
                 if (dirtemp == "left") dir = Direction::Left;
                 else if (dirtemp == "right") dir = Direction::Right;
                 else if (dirtemp == "up") dir = Direction::Up;
@@ -36,12 +51,12 @@ int main()
             else if (cmd == "ability")
             {
                 int abilityID;
-                cin >> abilityID;
+                (*stream) >> abilityID;
                 pair<int, bool> abilityInfo = game.verifyAbility(abilityID);
                 char c;
                 vector<char> useAbilityInfo;
                 for (int i = 0; i < abilityInfo.first; i++) {
-                    cin >> c;
+                    (*stream) >> c;
                     useAbilityInfo.emplace_back(c);
                 }
                 if (abilityInfo.second) {
@@ -59,7 +74,10 @@ int main()
             }
             else if (cmd == "sequence")
             {
-                // TODO, can add a stream to the front of another?
+                string fileName;
+                (*stream) >> fileName;
+                file = ifstream{fileName};
+                stream = &file;
             }
             else if (cmd == "quit")
             {
