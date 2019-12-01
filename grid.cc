@@ -32,10 +32,6 @@ Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers, int si
             } else {
                 row.emplace_back(Cell(r, c)); 
             }
-
-            for (int player = 0; player < 2; ++player) {
-                row[row.size() - 1].attach(players[player]);
-            }
         }
         cells.emplace_back(row); // Add row of cells to grid
     }
@@ -68,6 +64,15 @@ Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers, int si
     }
 
     textDisplay = make_unique<TextDisplay>(displayGrid, displayLinks);
+
+    for (int row = 0; row < GRIDSIZE; ++row) {
+        for (int col = 0; col < GRIDSIZE; ++col) {
+            for (int player = 0; player < 2; ++player) {
+                cells[row][col].attach(players[player]);
+            }
+            cells[row][col].attach(textDisplay.get());
+        }
+    }
 }
 
 void Grid::move(int player, int link, Direction dir) {
