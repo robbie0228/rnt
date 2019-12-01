@@ -30,7 +30,7 @@ class Grid {
         void move(int player, int link, Direction dir);
 
         // Uses ability
-        void useAbility(Ability a, vector<char> v, int player);
+        void useAbility(Ability a, vector<char> v, int user);
 
         // Calls any type of Display to draw
         friend std::ostream &operator<<(std::ostream &out, const Grid &grid);

@@ -85,14 +85,14 @@ Link *Cell::getLink() const{
     return link;
 }
 
-void Cell::useAbility(Ability a, int player) {
+void Cell::useAbility(Ability a, int user) {
     switch (a) {
         case Ability::Boost :
         {
             int currSpeed = this->link->getSpeed();
             this->link->setSpeed(1 + currSpeed);
             setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
-                              false, player);
+                              false, user);
             break;
         }
         case Ability::Polarize :
@@ -104,7 +104,7 @@ void Cell::useAbility(Ability a, int player) {
                 this->link->setType(LinkType::Data);
             }
             setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
-                              false, player);
+                              false, user);
             break;
         }
     }
