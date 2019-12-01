@@ -8,7 +8,7 @@
 using std::vector;
 using std::ostream;
 
-class TextDisplay : Observer {
+class TextDisplay : public Observer {
         // 8*8 2D array of (. a-h A-H S m w)
         vector<vector<char>> grid; 
         
