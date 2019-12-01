@@ -9,3 +9,9 @@ move C up
 abilities
 ability 3 a
 abilities
+ability 4 C
+ability 5 h
+move a down
+abilities
+ability 3 B
+ability 4 h
