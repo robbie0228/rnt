@@ -34,7 +34,7 @@ bool Cell::moveCellHere(Cell &cell) {
     }
 
     int attackPlayer = getPlayerNumFromLink(otherLink);
-    int defensePlayer = (attackPlayer + 1) % 2;
+    int defensePlayer = (attackPlayer % 2) + 1;
 
     if (serverPort) {
         if (serverPort == defensePlayer) {

@@ -40,7 +40,7 @@ void TextDisplay::notify(Subject &whoFrom) {
 
     int abilityUser = state.playerUsingAbility - 1;
     // When a player is using an ability
-    if (state.playerUsingAbility != -2) {
+    if (state.playerUsingAbility >= 0) {
         abilityRemainingCounts[abilityUser] -= 1;
     }
 
