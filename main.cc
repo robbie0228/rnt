@@ -48,7 +48,7 @@ int main()
                     game.useAbility(abilityID, useAbilityInfo);
                 }
                 else {
-                    cout << "invalid ability" << endl;
+                    cout << "Invalid ability" << endl;
                     cout << endl;
                 }
             }
