@@ -47,7 +47,8 @@ void TextDisplay::notify(Subject &whoFrom) {
     grid[info.row][info.col] = info.name;
 
     // When the cell contains a link
-    if (info.name != '.') {
+    if ((0 <= info.name - 'a' && info.name - 'a' < NUMLINKS)
+        || (0 <= info.name - 'A' && info.name - 'A' < NUMLINKS)) {
         // When a link is revealed using reveal
         if (state.linkIsRevealed) {
             if (info.name - 'a' >= 0) {
