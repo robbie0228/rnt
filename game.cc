@@ -15,7 +15,7 @@ int charLinkToInt(char c) {
 
 //implementations
 
-Game::Game(): currentPlayer{0} {
+Game::Game(): currentPlayer{0}, abilityUsedCount{0} {
     Player p1 = Player(1);
     Player p2 = Player(2);
 
@@ -45,8 +45,10 @@ void Game::move(char link, Direction dir) {
     this->grid->move(currentPlayer, charLinkToInt(link), dir);
     if (currentPlayer == 0) {
         currentPlayer = 1;
+        abilityUsedCount = 0;
     } else if (currentPlayer == 1) {
         currentPlayer = 0;
+        abilityUsedCount = 0;
     }
 }
 
@@ -73,6 +75,11 @@ pair<int, bool> Game::verifyAbility(int abilityID) {
 }
 
 void Game::useAbility(int abilityID, vector<char> useAbilityInfo) {
-    Ability abilityName = players[currentPlayer].useAbility(abilityID, useAbilityInfo);
-    grid->useAbility(abilityName, useAbilityInfo, currentPlayer + 1);
+    abilityUsedCount += 1;
+    if (abilityUsedCount > MAXABILITYUSE) throw "Only use one ability per turn";
+    else {
+        Ability abilityName = 
+            players[currentPlayer].useAbility(abilityID, useAbilityInfo);
+        grid->useAbility(abilityName, useAbilityInfo, currentPlayer + 1);
+    }
 }
