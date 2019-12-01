@@ -46,21 +46,6 @@ void Player::printAbilities(ostream& out) const{
     out << "not implemented yet, print abilities with ID and used status";
 }
 
-void Player::print(ostream& out) const{
-    out << "Player " << playerNumber << ":" << endl;
-    out << "Downloaded: " << downloadedDataCount << "D, "
-        << downloadedVirusCount << "V" << endl;
-
-    int abilityCount = 0;
-    for (int i = 0; i < 5; ++i) {
-        if (abilities[i].second) {
-            ++abilityCount;
-        }
-    }
-
-    out << "Abilities: " << abilityCount << endl;
-}
-
 pair<Ability, bool> Player::getAbility(int abilityID) {
     return abilities[abilityID - 1];
 }
@@ -97,5 +82,3 @@ void Player::notify(Subject &whoFrom) {
         }
     }
 }
-
-

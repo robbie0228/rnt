@@ -13,7 +13,7 @@ int charLinkToInt(char c) {
 }
 
 
-//implementations
+// implementations
 
 Game::Game(): currentPlayer{0} {
     Player p1 = Player(1);
@@ -49,11 +49,6 @@ void Game::move(char link, Direction dir) {
         currentPlayer = 0;
     }
 }
-
-/*ostream &operator<<(ostream &out, const Game &g) {
-    out << g.grid;
-    return out;
-}*/
 
 void Game::printBoard() {
     grid->printBoard(currentPlayer);

@@ -52,7 +52,6 @@ int main()
             }
             else if (cmd == "board")
             {
-                // cout << game;
                 game.printBoard();
                 cout << endl;
             }
@@ -65,8 +64,8 @@ int main()
                 break;
             }
             else
-            { // invalid command, take input again
-                cout << "invalid command, try again" << endl;
+            {
+                throw "invalid command";
             }
         } catch (char const *e) {
             cout << e << endl;

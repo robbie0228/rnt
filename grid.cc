@@ -66,8 +66,6 @@ Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers, int si
             displayGrid[row][col] = cells[row][col].getName();
         }
     }
-    
-    
 
     textDisplay = make_unique<TextDisplay>(displayGrid, displayLinks);
 }
@@ -163,16 +161,6 @@ void Grid::useAbility(Ability a, vector<char> v) {
         cells[rowOfLink][colOfLink].useAbility(a);
     }
 }
-
-/*ostream &operator<<(ostream &out, const Grid &grid) {
-    for (int r = 0; r < 8; ++r) {
-        for (int c = 0; c < 8; ++c) {
-            out << grid.cells[r][c].getName();
-        }
-        out << endl;
-    }
-    return out; // Return out for chaining
-}*/
 
 void Grid::printBoard(int currentPlayer) {
     textDisplay->draw(currentPlayer);

@@ -3,12 +3,12 @@
 #include <vector>
 #include <utility>
 #include <iostream>
+#include <memory>
+#include <string>
+#include "text_display.h"
 #include "cell.h"
 #include "player.h"
 #include "enums.h"
-#include <memory>
-#include "text_display.h"
-#include <string>
 using std::vector;
 
 class Link;

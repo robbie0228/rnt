@@ -39,5 +39,4 @@ class TextDisplay {
         void draw(int currentPlayer);
 };
 
-
 #endif

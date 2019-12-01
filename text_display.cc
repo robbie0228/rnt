@@ -8,14 +8,6 @@ TextDisplay::TextDisplay(vector<vector<char>> grid,
 
     knownLinks = vector<vector<bool>>(2, vector<bool>(8, false));
 
-    /*this->knownLinks = 
-              {
-                {true, true, true, true, true, true, true, true,
-                 false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false,
-                 true, true, true, true, true, true, true, true}
-              };*/
-
     downloadedCounts = vector<pair<int, int>>(2, pair<int, int>(0, 0));
 
     abilityRemainingCounts = vector<int>(2, 5);
@@ -25,7 +17,6 @@ void TextDisplay::notify(Subject&) {
     // Subject/Observer
 }
 
-//ostream& operator<< (ostream& out, TextDisplay& display) {
 void TextDisplay::draw(int currentPlayer) {
     cout << "Player 1:" << endl
         << "Downloaded: " << downloadedCounts[0].first << "D, " 
@@ -151,7 +142,4 @@ void TextDisplay::draw(int currentPlayer) {
     else {
         throw "this player does not exist";
     }
-
-    //return out;
 }
-
