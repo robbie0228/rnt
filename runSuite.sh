@@ -7,13 +7,13 @@ for file in $(cat tests/suite.txt)
 do
     if [ -e "tests/$file.args" ]; then
         if [ -e "tests/$file.in" ]; then
-            cat "tests/$file.in" | ./raiinet $(cat "tests/$file.args") > $temp
+            echo "sequence tests/$file.in quit" | ./raiinet $(cat "tests/$file.args") > $temp
         else
             ./raiinet $(cat "tests/$file.args") > $temp
         fi
     else 
         if [ -e "tests/$file.in" ]; then
-            cat "tests/$file.in" | ./raiinet > $temp
+            echo "sequence tests/$file.in quit" | ./raiinet > $temp
         else
             ./raiinet > $temp
         fi

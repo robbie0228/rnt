@@ -11,22 +11,24 @@ int main()
 
     string cmd;
 
+    vector<ifstream> fstreams;
     istream *stream = &cin;
-    ifstream file;
 
-    while (true)
-    {
-        
-        if (!((*stream) >> cmd)) {
-            if (stream != &cin) {
-                stream = &cin;
-                if (!((*stream) >> cmd)) {
-                    break;
-                }
-            } else {
-                break;
-            }
+    bool moreToRead = true;
+    while (!((*stream) >> cmd)) {
+        if (fstreams.size() > 1) {
+            fstreams.pop_back();
+            stream = &(fstreams.back());
+        } else if (fstreams.size() == 1) {
+            fstreams.pop_back();
+            stream = &cin;
+        } else {
+            moreToRead = false;
+            break;
         }
+    }
+    while (moreToRead)
+    {
         try
         {
             if (cmd == "move")
@@ -76,8 +78,8 @@ int main()
             {
                 string fileName;
                 (*stream) >> fileName;
-                file = ifstream{fileName};
-                stream = &file;
+                fstreams.emplace_back(ifstream{fileName});
+                stream = &(fstreams.back());
             }
             else if (cmd == "quit")
             {
@@ -90,6 +92,18 @@ int main()
         } catch (char const *e) {
             cout << e << endl;
             cout << endl;
+        }
+        while (!((*stream) >> cmd)) {
+            if (fstreams.size() > 1) {
+                fstreams.pop_back();
+                stream = &(fstreams.back());
+            } else if (fstreams.size() == 1) {
+                fstreams.pop_back();
+                stream = &cin;
+            } else {
+                moreToRead = false;
+                break;
+            }
         }
     }
 }
