@@ -209,7 +209,8 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
         if (a == Ability::Download) {
             locationOfLinks[playerIndex][linkIndex] = make_pair(-1, -1);
         } else if (a == Ability::Scan) {
-            printBoard(user);
+            //printBoard(user - 1);
+            return;
         }
     }
 }
