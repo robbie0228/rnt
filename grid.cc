@@ -60,8 +60,14 @@ void Grid::move(int player, int link, Direction dir) {
             cellWithLink.removeAndDownload(player, -1);
         } else {
             Cell &moveToCell = cells[rowOfLink + linkSpeed][colOfLink];
+            char otherCellName = moveToCell.getName();
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
+                if (('A' <= otherCellName && otherCellName <= 'H')
+                    || ('a' <= otherCellName && otherCellName <= 'h')) 
+                {
+                    locationOfLinks[(player + 1) % 2][link] = make_pair(-1, -1);
+                }
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink + linkSpeed, colOfLink);
             } else {
@@ -74,8 +80,14 @@ void Grid::move(int player, int link, Direction dir) {
             throw "Invalid move";
         } else {
             Cell &moveToCell = cells[rowOfLink][colOfLink - linkSpeed];
+            char otherCellName = moveToCell.getName();
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
+                if (('A' <= otherCellName && otherCellName <= 'H')
+                    || ('a' <= otherCellName && otherCellName <= 'h')) 
+                {
+                    locationOfLinks[(player + 1) % 2][link] = make_pair(-1, -1);
+                }
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink, colOfLink - linkSpeed);
             } else {
@@ -88,8 +100,14 @@ void Grid::move(int player, int link, Direction dir) {
             throw "Invalid move";
         } else {
             Cell &moveToCell = cells[rowOfLink][colOfLink + linkSpeed];
+            char otherCellName = moveToCell.getName();
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
+                if (('A' <= otherCellName && otherCellName <= 'H')
+                    || ('a' <= otherCellName && otherCellName <= 'h')) 
+                {
+                    locationOfLinks[(player + 1) % 2][link] = make_pair(-1, -1);
+                }
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink, colOfLink + linkSpeed);
             } else {
@@ -106,8 +124,15 @@ void Grid::move(int player, int link, Direction dir) {
             cellWithLink.removeAndDownload(player, -1);
         } else {
             Cell &moveToCell = cells[rowOfLink - linkSpeed][colOfLink];
+            char otherCellName = moveToCell.getName();
+
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
+                if (('A' <= otherCellName && otherCellName <= 'H')
+                    || ('a' <= otherCellName && otherCellName <= 'h')) 
+                {
+                    locationOfLinks[(player + 1) % 2][link] = make_pair(-1, -1);
+                }
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink - linkSpeed, colOfLink);
             } else {
