@@ -54,7 +54,6 @@ bool Cell::moveCellHere(Cell &cell) {
                               otherLink->getName(),
                               otherLink->getType(),
                               true, true, -1);
-            notifyObservers();
             return false;
         } else {
             setStateAndNotify(*this,
