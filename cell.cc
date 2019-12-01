@@ -49,17 +49,19 @@ bool Cell::moveCellHere(Cell &cell) {
         }
     } else if (firewall) {
         if (firewall == defensePlayer) {
+            link = otherLink;
+            setStateAndNotify(*this, -1, '.', LinkType::NoType,
+                              false, true, -1);
             if (otherLink->getType() == LinkType::Virus) {
+                link = nullptr;
                 setStateAndNotify(*this,
                                   attackPlayer,
                                   otherLink->getName(),
                                   otherLink->getType(),
-                                  true, false, -1);
+                                  false, false, -1);
                 return true;
             } else {
-                link = otherLink;
-                setStateAndNotify(*this, -1, '.', LinkType::NoType,
-                                  false, true, -1);
+                
                 return false;
             }
         } else {
