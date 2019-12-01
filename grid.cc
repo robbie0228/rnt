@@ -152,25 +152,17 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
         char linkName = v[0];
         int linkIndex;
         if ('a' <= linkName && linkName <= 'h') { 
-            linkIndex = linkName - 'a';   
+            linkIndex = linkName - 'a';
+            playerIndex = 0;   
         } else if ('A' <= linkName && linkName <= 'H') {
-            linkIndex = linkName - 'A';   
+            linkIndex = linkName - 'A';
+            playerIndex = 1;   
         }
 
-        pair<int, int> locationOfLink;
+        pair<int, int> locationOfLink = locationOfLinks[playerIndex][linkIndex];
 
         if (a == Ability::Download) {
-            if (user == 1) {
-                locationOfLink = locationOfLinks[1][linkIndex];
-                locationOfLinks[1][linkIndex] = make_pair(-1, -1);
-            } else {
-                locationOfLink = locationOfLinks[0][linkIndex];
-                locationOfLinks[1][linkIndex] = make_pair(-1, -1);
-            }
-        } else if (a == Ability::Boost) {
-            locationOfLink = locationOfLinks[user - 1][linkIndex];
-        } else if (a == Ability::Polarize) {
-            locationOfLink = locationOfLinks[user - 1][linkIndex];
+            locationOfLinks[playerIndex][linkIndex] = make_pair(-1, -1);
         }
 
         int rowOfLink = locationOfLink.first;
