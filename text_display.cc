@@ -28,17 +28,17 @@ void TextDisplay::notify(Subject &whoFrom) {
 
         // When two links battle and the downloading link is revealed
         if (state.downloadingLinkIsRevealed) {
-            if (state.downloadingLinkName - 'a' > 0) {
-                knownLinks[linkDownloader][state.downloadingLinkName - 'A'] = true;
-            } else {
+            if (state.downloadingLinkName - 'a' >= 0) {
                 knownLinks[linkDownloader][state.downloadingLinkName - 'a'] = true;
+            } else {
+                knownLinks[linkDownloader][state.downloadingLinkName - 'A'] = true;
             }
         }
     }
 
     // When a link is revealed using reveal
     if (state.linkIsRevealed) {
-        if (info.name - 'a' > 0) {
+        if (info.name - 'a' >= 0) {
             knownLinks[1][info.name - 'a'] = true;
         } else {
             knownLinks[0][info.name - 'A'] = true;
@@ -58,7 +58,7 @@ void TextDisplay::notify(Subject &whoFrom) {
         string linkTypeAndStrength = 
                     (info.type == LinkType::Data ? "D" : "V") + 
                     to_string(info.strength);
-        if (info.name - 'a' > 0) {
+        if (info.name - 'a' >= 0) {
             links[0][info.name - 'a'] = 
                 make_pair(info.name, linkTypeAndStrength);
         } else {

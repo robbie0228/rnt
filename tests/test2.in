@@ -17,4 +17,6 @@ move A up
 board
 move a down
 board
+move B up
+board
 quit
