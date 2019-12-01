@@ -50,14 +50,39 @@ void Player::print(ostream& out) const{
     out << "Player " << playerNumber << ":" << endl;
     out << "Downloaded: " << downloadedDataCount << "D, "
         << downloadedVirusCount << "V" << endl;
-    out << "Abilities: " << abilities.size() << endl;
+
+    int abilityCount = 0;
+    for (int i = 0; i < 5; ++i) {
+        if (abilities[i].second) {
+            ++abilityCount;
+        }
+    }
+
+    out << "Abilities: " << abilityCount << endl;
 }
 
 pair<Ability, bool> Player::getAbility(int abilityID) {
     return abilities[abilityID - 1];
 }
 
-Ability Player::useAbility(int abilityID) {
+Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
+    switch(abilities[abilityID - 1].first) {
+        case Ability::Boost :
+            if (playerNumber == 1 && 'a' > abilityInfo[0] && abilityInfo[0] > 'h') {
+                throw "Invalid use of ability";
+            } else if (playerNumber == 2 && 'A' > abilityInfo[0] && abilityInfo[0] > 'H') {
+                throw "Invalid use of ability";
+            }
+            break;
+        case Ability::Polarize :
+            if (abilityInfo[0] < 'A'
+                || ('H' < abilityInfo[0] && abilityInfo[0] < 'a')
+                || abilityInfo[0] > 'h')
+            {
+                throw "Invalid use of ability";
+            }
+    }
+    
     abilities[abilityID - 1].second = false;
     return abilities[abilityID - 1].first;
 }

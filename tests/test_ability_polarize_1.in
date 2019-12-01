@@ -1,0 +1,14 @@
+board
+ability 5 a
+move a down
+board
+ability 3 A
+move A up
+board
+move b down
+move A up
+move b down
+move A up
+board
+ability 5 b
+quit
