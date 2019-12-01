@@ -17,8 +17,8 @@ enum class Ability {
     Polarize,
 
     Uber, 
-    Whey, 
-    Steal,
+    Whey,
+    Embezzle,
 
     NotAvailable
 };

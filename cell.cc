@@ -148,6 +148,10 @@ void Cell::useAbility(Ability a, int user) {
                               false, user);
             break;
         }
+        case Ability::Scan :
+            setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
+                              false, user);
+            break;
         default :
         {
             break;

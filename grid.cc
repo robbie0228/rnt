@@ -201,14 +201,16 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
 
         pair<int, int> locationOfLink = locationOfLinks[playerIndex][linkIndex];
 
-        if (a == Ability::Download) {
-            locationOfLinks[playerIndex][linkIndex] = make_pair(-1, -1);
-        }
-
         int rowOfLink = locationOfLink.first;
         int colOfLink = locationOfLink.second;
 
         cells[rowOfLink][colOfLink].useAbility(a, user);
+
+        if (a == Ability::Download) {
+            locationOfLinks[playerIndex][linkIndex] = make_pair(-1, -1);
+        } else if (a == Ability::Scan) {
+            printBoard(user);
+        }
     }
 }
 
