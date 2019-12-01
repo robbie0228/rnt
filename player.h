@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "subject.h"
+#include "enums.h"
 #include <iostream>
 #include <vector>
 
@@ -19,6 +20,12 @@ class Player : public Observer {
     public:
         // Constructor for a Player
         Player(int playerNumber);
+
+        // Initialize custom abilities for the Player
+        void cmdInitAbilities(string abilities);
+
+        // Initialize custom link positions for the Player
+        void cmdInitLinks(string links);
 
         // Additional construction may go here if necessary
         std::vector<Link *> init();

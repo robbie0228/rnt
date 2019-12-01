@@ -23,9 +23,11 @@ class Game {
         //   Uses link information from each player to instantiate grid
         Game();
 
-        // Additional construction may go here if necessary
-        void init();
+        // Initialize custom abilities for the Player
+        void cmdInitAbilities(int playerNumber, string abilities);
 
+        // Initialize custom link positions for the Player
+        void cmdInitLinks(int playerNumber, string links);
         // Moves Link-link towards Direction dir;
         //   Parses link and calls Grid's move() with parsed information
         void move(char link, Direction dir);
@@ -39,8 +41,6 @@ class Game {
 
         // Calls current player's printAbilities()
         void printAbilities(std::ostream& out);
-
-        // friend std::ostream &operator<<(std::ostream &out, const Game &g);
 
         void printBoard();
 };

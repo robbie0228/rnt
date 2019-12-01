@@ -15,7 +15,44 @@ Player::Player(int playerNumber):
                make_pair(Ability::Polarize, 1)};
 }
 
-std::vector<Link *> Player::init() {
+void Player::cmdInitAbilities(string abilities){
+    vector<pair<Ability, bool>> abilitiesInit;
+    for (int i = 0; i < NUMABILITIES; ++i) {
+        char ability = abilities[i];
+        switch(ability) {
+            case 'F' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Firewall, true));
+                break;
+            case 'D' :
+                abilitiesInit.emplace_back(make_pair(Ability::Download, true));
+                break;
+            case 'L' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Boost, true));
+                break;
+            case 'S' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Scan, true));
+                break;
+            case 'P' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Polarize, true));
+                break;
+            case 'U' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Uber, true));
+                break;
+            case 'W' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Whey, true));
+                break;
+            case 'C' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Cop, true));
+                break;
+            default  :
+                throw "Invalid ability";
+        }
+    }
+    this->abilities = abilitiesInit;
+}
+
+
+vector<Link *> Player::init() {
     vector<Link *> linkPointers;
     for (int link = 0; link < NUMLINKS; ++link) {
         // Initialize link
@@ -30,6 +67,19 @@ std::vector<Link *> Player::init() {
         linkPointers.emplace_back(&(links[i]));
     }
     return linkPointers;
+}
+
+void Player::cmdInitLinks(string links) {
+    vector<Link> linksInit;
+    for (int i = 0, j = 0; i < NUMLINKS * 2; i += 2, ++j) {
+        LinkType linkTempType = (links[i] == 'D' ? LinkType::Data : 
+                                                   LinkType::Virus);
+        int linkTempStrength = links[i + 1];
+        char linkTempName = (playerNumber == 1 ? 'a' : 'A') + j;
+        linksInit.emplace_back(Link
+                                (linkTempType, linkTempStrength, linkTempName));
+    }
+    this->links = linksInit;
 }
 
 bool Player::isMyLink(char linkName) {
@@ -68,14 +118,14 @@ void Player::printAbilities(ostream& out) const{
         string abilityName;
 
         switch (abilities[i].first) {
-            case Ability::Boost    : abilityName = "Link Boost"; break;
-            case Ability::Download : abilityName = "Download"; break;
-            case Ability::Firewall : abilityName = "Firewall"; break;
-            case Ability::Polarize : abilityName = "Polarize"; break;
-            case Ability::Scan     : abilityName = "Scan"; break;
-            case Ability::Steal    : abilityName = "Steal"; break;
-            case Ability::Uber     : abilityName = "Uber"; break;
-            case Ability::Whey     : abilityName = "Whey"; break;
+            case Ability::Boost    : abilityName = "Link Boost" ; break;
+            case Ability::Download : abilityName = "Download"   ; break;
+            case Ability::Firewall : abilityName = "Firewall"   ; break;
+            case Ability::Polarize : abilityName = "Polarize"   ; break;
+            case Ability::Scan     : abilityName = "Scan"       ; break;
+            case Ability::Cop      : abilityName = "Cop"        ; break;
+            case Ability::Uber     : abilityName = "Uber"       ; break;
+            case Ability::Whey     : abilityName = "Whey"       ; break;
             default                : throw "ability unavailable";
         }
 

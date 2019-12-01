@@ -4,9 +4,55 @@
 #include <utility>
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
+    if (argc > MAXCMDLINEARGS + 1) {
+        throw "Too many command line arguments given";
+    }
+
+    // argc = #cmd + 1
+    // agrv[i] points to the ith cmd
+
     Game game;
+
+    try {
+        for (int i = 1; i < argc; ++i) {
+            string arg = argv[i];
+
+            if (arg == "-ability1") {
+                string abilities = argv[i + 1];
+                if (abilities.length() != NUMABILITIES) throw "Invalid abilities";
+                ++i;
+                game.cmdInitAbilities(1, abilities);
+            }
+            else if (arg == "-ability2") {
+                string abilities = argv[i + 1];
+                if (abilities.length() != NUMABILITIES) throw "Invalid abilities";
+                ++i;
+                game.cmdInitAbilities(2, abilities);
+            }
+            else if (arg == "-link1") {
+                string links = argv [i + 1];
+                if (links.length() != NUMLINKS * 2) throw "Invalid links";
+                ++i;
+                game.cmdInitLinks(1, links);
+            }
+            else if (arg == "-link2") {
+                string links = argv [i + 1];
+                if (links.length() != NUMLINKS * 2) throw "Invalid links";
+                ++i;
+                game.cmdInitLinks(2, links);
+            }
+            else if (arg == "-graphics") {
+                // Enable graphic display
+            }
+            else throw "Invalid command line argument given";
+        }
+    } catch (char const *e) {
+        cout << e << endl;
+        cout << endl;
+        EXIT_FAILURE;
+    }
 
     string cmd;
 

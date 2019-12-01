@@ -32,8 +32,12 @@ Game::Game(): currentPlayer{0}, abilityUsedCount{0} {
     grid = make_unique<Grid>(playerPointers, allLinks);
 }
 
-void Game::init() {
-    return;
+void Game::cmdInitAbilities(int playerNumber, string abilities) {
+    players[playerNumber - 1].cmdInitAbilities(abilities);
+}
+
+void Game::cmdInitLinks(int playerNumber, string links) {
+    players[playerNumber - 1].cmdInitLinks(links);
 }
 
 void Game::move(char link, Direction dir) {
