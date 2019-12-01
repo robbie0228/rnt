@@ -92,7 +92,7 @@ void Cell::useAbility(Ability a, int player) {
             int currSpeed = this->link->getSpeed();
             this->link->setSpeed(1 + currSpeed);
             setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
-                              false, getPlayerNumFromLink(this->link));
+                              false, player);
             break;
         }
         case Ability::Polarize :
@@ -104,7 +104,7 @@ void Cell::useAbility(Ability a, int player) {
                 this->link->setType(LinkType::Data);
             }
             setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
-                              false, getPlayerNumFromLink(this->link));
+                              false, player);
             break;
         }
     }
