@@ -6,11 +6,13 @@ TextDisplay::TextDisplay(vector<vector<char>> grid,
     this->grid = grid;
     this->links = links;
 
-    knownLinks = vector<vector<bool>>(2, vector<bool>(8, false));
+    knownLinks = vector<vector<bool>>(NUMPLAYERS, 
+                                      vector<bool>(NUMLINKS, false));
 
-    downloadedCounts = vector<pair<int, int>>(2, pair<int, int>(0, 0));
+    downloadedCounts = vector<pair<int, int>>(NUMPLAYERS, 
+                                              pair<int, int>(0, 0));
 
-    abilityRemainingCounts = vector<int>(2, 5);
+    abilityRemainingCounts = vector<int>(NUMPLAYERS, NUMABILITIES);
 }
 
 void TextDisplay::notify(Subject &whoFrom) {
@@ -128,8 +130,8 @@ void TextDisplay::draw(int currentPlayer) {
 
     cout << string(8, '=') << endl;
 
-    for (int row = 0; row < 8; ++row) {
-        for (int col = 0; col < 8; ++col) {
+    for (int row = 0; row < GRIDSIZE; ++row) {
+        for (int col = 0; col < GRIDSIZE; ++col) {
             cout << grid[row][col];
         }
         cout << endl;

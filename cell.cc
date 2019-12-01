@@ -74,7 +74,7 @@ bool Cell::moveCellHere(Cell &cell) {
                           false, false, -1);
         return false;
     } else {
-        if (abs(otherLink->getName() - link->getName()) < 8) {
+        if (abs(otherLink->getName() - link->getName()) < NUMLINKS) {
             throw "Cannot move a link onto another of your links";
         }
         if (otherLink->getStrength() >= link->getStrength()) {
@@ -144,6 +144,9 @@ void Cell::useAbility(Ability a, int user) {
         case Ability::Firewall : 
         {
             this->firewall = user;
+            setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
+                              false, user);
+            break;
         }
         default :
         {

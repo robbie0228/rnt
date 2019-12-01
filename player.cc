@@ -17,7 +17,7 @@ Player::Player(int playerNumber):
 
 std::vector<Link *> Player::init() {
     vector<Link *> linkPointers;
-    for (int link = 0; link < 8; ++link) {
+    for (int link = 0; link < NUMLINKS; ++link) {
         // Initialize link
         links.emplace_back(
             Link((link < 4 ? LinkType::Data : LinkType::Virus),

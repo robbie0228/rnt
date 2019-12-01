@@ -4,8 +4,8 @@
 using namespace std;
 
 Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers) {
-    locationOfLinks = vector<vector<pair<int, int>>>(2, 
-                      vector<pair<int, int>>(8, 
+    locationOfLinks = vector<vector<pair<int, int>>>(NUMPLAYERS,
+                      vector<pair<int, int>>(NUMLINKS,
                       make_pair(-1, -1)));
 
     // Loop through each row
@@ -39,12 +39,12 @@ Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers) {
     // construct the TextDisplay
 
     vector<vector<pair<char, string>>> displayLinks = 
-        vector<vector<pair<char, string>>>(2,
-        vector<pair<char, string>>(8,
+        vector<vector<pair<char, string>>>(NUMPLAYERS,
+        vector<pair<char, string>>(NUMLINKS,
         make_pair('%', "N0")));
     vector<vector<char>> displayGrid =
-        vector<vector<char>>(8,
-        vector<char>(8, '&'));
+        vector<vector<char>>(GRIDSIZE,
+        vector<char>(GRIDSIZE, '&'));
 
     for (int playerAt = 0; playerAt < NUMPLAYERS; ++playerAt) {
         for (int linkAt = 0; linkAt < GRIDSIZE; ++linkAt) {
@@ -67,7 +67,7 @@ Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers) {
 
     for (int row = 0; row < GRIDSIZE; ++row) {
         for (int col = 0; col < GRIDSIZE; ++col) {
-            for (int player = 0; player < 2; ++player) {
+            for (int player = 0; player < NUMPLAYERS; ++player) {
                 cells[row][col].attach(players[player]);
             }
             cells[row][col].attach(textDisplay.get());
@@ -87,7 +87,7 @@ void Grid::move(int player, int link, Direction dir) {
     Cell &cellWithLink = cells[rowOfLink][colOfLink];
     int linkSpeed = cellWithLink.getLink()->getSpeed();
     if (dir == Direction::Down) {
-        if (rowOfLink + linkSpeed >= 8) {
+        if (rowOfLink + linkSpeed >= GRIDSIZE) {
             if (player == 1) {
                 throw "Invalid move";
             }
@@ -101,7 +101,7 @@ void Grid::move(int player, int link, Direction dir) {
                 if (('A' <= otherCellName && otherCellName <= 'H')
                     || ('a' <= otherCellName && otherCellName <= 'h')) 
                 {
-                    locationOfLinks[(player + 1) % 2][link] = make_pair(-1, -1);
+                    locationOfLinks[(player + 1) % NUMPLAYERS][link] = make_pair(-1, -1);
                 }
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink + linkSpeed, colOfLink);
@@ -121,7 +121,7 @@ void Grid::move(int player, int link, Direction dir) {
                 if (('A' <= otherCellName && otherCellName <= 'H')
                     || ('a' <= otherCellName && otherCellName <= 'h')) 
                 {
-                    locationOfLinks[(player + 1) % 2][link] = make_pair(-1, -1);
+                    locationOfLinks[(player + 1) % NUMPLAYERS][link] = make_pair(-1, -1);
                 }
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink, colOfLink - linkSpeed);
@@ -131,7 +131,7 @@ void Grid::move(int player, int link, Direction dir) {
             cellWithLink.removeLink();
         }
     } else if (dir == Direction::Right) {
-        if (colOfLink + linkSpeed >= 8) {
+        if (colOfLink + linkSpeed >= GRIDSIZE) {
             throw "Invalid move";
         } else {
             Cell &moveToCell = cells[rowOfLink][colOfLink + linkSpeed];
@@ -141,7 +141,7 @@ void Grid::move(int player, int link, Direction dir) {
                 if (('A' <= otherCellName && otherCellName <= 'H')
                     || ('a' <= otherCellName && otherCellName <= 'h')) 
                 {
-                    locationOfLinks[(player + 1) % 2][link] = make_pair(-1, -1);
+                    locationOfLinks[(player + 1) % NUMPLAYERS][link] = make_pair(-1, -1);
                 }
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink, colOfLink + linkSpeed);
@@ -165,7 +165,7 @@ void Grid::move(int player, int link, Direction dir) {
                 if (('A' <= otherCellName && otherCellName <= 'H')
                     || ('a' <= otherCellName && otherCellName <= 'h')) 
                 {
-                    locationOfLinks[(player + 1) % 2][link] = make_pair(-1, -1);
+                    locationOfLinks[(player + 1) % NUMPLAYERS][link] = make_pair(-1, -1);
                 }
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink - linkSpeed, colOfLink);
@@ -181,7 +181,7 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
     if (a == Ability::Firewall) {
         int row = v[0] - '0';
         int col = v[1] - '0';
-        if (row < 0 || row >= 8 || col < 0 || col >= 8) {
+        if (row < 0 || row >= GRIDSIZE || col < 0 || col >= GRIDSIZE) {
             throw "Invalid use of ability";
         }
         cells[row][col].useAbility(Ability::Firewall, user);
