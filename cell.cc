@@ -39,10 +39,10 @@ bool Cell::moveCellHere(Cell &cell) {
     if (serverPort) {
         if (serverPort == defensePlayer) {
             setStateAndNotify(*this,
-                            attackPlayer,
-                            otherLink->getName(),
-                            otherLink->getType(),
-                            true, false, -1);
+                              attackPlayer,
+                              otherLink->getName(),
+                              otherLink->getType(),
+                              true, false, -1);
             return true;
         } else {
             throw "Invalid move";
@@ -57,9 +57,10 @@ bool Cell::moveCellHere(Cell &cell) {
                                   true, false, -1);
                 return true;
             } else {
+                link = otherLink;
                 setStateAndNotify(*this, -1, '.', LinkType::NoType,
                                   false, true, -1);
-                link = otherLink;
+                return false;
             }
         } else {
             link = otherLink;
@@ -95,8 +96,6 @@ bool Cell::moveCellHere(Cell &cell) {
             return true;
         }
     }
-
-    return false;
 }
 
 char Cell::getName() const{
