@@ -125,7 +125,6 @@ void Grid::move(int player, int link, Direction dir) {
         } else {
             Cell &moveToCell = cells[rowOfLink - linkSpeed][colOfLink];
             char otherCellName = moveToCell.getName();
-
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
                 if (('A' <= otherCellName && otherCellName <= 'H')
