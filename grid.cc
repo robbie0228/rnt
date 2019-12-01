@@ -3,16 +3,16 @@
 
 using namespace std;
 
-Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers, int size) {
+Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers) {
     locationOfLinks = vector<vector<pair<int, int>>>(2, 
                       vector<pair<int, int>>(8, 
                       make_pair(-1, -1)));
 
     // Loop through each row
-    for (int r = 0; r < size; ++r) {
+    for (int r = 0; r < GRIDSIZE; ++r) {
         vector<Cell> row;
         // Loop through each column
-        for (int c = 0; c < size; ++c) {
+        for (int c = 0; c < GRIDSIZE; ++c) {
             if (r == 0 || r == 7) {
                 int player = (r == 0 ? 0 : 1);
                 if (c == 3 || c == 4) {

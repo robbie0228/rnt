@@ -26,7 +26,7 @@ class Grid {
     public:
         // Constructor for a Grid
         //   Instantiates Cells in a size*size Grid
-        Grid(vector<Player *> players, vector<vector<Link *>> linkPointers, int size = GRIDSIZE);
+        Grid(vector<Player *> players, vector<vector<Link *>> linkPointers);
 
         // Moves Player (player + 1)'s Link (link + 1), towards Direction dir
         void move(int player, int link, Direction dir);
