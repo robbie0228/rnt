@@ -5,11 +5,17 @@
 #include <memory>
 #include "grid.h"
 #include "player.h"
+#include "enums.h"
 
 class Game {
-        std::unique_ptr<Grid> grid;     // grid is the Grid that the game takes place in
-        std::vector<Player> players;    // a vector of two Player's
-        int currentPlayer; // an integer that holds info on the current Player
+        // grid is the Grid that the game takes place in
+        std::unique_ptr<Grid> grid;
+        // a vector of two Player's
+        std::vector<Player> players;
+        // an integer that holds info on the current Player
+        int currentPlayer;
+        // the number of abilities the current player has used in the turn
+        int abilityUsedCount;
 
     public:
         // Constructor for a Game

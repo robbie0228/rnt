@@ -4,6 +4,7 @@
 // Constants
 const int GRIDSIZE = 8;  // Board side length
 const int NUMPLAYERS = 2; // Number of players
+const int MAXABILITYUSE = 1; // Limit of ability use per turn
 
 // Ability names
 enum class Ability {

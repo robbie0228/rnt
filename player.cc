@@ -43,7 +43,27 @@ Status Player::checkStatus() {
 }
 
 void Player::printAbilities(ostream& out) const{
-    out << "not implemented yet, print abilities with ID and used status";
+    out << "Player " << playerNumber << "'s Abilities:" << endl;
+    for (int i = 0; i < 5; ++i) {
+        string abilityName;
+
+        switch (abilities[i].first) {
+            case Ability::Boost    : abilityName = "Link Boost"; break;
+            case Ability::Download : abilityName = "Download"; break;
+            case Ability::Firewall : abilityName = "Firewall"; break;
+            case Ability::Polarize : abilityName = "Polarize"; break;
+            case Ability::Scan     : abilityName = "Scan"; break;
+            case Ability::Steal    : abilityName = "Steal"; break;
+            case Ability::Uber     : abilityName = "Uber"; break;
+            case Ability::Whey     : abilityName = "Whey"; break;
+            default                : throw "ability unavailable";
+        }
+
+        out << i + 1 << ": " << abilityName << ", ";
+
+        if (abilities[i].second) out << "Unused" << endl;
+        else out << "Used" << endl;
+    }
 }
 
 pair<Ability, bool> Player::getAbility(int abilityID) {
@@ -53,9 +73,9 @@ pair<Ability, bool> Player::getAbility(int abilityID) {
 Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
     switch(abilities[abilityID - 1].first) {
         case Ability::Boost :
-            if (playerNumber == 1 && 'a' > abilityInfo[0] && abilityInfo[0] > 'h') {
+            if (playerNumber == 1 && ('a' > abilityInfo[0] || abilityInfo[0] > 'h')) {
                 throw "Invalid use of ability";
-            } else if (playerNumber == 2 && 'A' > abilityInfo[0] && abilityInfo[0] > 'H') {
+            } else if (playerNumber == 2 && ('A' > abilityInfo[0] || abilityInfo[0] > 'H')) {
                 throw "Invalid use of ability";
             }
             break;
@@ -66,6 +86,16 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
             {
                 throw "Invalid use of ability";
             }
+            break;
+        case Ability::Download :
+            if (playerNumber == 1 && (abilityInfo[0] < 'A' || 'H' < abilityInfo[0])) {
+                throw "Invalid use of ability";
+            } else if (playerNumber == 2 && (abilityInfo[0] < 'a' || 'h' < abilityInfo[0])) {
+                throw "Invalid use of ability";
+            }
+            break;
+        default :
+            break;
     }
     
     abilities[abilityID - 1].second = false;
