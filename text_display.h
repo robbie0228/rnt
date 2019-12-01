@@ -8,7 +8,7 @@
 using std::vector;
 using std::ostream;
 
-class TextDisplay {
+class TextDisplay : Observer {
         // 8*8 2D array of (. a-h A-H S m w)
         vector<vector<char>> grid; 
         
@@ -34,8 +34,7 @@ class TextDisplay {
     public:
         TextDisplay(vector<vector<char>> grid, 
                     vector<vector<std::pair<char, std::string>>> links);
-        void notify(Subject& subject);
-        // friend ostream& operator<< (ostream& out, TextDisplay& display);
+        void notify(Subject &whoFrom);
         void draw(int currentPlayer);
 };
 

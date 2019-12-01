@@ -13,8 +13,59 @@ TextDisplay::TextDisplay(vector<vector<char>> grid,
     abilityRemainingCounts = vector<int>(2, 5);
 }
 
-void TextDisplay::notify(Subject&) {
-    // Subject/Observer
+void TextDisplay::notify(Subject &whoFrom) {
+    StateType state = whoFrom.getState();
+    InfoType info = whoFrom.getInfo();
+
+    int linkDownloader = state.downloadingPlayer - 1;
+    // When a player is downloading a link
+    if (linkDownloader != -2) {
+        if (state.downloadingLinkType == LinkType::Data) {
+            downloadedCounts[linkDownloader].first += 1;
+        } else {
+            downloadedCounts[linkDownloader].second += 1;
+        }
+
+        // When two links battle and the downloading link is revealed
+        if (state.downloadingLinkIsRevealed) {
+            if (state.downloadingLinkName - 'a' > 0) {
+                knownLinks[linkDownloader][state.downloadingLinkName - 'a'] = true;
+            } else {
+                knownLinks[linkDownloader][state.downloadingLinkName - 'A'] = true;
+            }
+        }
+    }
+
+    // When a link is revealed using reveal
+    if (state.linkIsRevealed) {
+        if (info.name - 'a' > 0) {
+            knownLinks[1][info.name - 'a'] = true;
+        } else {
+            knownLinks[0][info.name - 'A'] = true;
+        }
+    }
+
+    int abilityUser = state.playerUsingAbility - 1;
+    // When a player is using an ability
+    if (state.playerUsingAbility != -2) {
+        abilityRemainingCounts[abilityUser] -= 1;
+    }
+
+    grid[info.row][info.col] = info.name;
+
+    // When the cell contains a link
+    if (info.name != '.') {
+        string linkTypeAndStrength = 
+                    (info.type == LinkType::Data ? "D" : "V") + 
+                    to_string(info.strength);
+        if (info.name - 'a' > 0) {
+            links[0][info.name - 'a'] = 
+                make_pair(info.name, linkTypeAndStrength);
+        } else {
+            links[1][info.name - 'A'] = 
+                make_pair(info.name, linkTypeAndStrength);
+        }
+    }
 }
 
 void TextDisplay::draw(int currentPlayer) {
