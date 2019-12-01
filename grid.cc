@@ -44,6 +44,11 @@ void Grid::move(int player, int link, Direction dir) {
     pair<int, int> locationOfLink = locationOfLinks[player][link];
     int rowOfLink = locationOfLink.first;
     int colOfLink = locationOfLink.second;
+
+    if (rowOfLink == -1 && colOfLink == -1) {
+        throw "Invalid move";
+    }
+
     Cell &cellWithLink = cells[rowOfLink][colOfLink];
     int linkSpeed = cellWithLink.getLink()->getSpeed();
     if (dir == Direction::Down) {
@@ -52,13 +57,15 @@ void Grid::move(int player, int link, Direction dir) {
                 throw "Invalid move";
             }
             locationOfLinks[player][link] = make_pair(-1, -1);
-            cellWithLink.removeAndDownload();
+            cellWithLink.removeAndDownload(player, -1);
         } else {
             Cell &moveToCell = cells[rowOfLink + linkSpeed][colOfLink];
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink + linkSpeed, colOfLink);
+            } else {
+                locationOfLinks[player][link] = make_pair(-1, -1);
             }
             cellWithLink.removeLink();
         }
@@ -71,6 +78,8 @@ void Grid::move(int player, int link, Direction dir) {
             if (!linkStayedTheSame) {
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink, colOfLink - linkSpeed);
+            } else {
+                locationOfLinks[player][link] = make_pair(-1, -1);
             }
             cellWithLink.removeLink();
         }
@@ -83,6 +92,8 @@ void Grid::move(int player, int link, Direction dir) {
             if (!linkStayedTheSame) {
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink, colOfLink + linkSpeed);
+            } else {
+                locationOfLinks[player][link] = make_pair(-1, -1);
             }
             cellWithLink.removeLink();
         }
@@ -92,13 +103,15 @@ void Grid::move(int player, int link, Direction dir) {
                 throw "Invalid move";
             }
             locationOfLinks[player][link] = make_pair(-1, -1);
-            cellWithLink.removeAndDownload();
+            cellWithLink.removeAndDownload(player, -1);
         } else {
             Cell &moveToCell = cells[rowOfLink - linkSpeed][colOfLink];
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink - linkSpeed, colOfLink);
+            } else {
+                locationOfLinks[player][link] = make_pair(-1, -1);
             }
             cellWithLink.removeLink();
         }
@@ -112,22 +125,32 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
         cells[row][col].useAbility(Ability::Firewall, user);
     } else {
         char linkName = v[0];
-        pair<int, int> locationOfLink;
+        int linkIndex;
         if ('a' <= linkName && linkName <= 'h') { 
-            locationOfLink = locationOfLinks[0][linkName - 'a'];
+            linkIndex = linkName - 'a';   
         } else if ('A' <= linkName && linkName <= 'H') {
-            locationOfLink = locationOfLinks[1][linkName - 'A'];    
+            linkIndex = linkName - 'A';   
         }
+
+        pair<int, int> locationOfLink;
+
+        if (a == Ability::Download) {
+            if (user == 1) {
+                locationOfLink = locationOfLinks[1][linkIndex] = locationOfLinks[1][linkIndex];
+                locationOfLinks[1][linkIndex] = make_pair(-1, -1);
+            } else {
+                locationOfLink = locationOfLinks[0][linkIndex] = locationOfLinks[0][linkIndex];
+                locationOfLinks[1][linkIndex] = make_pair(-1, -1);
+            }
+        } else if (a == Ability::Boost) {
+            locationOfLink = locationOfLinks[user - 1][linkIndex];
+        } else if (a == Ability::Polarize) {
+            locationOfLink = locationOfLinks[user - 1][linkIndex];
+        }
+
         int rowOfLink = locationOfLink.first;
         int colOfLink = locationOfLink.second;
 
-        /*if (a == Ability::Download) {
-            cells[rowOfLink][colOfLink].useAbility(Ability::Download);
-        } else if (a == Ability::Boost) {
-            cells[rowOfLink][colOfLink].useAbility(Ability::Boost);
-        } else if (a == Ability::Polarize) {
-            cells[rowOfLink][colOfLink].useAbility(Ability::Polarize);
-        }*/
         cells[rowOfLink][colOfLink].useAbility(a, user);
     }
 }

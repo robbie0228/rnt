@@ -107,23 +107,29 @@ void Cell::useAbility(Ability a, int user) {
                               false, user);
             break;
         }
+        case Ability::Download :
+        {
+            this->removeAndDownload(user, user);
+            break;
+        }
+        default :
+        {
+            break;
+        }
     }
-    notifyObservers();
 }
 
 void Cell::removeLink() {
     setStateAndNotify(*this, -1, '.', LinkType::NoType,
                       false, false, -1);
-    notifyObservers();
     link = nullptr;
 }
 
-void Cell::removeAndDownload() {
-    setStateAndNotify(*this, getPlayerNumFromLink(link),
+void Cell::removeAndDownload(int downloadingPlayer, int playerUsingAbility) {
+    setStateAndNotify(*this, downloadingPlayer,
                       link->getName(),
                       link->getType(),
-                      false, false, -1);
-    notifyObservers();
+                      false, false, playerUsingAbility);
     removeLink();
 }
 

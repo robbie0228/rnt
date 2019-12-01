@@ -44,7 +44,7 @@ class Cell : public Subject {
         // Takes care of recording the download by the owner of the now perished
         //  Link
         //   This is used in case of a Link crosses the opponent border
-        void removeAndDownload();
+        void removeAndDownload(int downloadingPlayer, int playerUsingAbility);
 
         // Set this Cell's link (pointer) to newLink
         void setLink(Link *newLink);
