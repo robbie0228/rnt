@@ -41,7 +41,7 @@ Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers) {
     vector<vector<pair<char, string>>> displayLinks = 
         vector<vector<pair<char, string>>>(2,
         vector<pair<char, string>>(8,
-        make_pair('%', "re")));
+        make_pair('%', "N0")));
     vector<vector<char>> displayGrid =
         vector<vector<char>>(8,
         vector<char>(8, '&'));
