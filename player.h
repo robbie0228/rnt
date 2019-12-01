@@ -23,6 +23,12 @@ class Player : public Observer {
         // Additional construction may go here if necessary
         std::vector<Link *> init();
 
+        // Returns true if the link specified by linkName is the player's
+        bool isMyLink(char linkName);
+
+        // Returns true if the link specified by linkName is the other player's
+        bool isEnemyLink(char linkName);
+
         // Checks the current status of the Player
         Status checkStatus();
 

@@ -3,6 +3,8 @@
 
 using namespace std;
 
+// implementations
+
 Player::Player(int playerNumber): 
     downloadedDataCount{0}, downloadedVirusCount{0}, 
     playerNumber{playerNumber} {
@@ -24,10 +26,28 @@ std::vector<Link *> Player::init() {
             )
         );
     }
-    for (int i = 0; i < links.size(); ++i) {
+    for (unsigned int i = 0; i < links.size(); ++i) {
         linkPointers.emplace_back(&(links[i]));
     }
     return linkPointers;
+}
+
+bool Player::isMyLink(char linkName) {
+    if (playerNumber == 1) {
+        return ('a' <= linkName && linkName <= 'h');
+    } else {
+        return ('A' <= linkName && linkName <= 'H');
+    }
+    return false;
+}
+
+bool Player::isEnemyLink(char linkName) {
+    if (playerNumber == 1) {
+        return ('A' <= linkName && linkName <= 'H');
+    } else {
+        return ('a' <= linkName && linkName <= 'h');
+    }
+    return false;
 }
 
 Status Player::checkStatus() {
@@ -88,24 +108,17 @@ pair<Ability, bool> Player::getAbility(int abilityID) {
 Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
     switch(abilities[abilityID - 1].first) {
         case Ability::Boost :
-            if (playerNumber == 1 && ('a' > abilityInfo[0] || abilityInfo[0] > 'h')) {
-                throw "Invalid use of ability";
-            } else if (playerNumber == 2 && ('A' > abilityInfo[0] || abilityInfo[0] > 'H')) {
+            if (!isMyLink(abilityInfo[0])) {
                 throw "Invalid use of ability";
             }
             break;
         case Ability::Polarize :
-            if (abilityInfo[0] < 'A'
-                || ('H' < abilityInfo[0] && abilityInfo[0] < 'a')
-                || abilityInfo[0] > 'h')
-            {
+            if (!isMyLink(abilityInfo[0]) && !isEnemyLink(abilityInfo[0])) {
                 throw "Invalid use of ability";
             }
             break;
         case Ability::Download :
-            if (playerNumber == 1 && (abilityInfo[0] < 'A' || 'H' < abilityInfo[0])) {
-                throw "Invalid use of ability";
-            } else if (playerNumber == 2 && (abilityInfo[0] < 'a' || 'h' < abilityInfo[0])) {
+            if (!isEnemyLink(abilityInfo[0])) {
                 throw "Invalid use of ability";
             }
             break;
