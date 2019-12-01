@@ -125,7 +125,6 @@ void Grid::move(int player, int link, Direction dir) {
         } else {
             Cell &moveToCell = cells[rowOfLink - linkSpeed][colOfLink];
             char otherCellName = moveToCell.getName();
-
             bool linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
             if (!linkStayedTheSame) {
                 if (('A' <= otherCellName && otherCellName <= 'H')
@@ -151,6 +150,7 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
     } else {
         char linkName = v[0];
         int linkIndex;
+        int playerIndex;
         if ('a' <= linkName && linkName <= 'h') { 
             linkIndex = linkName - 'a';
             playerIndex = 0;   
