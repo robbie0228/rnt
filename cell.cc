@@ -1,5 +1,6 @@
 #include "cell.h"
 #include <cstdlib>
+#include <iostream>
 
 using namespace std;
 
@@ -48,11 +49,13 @@ bool Cell::moveCellHere(Cell &cell) {
             throw "Cannot move a link onto another of your links";
         }
         if (otherLink->getStrength() >= link->getStrength()) {
+            char downloadLinkName = link->getName();
+            LinkType downloadLinkType = link->getType();
             link = otherLink;
             setStateAndNotify(*this,
-                              getPlayerNumFromLink(link),
-                              otherLink->getName(),
-                              otherLink->getType(),
+                              getPlayerNumFromLink(otherLink),
+                              downloadLinkName,
+                              downloadLinkType,
                               true, true, -1);
             return false;
         } else {
