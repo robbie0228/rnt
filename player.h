@@ -36,9 +36,6 @@ class Player : public Observer {
         //  of if it has been used
         void printAbilities(std::ostream& out) const;
 
-        //////// FOR TESTING ////////
-        void print(std::ostream& out) const;
-
         // returns the ability that is associated with the ID
         std::pair<Ability, bool> getAbility(int abilityID);
 

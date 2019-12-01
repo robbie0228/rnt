@@ -3,6 +3,9 @@
 #include <vector>
 #include <utility>
 #include <iostream>
+#include <memory>
+#include <string>
+#include "text_display.h"
 #include "cell.h"
 #include "player.h"
 #include "enums.h"
@@ -11,9 +14,6 @@ using std::vector;
 class Link;
 
 class Grid {
-        // Every Player's each of the 8 links;
-        vector<vector<Link>> links;
-
         // 8*8 2D array of Cell's
         vector<vector<Cell>> cells;
 
@@ -21,10 +21,12 @@ class Grid {
         //   If a Link perishes its coordianate pair is set to <-1, -1>
         vector<vector<std::pair<int, int>>> locationOfLinks;
 
+        std::unique_ptr<TextDisplay> textDisplay;
+
     public:
         // Constructor for a Grid
         //   Instantiates Cells in a size*size Grid
-        Grid(vector<Player *> players, vector<vector<Link *>> linkPointers, int size = GRIDSIZE);
+        Grid(vector<Player *> players, vector<vector<Link *>> linkPointers);
 
         // Moves Player (player + 1)'s Link (link + 1), towards Direction dir
         void move(int player, int link, Direction dir);
@@ -33,7 +35,8 @@ class Grid {
         void useAbility(Ability a, vector<char> v, int user);
 
         // Calls any type of Display to draw
-        friend std::ostream &operator<<(std::ostream &out, const Grid &grid);
+        // friend std::ostream &operator<<(std::ostream &out, const Grid &grid);
+        void printBoard(int currentPlayer);
 };
 
 #endif

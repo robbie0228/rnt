@@ -10,5 +10,7 @@ move A up
 move b down
 move A up
 board
+move b down
+board
 ability 5 b
 quit

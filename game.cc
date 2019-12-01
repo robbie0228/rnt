@@ -50,11 +50,8 @@ void Game::move(char link, Direction dir) {
     abilityUsedCount = 0;
 }
 
-ostream &operator<<(ostream &out, const Game &g) {
-    g.players[0].print(out);
-    out << *(g.grid);
-    g.players[1].print(out);
-    return out;
+void Game::printBoard() {
+    grid->printBoard(currentPlayer);
 }
 
 void Game::printAbilities(ostream& out){

@@ -17,7 +17,7 @@ Player::Player(int playerNumber):
 
 std::vector<Link *> Player::init() {
     vector<Link *> linkPointers;
-    for (int link = 0; link < 8; ++link) {
+    for (int link = 0; link < NUMLINKS; ++link) {
         // Initialize link
         links.emplace_back(
             Link((link < 4 ? LinkType::Data : LinkType::Virus),
@@ -86,21 +86,6 @@ void Player::printAbilities(ostream& out) const{
     }
 }
 
-void Player::print(ostream& out) const{
-    out << "Player " << playerNumber << ":" << endl;
-    out << "Downloaded: " << downloadedDataCount << "D, "
-        << downloadedVirusCount << "V" << endl;
-
-    int abilityCount = 0;
-    for (int i = 0; i < 5; ++i) {
-        if (abilities[i].second) {
-            ++abilityCount;
-        }
-    }
-
-    out << "Abilities: " << abilityCount << endl;
-}
-
 pair<Ability, bool> Player::getAbility(int abilityID) {
     return abilities[abilityID - 1];
 }
@@ -140,5 +125,3 @@ void Player::notify(Subject &whoFrom) {
         }
     }
 }
-
-

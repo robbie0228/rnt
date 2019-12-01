@@ -4,6 +4,8 @@
 // Constants
 const int GRIDSIZE = 8;  // Board side length
 const int NUMPLAYERS = 2; // Number of players
+const int NUMLINKS = 8; // Number of links per player
+const int NUMABILITIES = 5; // Number of abilities per player
 const int MAXABILITYUSE = 1; // Limit of ability use per turn
 
 // Ability names

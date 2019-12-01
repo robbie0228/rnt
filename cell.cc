@@ -74,7 +74,7 @@ bool Cell::moveCellHere(Cell &cell) {
                           false, false, -1);
         return false;
     } else {
-        if (abs(otherLink->getName() - link->getName()) < 8) {
+        if (abs(otherLink->getName() - link->getName()) < NUMLINKS) {
             throw "Cannot move a link onto another of your links";
         }
         if (otherLink->getStrength() >= link->getStrength()) {
@@ -144,6 +144,9 @@ void Cell::useAbility(Ability a, int user) {
         case Ability::Firewall : 
         {
             this->firewall = user;
+            setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
+                              false, user);
+            break;
         }
         default :
         {
@@ -153,17 +156,19 @@ void Cell::useAbility(Ability a, int user) {
 }
 
 void Cell::removeLink() {
+    link = nullptr;
     setStateAndNotify(*this, -1, '.', LinkType::NoType,
                       false, false, -1);
-    link = nullptr;
 }
 
 void Cell::removeAndDownload(int downloadingPlayer, int playerUsingAbility) {
+    char linkName = link->getName();
+    LinkType linkType = link->getType();
+    link = nullptr;
     setStateAndNotify(*this, downloadingPlayer,
-                      link->getName(),
-                      link->getType(),
+                      linkName,
+                      linkType,
                       false, false, playerUsingAbility);
-    removeLink();
 }
 
 void Cell::setLink(Link *newLink) {
