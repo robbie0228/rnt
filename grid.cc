@@ -199,10 +199,8 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
             throw "Invalid link";
         }
 
-        pair<int, int> locationOfLink = locationOfLinks[playerIndex][linkIndex];
-
-        int rowOfLink = locationOfLink.first;
-        int colOfLink = locationOfLink.second;
+        int rowOfLink = locationOfLinks[playerIndex][linkIndex].first;
+        int colOfLink = locationOfLinks[playerIndex][linkIndex].second;
 
         cells[rowOfLink][colOfLink].useAbility(a, user);
 
