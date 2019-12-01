@@ -192,6 +192,8 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
         } else if ('A' <= linkName && linkName <= 'H') {
             linkIndex = linkName - 'A';
             playerIndex = 1;   
+        } else {
+            throw "Invalid link";
         }
 
         pair<int, int> locationOfLink = locationOfLinks[playerIndex][linkIndex];
