@@ -36,15 +36,6 @@ void TextDisplay::notify(Subject &whoFrom) {
         }
     }
 
-    // When a link is revealed using reveal
-    if (state.linkIsRevealed) {
-        if (info.name - 'a' >= 0) {
-            knownLinks[1][info.name - 'a'] = true;
-        } else {
-            knownLinks[0][info.name - 'A'] = true;
-        }
-    }
-
     int abilityUser = state.playerUsingAbility - 1;
     // When a player is using an ability
     if (state.playerUsingAbility != -2) {
@@ -55,6 +46,15 @@ void TextDisplay::notify(Subject &whoFrom) {
 
     // When the cell contains a link
     if (info.name != '.') {
+        // When a link is revealed using reveal
+        if (state.linkIsRevealed) {
+            if (info.name - 'a' >= 0) {
+                knownLinks[1][info.name - 'a'] = true;
+            } else {
+                knownLinks[0][info.name - 'A'] = true;
+            }
+        }
+        
         string linkTypeAndStrength = 
                     (info.type == LinkType::Data ? "D" : "V") + 
                     to_string(info.strength);
