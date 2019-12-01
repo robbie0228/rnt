@@ -61,7 +61,6 @@ bool Cell::moveCellHere(Cell &cell) {
                                   false, false, -1);
                 return true;
             } else {
-                
                 return false;
             }
         } else {
