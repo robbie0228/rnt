@@ -31,20 +31,20 @@ abcSSfgh
 ........
 ........
 ........
-...DE..m
+...DE...
 ABCSSFGH
 ========
 Player 2:
 Downloaded: 0D, 0V
 Abilities: 5
-A: ?    B: ?    C: ?    D: ?
+A: D1   B: ?    C: ?    D: ?
 E: ?    F: ?    G: ?    H: ?
 
 Player 1:
 Downloaded: 0D, 0V
 Abilities: 4
 a: ?    b: ?    c: ?    d: ?
-e: ?    f: ?    g: ?    h: ?
+e: ?    f: ?    g: ?    h: V4
 ========
 .bcSSfgh
 a..de...
@@ -52,53 +52,11 @@ a..de...
 ........
 ........
 ........
-...DE..m
+...DE...
 ABCSSFGH
 ========
 Player 2:
 Downloaded: 0D, 0V
-Abilities: 5
-A: D1   B: D2   C: D3   D: D4
-E: V1   F: V2   G: V3   H: V4
-
-Player 1:
-Downloaded: 0D, 0V
-Abilities: 4
-a: D1   b: D2   c: D3   d: D4
-e: V1   f: V2   g: V3   h: V4
-========
-.bcSSfgh
-a..de...
-w.......
-........
-........
-........
-...DE..m
-ABCSSFG.
-========
-Player 2:
-Downloaded: 0D, 1V
-Abilities: 4
-A: ?    B: ?    C: ?    D: ?
-E: ?    F: ?    G: ?    H: V4
-
-Player 1:
-Downloaded: 0D, 0V
-Abilities: 4
-a: D1   b: ?    c: ?    d: ?
-e: ?    f: ?    g: ?    h: ?
-========
-.bcSSfgh
-...de...
-a.......
-........
-........
-........
-...DE..m
-ABCSSFG.
-========
-Player 2:
-Downloaded: 0D, 1V
 Abilities: 4
 A: D1   B: D2   C: D3   D: D4
 E: V1   F: V2   G: V3   H: V4
