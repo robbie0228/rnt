@@ -2,12 +2,16 @@
 #define GRAPHICSDISPLAY_H
 #include <iostream>
 #include <vector>
+#include <utility>
+#include <memory>
 #include "subject.h"
 #include "enums.h"
 #include "window.h"
 
+using std::vector;
+
 class GraphicsDisplay: public Observer {
-        Xwindow *win; // reference to Xwindow
+        std::unique_ptr<Xwindow> win; // reference to Xwindow
         // 8*8 2D array of (. a-h A-H S m w)
         vector<vector<char>> grid; 
         

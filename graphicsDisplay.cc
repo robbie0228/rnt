@@ -1,6 +1,11 @@
 #include "graphicsDisplay.h"
 
-GraphicsDisplay::GraphicsDisplay(size_t n) : gridSize{n} {
+using namespace std;
+
+GraphicsDisplay::GraphicsDisplay(
+	vector<vector<char>> grid, 
+    vector<vector<pair<char, string>>> links) {
+		
 	this->grid = grid;
 	this->links = links;
 
@@ -13,7 +18,7 @@ GraphicsDisplay::GraphicsDisplay(size_t n) : gridSize{n} {
 	abilityRemainingCounts = vector<int>(NUMPLAYERS, NUMABILITIES);
 
 	// Create window
-	win = Xwindow(500, 1000);
+    win = make_unique<Xwindow>(500, 1000);
 
 	// Create blue background
 	win->fillRectangle(0, 0, 500, 1000, 4);
@@ -21,17 +26,17 @@ GraphicsDisplay::GraphicsDisplay(size_t n) : gridSize{n} {
 	// Create dividing lines
 	size_t pieceSize = 500 / GRIDSIZE;
 	size_t lineWidth = 2;
-	for (size_t i = 1; i < n; ++i)
+	for (size_t i = 1; i < GRIDSIZE; ++i)
 	{
 		win->fillRectangle((i * pieceSize) - (lineWidth / 2), 250, lineWidth, 500, 3);
 	}
-	for (size_t i = 1; i < n; ++i)
+	for (size_t i = 1; i < GRIDSIZE; ++i)
 	{
 		win->fillRectangle(0, 250 + (i * pieceSize) - (lineWidth / 2), 500, lineWidth, 3);
 	}
 }
 
-void TextDisplay::notify(Subject &whoFrom) {
+void GraphicsDisplay::notify(Subject &whoFrom) {
     StateType state = whoFrom.getState();
     InfoType info = whoFrom.getInfo();
 
@@ -88,10 +93,10 @@ void TextDisplay::notify(Subject &whoFrom) {
 }
 
 void GraphicsDisplay::draw(int currentPlayer) {
-    string s = "Player 1:" + "\n"
-        + "Downloaded: " + downloadedCounts[0].first + "D, " 
-                          + downloadedCounts[0].second + "V" + "\n"
-        + "Abilities: " + abilityRemainingCounts[0] + "\n";
+    string s = string("Player 1:") + "\n"
+        + "Downloaded: " + to_string(downloadedCounts[0].first) + "D, " 
+                          + to_string(downloadedCounts[0].second) + "V" + "\n"
+        + "Abilities: " + to_string(abilityRemainingCounts[0]) + "\n";
 
     if (currentPlayer == 0) {
         for (int i = 0; i < 8; ++i) {
@@ -120,7 +125,7 @@ void GraphicsDisplay::draw(int currentPlayer) {
     }
 
     s += string(8, '=') + "\n";
-	win.drawString(0,0,s)
+	win->drawString(0,0,s);
 
     for (int row = 0; row < GRIDSIZE; ++row) {
         for (int col = 0; col < GRIDSIZE; ++col) {
@@ -131,10 +136,10 @@ void GraphicsDisplay::draw(int currentPlayer) {
 
     s = string(8, '=') + "\n";
 
-     s += "Player 2:" + "\n"
-        + "Downloaded: " + downloadedCounts[1].first + "D, " 
-                          + downloadedCounts[1].second + "V" + "\n"
-        + "Abilities: " + abilityRemainingCounts[1] + "\n";
+    s = string("Player 2:") + "\n"
+        + "Downloaded: " + to_string(downloadedCounts[1].first) + "D, " 
+                          + to_string(downloadedCounts[1].second) + "V" + "\n"
+        + "Abilities: " + to_string(abilityRemainingCounts[1]) + "\n";
 
     if (currentPlayer == 0) {
         for (int i = 0; i < 8; ++i) {
@@ -161,5 +166,5 @@ void GraphicsDisplay::draw(int currentPlayer) {
     else {
         throw "this player does not exist";
     }
-	win.drawString(0,750,s)
+	win->drawString(0,750,s);
 }

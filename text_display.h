@@ -6,7 +6,6 @@
 #include <string>
 #include "subject.h"
 using std::vector;
-using std::ostream;
 
 class TextDisplay : public Observer {
         // 8*8 2D array of (. a-h A-H S m w)
