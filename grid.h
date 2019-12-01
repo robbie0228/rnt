@@ -4,6 +4,7 @@
 #include <utility>
 #include <iostream>
 #include "cell.h"
+#include "player.h"
 #include "enums.h"
 using std::vector;
 
@@ -23,13 +24,13 @@ class Grid {
     public:
         // Constructor for a Grid
         //   Instantiates Cells in a size*size Grid
-        Grid(int size = GRIDSIZE);
+        Grid(vector<Player *> players, vector<vector<Link *>> linkPointers, int size = GRIDSIZE);
 
         // Moves Player (player + 1)'s Link (link + 1), towards Direction dir
         void move(int player, int link, Direction dir);
 
         // Uses ability
-        void useAbility(Ability a, vector<char> v);
+        void useAbility(Ability a, vector<char> v, int player);
 
         // Calls any type of Display to draw
         friend std::ostream &operator<<(std::ostream &out, const Grid &grid);

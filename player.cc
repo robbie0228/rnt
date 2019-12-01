@@ -1,12 +1,33 @@
 #include "player.h"
+#include "link.h"
+
 using namespace std;
 
-Player::Player(int playerNumber): downloadedDataCount{0}, downloadedVirusCount{0}, playerNumber{playerNumber} {
-    ability = {make_pair(Ability::Firewall, 1),
+Player::Player(int playerNumber): 
+    downloadedDataCount{0}, downloadedVirusCount{0}, 
+    playerNumber{playerNumber} {
+    abilities = {make_pair(Ability::Firewall, 1),
                make_pair(Ability::Download, 1),
                make_pair(Ability::Boost, 1),
                make_pair(Ability::Scan, 1),
                make_pair(Ability::Polarize, 1)};
+}
+
+std::vector<Link *> Player::init() {
+    vector<Link *> linkPointers;
+    for (int link = 0; link < 8; ++link) {
+        // Initialize link
+        links.emplace_back(
+            Link((link < 4 ? LinkType::Data : LinkType::Virus),
+                 (link % 4) + 1,
+                 (char)((playerNumber == 1 ? 'a' : 'A') + link)
+            )
+        );
+    }
+    for (int i = 0; i < links.size(); ++i) {
+        linkPointers.emplace_back(&(links[i]));
+    }
+    return linkPointers;
 }
 
 Status Player::checkStatus() {
@@ -21,17 +42,49 @@ Status Player::checkStatus() {
     }
 }
 
-void Player::printAbilities(ostream& out) {
+void Player::printAbilities(ostream& out) const{
     out << "not implemented yet, print abilities with ID and used status";
 }
 
-pair<Ability, bool> Player::getAbility(int abilityID) {
-    return ability[abilityID - 1];
+void Player::print(ostream& out) const{
+    out << "Player " << playerNumber << ":" << endl;
+    out << "Downloaded: " << downloadedDataCount << "D, "
+        << downloadedVirusCount << "V" << endl;
+
+    int abilityCount = 0;
+    for (int i = 0; i < 5; ++i) {
+        if (abilities[i].second) {
+            ++abilityCount;
+        }
+    }
+
+    out << "Abilities: " << abilityCount << endl;
 }
 
-Ability Player::useAbility(int abilityID) {
-    ability[abilityID - 1].second = false;
-    return ability[abilityID - 1].first;
+pair<Ability, bool> Player::getAbility(int abilityID) {
+    return abilities[abilityID - 1];
+}
+
+Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
+    switch(abilities[abilityID - 1].first) {
+        case Ability::Boost :
+            if (playerNumber == 1 && 'a' > abilityInfo[0] && abilityInfo[0] > 'h') {
+                throw "Invalid use of ability";
+            } else if (playerNumber == 2 && 'A' > abilityInfo[0] && abilityInfo[0] > 'H') {
+                throw "Invalid use of ability";
+            }
+            break;
+        case Ability::Polarize :
+            if (abilityInfo[0] < 'A'
+                || ('H' < abilityInfo[0] && abilityInfo[0] < 'a')
+                || abilityInfo[0] > 'h')
+            {
+                throw "Invalid use of ability";
+            }
+    }
+    
+    abilities[abilityID - 1].second = false;
+    return abilities[abilityID - 1].first;
 }
 
 void Player::notify(Subject &whoFrom) {
@@ -44,4 +97,5 @@ void Player::notify(Subject &whoFrom) {
         }
     }
 }
+
 

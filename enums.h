@@ -15,7 +15,7 @@ enum class Ability {
 
     Uber, 
     Whey, 
-    Cop,
+    Steal,
 
     NotAvailable
 };

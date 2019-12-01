@@ -35,7 +35,7 @@ class Cell : public Subject {
         Link *getLink() const;
 
         // Uses the specified ability on this cell
-        void useAbility(Ability a);
+        void useAbility(Ability a, int player);
 
         // Sets this Cell's link (pointer) to nullptr
         void removeLink();

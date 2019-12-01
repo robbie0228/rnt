@@ -15,14 +15,22 @@ int charLinkToInt(char c) {
 
 //implementations
 
-Game::Game(): 
-    grid{Grid()}, currentPlayer{0} {
-
+Game::Game(): currentPlayer{0} {
     Player p1 = Player(1);
     Player p2 = Player(2);
 
     this->players.push_back(p1);
     this->players.push_back(p2);
+
+    vector<Player *> playerPointers;
+    for (int i = 0; i < players.size(); ++i) {
+        playerPointers.emplace_back(&(players[i]));
+    }
+    vector<vector<Link *>> allLinks;
+    for (int i = 0; i < players.size(); ++i) {
+        allLinks.emplace_back(players[i].init());
+    }
+    grid = make_unique<Grid>(playerPointers, allLinks);
 }
 
 void Game::init() {
@@ -30,7 +38,11 @@ void Game::init() {
 }
 
 void Game::move(char link, Direction dir) {
-    this->grid.move(currentPlayer, charLinkToInt(link), dir);
+    if ((link < 'a' && currentPlayer == 0) || 
+        (link >= 'a' && currentPlayer == 1)) {
+            throw "Cannot move opponent's piece";
+    }
+    this->grid->move(currentPlayer, charLinkToInt(link), dir);
     if (currentPlayer == 0) {
         currentPlayer = 1;
     } else if (currentPlayer == 1) {
@@ -39,7 +51,9 @@ void Game::move(char link, Direction dir) {
 }
 
 ostream &operator<<(ostream &out, const Game &g) {
-    out << g.grid;
+    g.players[0].print(out);
+    out << *(g.grid);
+    g.players[1].print(out);
     return out;
 }
 
@@ -59,6 +73,6 @@ pair<int, bool> Game::verifyAbility(int abilityID) {
 }
 
 void Game::useAbility(int abilityID, vector<char> useAbilityInfo) {
-    Ability abilityName = players[currentPlayer].useAbility(abilityID);
-    grid.useAbility(abilityName, useAbilityInfo);
+    Ability abilityName = players[currentPlayer].useAbility(abilityID, useAbilityInfo);
+    grid->useAbility(abilityName, useAbilityInfo, currentPlayer + 1);
 }
