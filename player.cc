@@ -48,15 +48,15 @@ void Player::printAbilities(ostream& out) const{
         string abilityName;
 
         switch (abilities[i].first) {
-            case Ability::Boost : abilityName = "Link Boost"; break;
+            case Ability::Boost    : abilityName = "Link Boost"; break;
             case Ability::Download : abilityName = "Download"; break;
             case Ability::Firewall : abilityName = "Firewall"; break;
             case Ability::Polarize : abilityName = "Polarize"; break;
-            case Ability::Scan : abilityName = "Scan"; break;
-            case Ability::Steal : abilityName = "Steal"; break;
-            case Ability::Uber : abilityName = "Uber"; break;
-            case Ability::Whey : abilityName = "Whey"; break;
-            default : throw "ability unavailable";
+            case Ability::Scan     : abilityName = "Scan"; break;
+            case Ability::Steal    : abilityName = "Steal"; break;
+            case Ability::Uber     : abilityName = "Uber"; break;
+            case Ability::Whey     : abilityName = "Whey"; break;
+            default                : throw "ability unavailable";
         }
 
         out << i + 1 << ": " << abilityName << ", ";
