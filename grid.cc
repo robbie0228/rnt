@@ -95,7 +95,7 @@ void Grid::move(int player, int link, Direction dir) {
                 throw "Invalid move";
             }
             locationOfLinks[player][link] = make_pair(-1, -1);
-            cellWithLink.removeAndDownload(player, -1);
+            cellWithLink.removeAndDownload(player + 1, -1);
         } else {
             Cell &moveToCell = cells[rowOfLink + linkSpeed][colOfLink];
             char otherCellName = moveToCell.getName();
@@ -159,7 +159,7 @@ void Grid::move(int player, int link, Direction dir) {
                 throw "Invalid move";
             }
             locationOfLinks[player][link] = make_pair(-1, -1);
-            cellWithLink.removeAndDownload(player, -1);
+            cellWithLink.removeAndDownload(player + 1, -1);
         } else {
             Cell &moveToCell = cells[rowOfLink - linkSpeed][colOfLink];
             char otherCellName = moveToCell.getName();
