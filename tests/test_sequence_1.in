@@ -1,7 +1,0 @@
-board
-sequence tests/test_sequence_1_1.in
-board
-move a up
-move a up
-move F up
-board

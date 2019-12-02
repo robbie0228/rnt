@@ -1,12 +1,15 @@
 board
-ability 2 a
-ability 2 A
+abilities
+ability 3 a
+ability 3 A
 board
 move a down
 board
-ability 2 a
+abilities
+ability 3 a
 move A up
 move B up
-ability 2 B
+abilities
+ability 3 B
 board
 quit

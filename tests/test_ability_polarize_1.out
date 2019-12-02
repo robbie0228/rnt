@@ -1,8 +1,36 @@
 Player 1:
 Downloaded: 0D, 0V
 Abilities: 5
-a: D1   b: D2   c: D3   d: D4
-e: V1   f: V2   g: V3   h: V4
+a: V1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
+========
+abcSSfgh
+...de...
+........
+........
+........
+........
+...DE...
+ABCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
+Player 1's Abilities:
+1: Link Boost, Unused
+2: Firewall, Unused
+3: Download, Unused
+4: Scan, Unused
+5: Polarize, Unused
+
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 4
+a: D1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
 ========
 abcSSfgh
 ...de...
@@ -37,21 +65,121 @@ ABCSSFGH
 Player 2:
 Downloaded: 0D, 0V
 Abilities: 5
-A: D1   B: D2   C: D3   D: D4
-E: V1   F: V2   G: V3   H: V4
+A: V1   B: V2   C: V3   D: V4
+E: D1   F: D2   G: D3   H: D4
+
+Player 2's Abilities:
+1: Link Boost, Unused
+2: Firewall, Unused
+3: Download, Unused
+4: Scan, Unused
+5: Polarize, Unused
+
+Invalid use of ability
 
 Player 1:
 Downloaded: 0D, 0V
 Abilities: 4
-a: V1   b: D2   c: D3   d: D4
-e: V1   f: V2   g: V3   h: V4
+a: D1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
 ========
 .bcSSfgh
 a..de...
 ........
 ........
 ........
+........
+A..DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 4
+a: D1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
+========
+..cSSfgh
+a..de...
+.b......
+........
 A.......
+........
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 4
+a: ?    b: ?    c: ?    d: ?
+e: ?    f: ?    g: ?    h: ?
+========
+..cSSfgh
+a..de...
+........
+.b......
+A.......
+........
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: V1   B: V2   C: V3   D: V4
+E: D1   F: D2   G: D3   H: D4
+
+Player 2's Abilities:
+1: Link Boost, Unused
+2: Firewall, Unused
+3: Download, Unused
+4: Scan, Unused
+5: Polarize, Unused
+
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 4
+a: ?    b: ?    c: ?    d: ?
+e: ?    f: ?    g: ?    h: ?
+========
+..cSSfgh
+a..de...
+........
+.b......
+A.......
+........
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 4
+A: V1   B: V2   C: V3   D: V4
+E: D1   F: D2   G: D3   H: D4
+
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 4
+a: V1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
+========
+..cSSfgh
+a..de...
+........
+Ab......
+........
+........
 ...DE...
 .BCSSFGH
 ========
@@ -60,46 +188,4 @@ Downloaded: 0D, 0V
 Abilities: 4
 A: ?    B: ?    C: ?    D: ?
 E: ?    F: ?    G: ?    H: ?
-
-Player 1:
-Downloaded: 0D, 0V
-Abilities: 4
-a: V1   b: D2   c: D3   d: D4
-e: V1   f: V2   g: V3   h: V4
-========
-..cSSfgh
-A..de...
-.b......
-........
-........
-........
-...DE...
-.BCSSFGH
-========
-Player 2:
-Downloaded: 0D, 1V
-Abilities: 4
-A: D1   B: ?    C: ?    D: ?
-E: ?    F: ?    G: ?    H: ?
-
-Player 1:
-Downloaded: 0D, 0V
-Abilities: 4
-a: V1   b: ?    c: ?    d: ?
-e: ?    f: ?    g: ?    h: ?
-========
-..cSSfgh
-A..de...
-........
-.b......
-........
-........
-...DE...
-.BCSSFGH
-========
-Player 2:
-Downloaded: 0D, 1V
-Abilities: 4
-A: D1   B: D2   C: D3   D: D4
-E: V1   F: V2   G: V3   H: V4
 
