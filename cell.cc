@@ -115,8 +115,8 @@ Link *Cell::getLink() const{
     return link;
 }
 
-void Cell::useAbility(Ability a, int user) {
-    switch (a) {
+void Cell::useAbility(Ability abilityName, int user) {
+    switch (abilityName) {
         case Ability::Boost :
         {
             int currSpeed = this->link->getSpeed();
@@ -144,6 +144,9 @@ void Cell::useAbility(Ability a, int user) {
         }
         case Ability::Firewall : 
         {
+            if (this->getName() != '.') {
+                throw "Cell is not empty! Cannot place Firewall";
+            }
             this->firewall = user;
             setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
                               false, user);
