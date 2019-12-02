@@ -1,5 +1,6 @@
 #include "game.h"
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <utility>
 using namespace std;
@@ -132,17 +133,24 @@ int main(int argc, char* argv[])
 
     string cmd;
 
-    while (cin >> cmd)
+    vector<ifstream> fstreams;
+    istream *stream = &cin;
+
+    bool moreToRead = true;
+    if (!(cin >> cmd)) {
+        exit(0);
+    }
+    while (moreToRead)
     {
         try
         {
             if (cmd == "move")
             {
                 char link;
-                cin >> link;
+                (*stream) >> link;
                 Direction dir;
                 string dirtemp;
-                cin >> dirtemp;
+                (*stream) >> dirtemp;
                 if (dirtemp == "left") dir = Direction::Left;
                 else if (dirtemp == "right") dir = Direction::Right;
                 else if (dirtemp == "up") dir = Direction::Up;
@@ -158,12 +166,12 @@ int main(int argc, char* argv[])
             else if (cmd == "ability")
             {
                 int abilityID;
-                cin >> abilityID;
+                (*stream) >> abilityID;
                 pair<int, bool> abilityInfo = game.verifyAbility(abilityID);
                 char c;
                 vector<char> useAbilityInfo;
                 for (int i = 0; i < abilityInfo.first; i++) {
-                    cin >> c;
+                    (*stream) >> c;
                     useAbilityInfo.emplace_back(c);
                 }
                 if (abilityInfo.second) {
@@ -181,7 +189,10 @@ int main(int argc, char* argv[])
             }
             else if (cmd == "sequence")
             {
-                // TODO, can add a stream to the front of another?
+                string fileName;
+                (*stream) >> fileName;
+                fstreams.emplace_back(ifstream{fileName});
+                stream = &(fstreams.back());
             }
             else if (cmd == "quit")
             {
@@ -194,6 +205,18 @@ int main(int argc, char* argv[])
         } catch (char const *e) {
             cout << e << endl;
             cout << endl;
+        }
+        while (!((*stream) >> cmd)) {
+            if (fstreams.size() > 1) {
+                fstreams.pop_back();
+                stream = &(fstreams.back());
+            } else if (fstreams.size() == 1) {
+                fstreams.pop_back();
+                stream = &cin;
+            } else {
+                moreToRead = false;
+                break;
+            }
         }
     }
 }
