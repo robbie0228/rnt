@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <utility>
+#include <algorithm>
 using namespace std;
 
 vector<pair<Ability, bool>> cmdInitAbilities(string s){
@@ -31,8 +32,8 @@ vector<pair<Ability, bool>> cmdInitAbilities(string s){
             case 'W' : 
                 abilitiesInit.emplace_back(make_pair(Ability::Whey, true));
                 break;
-            case 'C' : 
-                abilitiesInit.emplace_back(make_pair(Ability::Cop, true));
+            case 'A' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Ambush, true));
                 break;
             default  :
                 throw "Invalid ability";
@@ -181,7 +182,7 @@ int main(int argc, char* argv[])
                     game.useAbility(abilityID, useAbilityInfo);
                 }
                 else {
-                    cout << "Invalid ability" << endl;
+                    cout << "Ability is unavailable" << endl;
                     cout << endl;
                 }
             }

@@ -81,7 +81,7 @@ void Game::printAbilities(ostream& out){
 
 pair<int, bool> Game::verifyAbility(int abilityID) {
     pair<Ability, bool> abilityPair = players[currentPlayer].getAbility(abilityID);
-    if (abilityPair.first == Ability::Firewall) {
+    if (abilityPair.first == Ability::Firewall || abilityPair.first == Ability::Ambush) {
         return make_pair(2, abilityPair.second);
     } else if (abilityPair.first == Ability::Download || abilityPair.first == Ability::Boost || 
                abilityPair.first == Ability::Scan || abilityPair.first == Ability::Polarize || 
