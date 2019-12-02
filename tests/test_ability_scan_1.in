@@ -1,7 +1,9 @@
 board
+abilities
 ability 4 A
 board
 move a down
+abilities
 ability 4 h
 board
 quit
