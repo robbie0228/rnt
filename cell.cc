@@ -39,7 +39,7 @@ bool Cell::moveCellHere(Cell &cell) {
     if (serverPort) {
         if (serverPort == defensePlayer) {
             setStateAndNotify(*this,
-                              attackPlayer,
+                              defensePlayer,
                               otherLink->getName(),
                               otherLink->getType(),
                               true, false, -1);

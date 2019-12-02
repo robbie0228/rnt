@@ -62,7 +62,11 @@
         "iostream": "cpp",
         "map": "cpp",
         "__tree": "cpp",
+        "filesystem": "cpp",
+        "iomanip": "cpp",
+        "stack": "cpp",
         "fstream": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "*.tcc": "cpp"
     }
 }

@@ -1,9 +1,12 @@
 #include "grid.h"
+#include "player.h"
 #include "enums.h"
 
 using namespace std;
 
-Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers) {
+Grid::Grid(vector<Player *> players, 
+           vector<vector<Link *>> linkPointers, 
+           bool useGraphics): useGraphics{useGraphics} {
     locationOfLinks = vector<vector<pair<int, int>>>(NUMPLAYERS,
                       vector<pair<int, int>>(NUMLINKS,
                       make_pair(-1, -1)));
@@ -36,7 +39,7 @@ Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers) {
         cells.emplace_back(row); // Add row of cells to grid
     }
 
-    // construct the TextDisplay
+    // construct the displays
 
     vector<vector<pair<char, string>>> displayLinks = 
         vector<vector<pair<char, string>>>(NUMPLAYERS,
@@ -64,6 +67,7 @@ Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers) {
     }
 
     textDisplay = make_unique<TextDisplay>(displayGrid, displayLinks);
+    graphicsDisplay = make_unique<GraphicsDisplay>(displayGrid, displayLinks);
 
     for (int row = 0; row < GRIDSIZE; ++row) {
         for (int col = 0; col < GRIDSIZE; ++col) {
@@ -71,6 +75,7 @@ Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers) {
                 cells[row][col].attach(players[player]);
             }
             cells[row][col].attach(textDisplay.get());
+            cells[row][col].attach(graphicsDisplay.get());
         }
     }
 }
@@ -92,7 +97,7 @@ void Grid::move(int player, int link, Direction dir) {
                 throw "Invalid move";
             }
             locationOfLinks[player][link] = make_pair(-1, -1);
-            cellWithLink.removeAndDownload(player, -1);
+            cellWithLink.removeAndDownload(player + 1, -1);
         } else {
             Cell &moveToCell = cells[rowOfLink + linkSpeed][colOfLink];
             char otherCellName = moveToCell.getName();
@@ -156,7 +161,7 @@ void Grid::move(int player, int link, Direction dir) {
                 throw "Invalid move";
             }
             locationOfLinks[player][link] = make_pair(-1, -1);
-            cellWithLink.removeAndDownload(player, -1);
+            cellWithLink.removeAndDownload(player + 1, -1);
         } else {
             Cell &moveToCell = cells[rowOfLink - linkSpeed][colOfLink];
             char otherCellName = moveToCell.getName();
@@ -212,4 +217,5 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
 
 void Grid::printBoard(int currentPlayer) {
     textDisplay->draw(currentPlayer);
+    if (useGraphics) graphicsDisplay->draw(currentPlayer);
 }
