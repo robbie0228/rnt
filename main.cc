@@ -15,17 +15,8 @@ int main()
     istream *stream = &cin;
 
     bool moreToRead = true;
-    while (!((*stream) >> cmd)) {
-        if (fstreams.size() > 1) {
-            fstreams.pop_back();
-            stream = &(fstreams.back());
-        } else if (fstreams.size() == 1) {
-            fstreams.pop_back();
-            stream = &cin;
-        } else {
-            moreToRead = false;
-            break;
-        }
+    if (!(cin >> cmd)) {
+        exit(0);
     }
     while (moreToRead)
     {
