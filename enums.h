@@ -40,7 +40,7 @@ enum class Direction {
 }; 
 
 // Status of a Player
-enum class Status {
+enum class PlayStatus {
     Win, 
     Lose, 
     InPlay

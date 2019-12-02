@@ -49,9 +49,11 @@ vector<Link *> Player::cmdInit(vector<Link> cmdLinks) {
 
 bool Player::isMyLink(char linkName) {
     if (playerNumber == 1) {
-        return ('a' <= linkName && linkName <= 'h');
+        return ('a' <= linkName && linkName <= 'h') && 
+                links[linkName - 'a'].getType() != LinkType::NoType;
     } else {
-        return ('A' <= linkName && linkName <= 'H');
+        return ('A' <= linkName && linkName <= 'H') && 
+                links[linkName - 'A'].getType() != LinkType::NoType;
     }
     return false;
 }
@@ -65,15 +67,15 @@ bool Player::isEnemyLink(char linkName) {
     return false;
 }
 
-Status Player::checkStatus() {
+PlayStatus Player::checkStatus() {
     if (downloadedDataCount >= 4) {
-        return Status::Win;
+        return PlayStatus::Win;
     }
     else if (downloadedVirusCount >= 4) {
-        return Status::Lose;
+        return PlayStatus::Lose;
     }
     else {
-        return Status::InPlay;
+        return PlayStatus::InPlay;
     }
 }
 
@@ -127,17 +129,8 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
                 throw "Invalid use of ability";
             }
             break;
-        case Ability::Firewall :
-            if ((abilityInfo[0] - '0' < 0) || 
-                (abilityInfo[0] - '0' >= GRIDSIZE) || 
-                (abilityInfo[1] - '0' < 0) || 
-                (abilityInfo[1] - '0' >= GRIDSIZE)) {
-
-                throw "Invalid use of ability";
-            }
-            break;
-        case Ability::Ambush :
-            if (!isMyLink(abilityInfo[0]) || !isEnemyLink(abilityInfo[1])) {
+        case Ability::Uber :
+            if (!isMyLink(abilityInfo[0])) {
                 throw "Invalid use of ability";
             }
             break;
@@ -149,6 +142,10 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
     return abilities[abilityID - 1].first;
 }
 
+int getPlayerNumFromLink(char name) {
+    return name < 'a' ? 2 : 1;
+}
+
 void Player::notify(Subject &whoFrom) {
     StateType state = whoFrom.getState();
     if (state.downloadingPlayer == playerNumber) {
@@ -156,6 +153,21 @@ void Player::notify(Subject &whoFrom) {
             downloadedDataCount += 1;
         } else {
             downloadedVirusCount += 1;
+        }
+    }
+    if (('a' <= state.downloadingLinkName && 
+         state.downloadingLinkName <= 'h') || 
+        ('A' <= state.downloadingLinkName && 
+         state.downloadingLinkName <= 'H')) {
+        if (getPlayerNumFromLink(state.downloadingLinkName) == 
+            playerNumber) {
+            if (playerNumber == 1) {
+                links[state.downloadingLinkName - 'a'].setType(
+                    LinkType::NoType);
+            } else {
+                links[state.downloadingLinkName - 'A'].setType(
+                    LinkType::NoType);
+            }
         }
     }
 }

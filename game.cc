@@ -84,7 +84,8 @@ pair<int, bool> Game::verifyAbility(int abilityID) {
     if (abilityPair.first == Ability::Firewall || abilityPair.first == Ability::Ambush) {
         return make_pair(2, abilityPair.second);
     } else if (abilityPair.first == Ability::Download || abilityPair.first == Ability::Boost || 
-        abilityPair.first == Ability::Scan || abilityPair.first == Ability::Polarize) {
+               abilityPair.first == Ability::Scan || abilityPair.first == Ability::Polarize || 
+               abilityPair.first == Ability::Uber) {
         return make_pair(1, abilityPair.second);
     }
     return make_pair(0, false);
@@ -98,4 +99,16 @@ void Game::useAbility(int abilityID, vector<char> useAbilityInfo) {
         grid->useAbility(abilityName, useAbilityInfo, currentPlayer + 1);
         abilityUsedCount += 1;
     }
+}
+
+int Game::checkStatus() {
+    int curStatus = -1;
+    for (int i = 0; i < NUMPLAYERS; i++) {
+        if (players[i].checkStatus() == PlayStatus::Win) {
+            curStatus = i + 1;
+        } else if (players[i].checkStatus() == PlayStatus::Lose) {
+            curStatus = (i + 1) % NUMPLAYERS + 1;
+        }
+    }
+    return curStatus;
 }

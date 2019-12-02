@@ -210,6 +210,15 @@ int main(int argc, char* argv[])
             cout << e << endl;
             cout << endl;
         }
+        if (game.checkStatus() != -1) {
+            if (game.checkStatus() == 1) {
+                cout << "Player 1 won!" << endl;
+                exit(0);
+            } else {
+                cout << "Player 2 won!" << endl;
+                exit(0);
+            }
+        }
         while (!((*stream) >> cmd)) {
             if (fstreams.size() > 1) {
                 fstreams.pop_back();
