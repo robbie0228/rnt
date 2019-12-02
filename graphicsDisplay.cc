@@ -19,6 +19,8 @@ GraphicsDisplay::GraphicsDisplay(
 
 	// Create window
     win = make_unique<Xwindow>(500, 700);
+
+    draw(0);
 }
 
 void GraphicsDisplay::notify(Subject &whoFrom) {
@@ -125,34 +127,59 @@ void GraphicsDisplay::draw(int currentPlayer) {
                 colour = 0;
                 name = "";
             } else if ('a' <= grid[row][col] && grid[row][col] <= 'h') {
+                int linkIndex = grid[row][col] - 'a';
                 if (currentPlayer == 0) {
-                    if (links[0][grid[row][col] - 'a'].second < "E") {
+                    if (links[0][linkIndex].second < "E") {
                         colour = 3;
                     } else {
                         colour = 2;
                     }
                     name = string(1, grid[row][col]) + ":" +
-                           links[0][grid[row][col] - 'a'].second;
+                           links[0][linkIndex].second;
                 } else {
-                    colour = 1;
-                    name = string(1, grid[row][col]);
+                    if (knownLinks[1][linkIndex]) {
+                        if (links[0][linkIndex].second < "E") {
+                            colour = 3;
+                        } else {
+                            colour = 2;
+                        }
+                        name = string(1, grid[row][col]) + ":" +
+                               links[0][linkIndex].second;
+                    } else {
+                        colour = 1;
+                        name = string(1, grid[row][col]);
+                    }
                 }
             } else if ('A' <= grid[row][col] && grid[row][col] <= 'H') {
+                int linkIndex = grid[row][col] - 'A';
                 if (currentPlayer == 1) {
-                    if (links[0][grid[row][col] - 'A'].second < "E") {
+                    if (links[1][linkIndex].second < "E") {
                         colour = 3;
                     } else {
                         colour = 2;
                     }
                     name = string(1, grid[row][col]) + ":" +
-                           links[0][grid[row][col] - 'A'].second;
+                           links[1][linkIndex].second;
                 } else {
-                    colour = 1;
-                    name = string(1, grid[row][col]);
+                    if (knownLinks[0][linkIndex]) {
+                        if (links[1][linkIndex].second < "E") {
+                            colour = 3;
+                        } else {
+                            colour = 2;
+                        }
+                        name = string(1, grid[row][col]) + ":" +
+                               links[1][linkIndex].second;
+                    } else {
+                        colour = 1;
+                        name = string(1, grid[row][col]);
+                    }
                 }
+            } else if (grid[row][col] == 'S') {
+                colour = 5;
+                name = string(1, grid[row][col]);
             } else {
-                colour = 1;
-                name = "";
+                colour = 4;
+                name = string(1, grid[row][col]);
             }
 
             // Add rectangle with the notifying piece's colour
