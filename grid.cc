@@ -211,12 +211,8 @@ void Grid::useAbility(Ability a, vector<char> abilityInfo, int user) {
         char myLink = abilityInfo[0];
         char enemyLink = abilityInfo[1];
 
-        cout << myLink << enemyLink << endl;
-
         getIndicesFromName(myLink, myLinkIndex, myIndex);
         getIndicesFromName(enemyLink, enemyLinkIndex, enemyIndex);
-
-        cout << myIndex << enemyIndex << endl;
 
         int enemyRow = locationOfLinks[enemyIndex][enemyLinkIndex].first;
         int enemyCol = locationOfLinks[enemyIndex][enemyLinkIndex].second;
