@@ -22,7 +22,7 @@ Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
     Player p2 = Player(2);
 
     if (cmdAllAbilities.size()){
-        for (int i = 0; i < NUMPLAYERS; ++i) {
+        for (int i = 0; i < cmdAllAbilities.size(); ++i) {
             if (cmdAllAbilities[i].first == 1) 
                 p1.overrideAbilities(cmdAllAbilities[i].second);
             else if (cmdAllAbilities[i].first == 2)
