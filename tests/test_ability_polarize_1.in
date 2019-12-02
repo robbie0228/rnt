@@ -1,7 +1,10 @@
 board
+abilities
 ability 5 a
+board
 move a down
 board
+abilities
 ability 3 A
 move A up
 board
@@ -12,5 +15,9 @@ move A up
 board
 move b down
 board
-ability 5 b
+abilities
+ability 5 a
+board
+move A up
+board
 quit

@@ -19,17 +19,10 @@ Abilities: 5
 A: ?    B: ?    C: ?    D: ?
 E: ?    F: ?    G: ?    H: ?
 
-Player 1's Abilities:
-1: Link Boost, Unused
-2: Firewall, Unused
-3: Download, Unused
-4: Scan, Unused
-5: Polarize, Unused
-
 Player 1:
 Downloaded: 0D, 0V
-Abilities: 4
-a: D1   b: V2   c: V3   d: V4
+Abilities: 5
+a: V1   b: V2   c: V3   d: V4
 e: D1   f: D2   g: D3   h: D4
 ========
 abcSSfgh
@@ -49,9 +42,9 @@ E: ?    F: ?    G: ?    H: ?
 
 Player 1:
 Downloaded: 0D, 0V
-Abilities: 4
-a: ?    b: ?    c: ?    d: ?
-e: ?    f: ?    g: ?    h: ?
+Abilities: 5
+a: V1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
 ========
 .bcSSfgh
 a..de...
@@ -59,23 +52,16 @@ a..de...
 ........
 ........
 ........
-...DE...
-ABCSSFGH
+A..DE...
+.BCSSFGH
 ========
 Player 2:
 Downloaded: 0D, 0V
 Abilities: 5
-A: V1   B: V2   C: V3   D: V4
-E: D1   F: D2   G: D3   H: D4
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
 
-Player 2's Abilities:
-1: Link Boost, Unused
-2: Firewall, Unused
-3: Download, Unused
-4: Scan, Unused
-5: Polarize, Unused
-
-Invalid use of ability
+Ability is unavailable
 
 Player 1:
 Downloaded: 0D, 0V
@@ -104,13 +90,13 @@ Abilities: 4
 a: D1   b: V2   c: V3   d: V4
 e: D1   f: D2   g: D3   h: D4
 ========
-..cSSfgh
+.bcSSfgh
 a..de...
-.b......
 ........
-A.......
 ........
-...DE...
+........
+........
+A..DE...
 .BCSSFGH
 ========
 Player 2:
@@ -119,73 +105,26 @@ Abilities: 5
 A: ?    B: ?    C: ?    D: ?
 E: ?    F: ?    G: ?    H: ?
 
+Cannot move opponent's piece
+
 Player 1:
 Downloaded: 0D, 0V
 Abilities: 4
-a: ?    b: ?    c: ?    d: ?
-e: ?    f: ?    g: ?    h: ?
+a: D1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
 ========
-..cSSfgh
-a..de...
+abcSSfgh
+...de...
 ........
-.b......
-A.......
 ........
-...DE...
-.BCSSFGH
+........
+........
+A..DEF..
+.BCSS.GH
 ========
 Player 2:
 Downloaded: 0D, 0V
 Abilities: 5
-A: V1   B: V2   C: V3   D: V4
-E: D1   F: D2   G: D3   H: D4
-
-Player 2's Abilities:
-1: Link Boost, Unused
-2: Firewall, Unused
-3: Download, Unused
-4: Scan, Unused
-5: Polarize, Unused
-
-Player 1:
-Downloaded: 0D, 0V
-Abilities: 4
-a: ?    b: ?    c: ?    d: ?
-e: ?    f: ?    g: ?    h: ?
-========
-..cSSfgh
-a..de...
-........
-.b......
-A.......
-........
-...DE...
-.BCSSFGH
-========
-Player 2:
-Downloaded: 0D, 0V
-Abilities: 4
-A: V1   B: V2   C: V3   D: V4
-E: D1   F: D2   G: D3   H: D4
-
-Player 1:
-Downloaded: 0D, 0V
-Abilities: 4
-a: V1   b: V2   c: V3   d: V4
-e: D1   f: D2   g: D3   h: D4
-========
-..cSSfgh
-a..de...
-........
-Ab......
-........
-........
-...DE...
-.BCSSFGH
-========
-Player 2:
-Downloaded: 0D, 0V
-Abilities: 4
 A: ?    B: ?    C: ?    D: ?
 E: ?    F: ?    G: ?    H: ?
 

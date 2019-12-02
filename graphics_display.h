@@ -1,18 +1,22 @@
-#ifndef TEXT_H
-#define TEXT_H
-#include <vector>
+#ifndef GRAPHICSDISPLAY_H
+#define GRAPHICSDISPLAY_H
 #include <iostream>
+#include <vector>
 #include <utility>
-#include <string>
+#include <memory>
 #include "subject.h"
+#include "enums.h"
+#include "window.h"
+
 using std::vector;
 
-class TextDisplay : public Observer {
+class GraphicsDisplay: public Observer {
+        std::unique_ptr<Xwindow> win; // reference to Xwindow
         // 8*8 2D array of (. a-h A-H S m w)
         vector<vector<char>> grid; 
         
         // 2 player's 8 of pair(a-hA-H, D/V1-8)
-        //   note that Copping 2 to have 4 steroids makes a max strength of 8
+        //   note that steal 2 to have 4 steroids makes a max strength of 8
         vector<vector<std::pair<char, std::string>>> links;
 
         // 2 player's 8 of the other player's links' reveal status
@@ -31,10 +35,9 @@ class TextDisplay : public Observer {
         vector<int> abilityRemainingCounts;
         
     public:
-        TextDisplay(vector<vector<char>> grid, 
-                    vector<vector<std::pair<char, std::string>>> links);
+        GraphicsDisplay(vector<vector<char>> grid, 
+                    	vector<vector<std::pair<char, std::string>>> links);
         void notify(Subject &whoFrom);
         void draw(int currentPlayer);
 };
-
 #endif

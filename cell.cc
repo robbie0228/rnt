@@ -39,7 +39,7 @@ bool Cell::moveCellHere(Cell &cell) {
     if (serverPort) {
         if (serverPort == defensePlayer) {
             setStateAndNotify(*this,
-                              attackPlayer,
+                              defensePlayer,
                               otherLink->getName(),
                               otherLink->getType(),
                               true, false, -1);
@@ -115,8 +115,8 @@ Link *Cell::getLink() const{
     return link;
 }
 
-void Cell::useAbility(Ability a, int user) {
-    switch (a) {
+void Cell::useAbility(Ability abilityName, int user) {
+    switch (abilityName) {
         case Ability::Boost :
         {
             int currSpeed = this->link->getSpeed();
@@ -144,6 +144,9 @@ void Cell::useAbility(Ability a, int user) {
         }
         case Ability::Firewall : 
         {
+            if (this->getName() != '.') {
+                throw "Cell is not empty, cannot place Firewall!";
+            }
             this->firewall = user;
             setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
                               false, user);
@@ -165,6 +168,8 @@ void Cell::useAbility(Ability a, int user) {
         }
         default :
         {
+            setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
+                              false, user);
             break;
         }
     }

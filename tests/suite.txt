@@ -1,8 +1,11 @@
-test1
-test2
+test_1
+test_2
+test_ability_ambush_1
 test_ability_boost_1
-test_ability_polarize_1
-test_print_ability
 test_ability_download_1
 test_ability_firewall_1
+test_ability_polarize_1
 test_ability_scan_1
+test_cmd_1
+test_print_ability_1
+test_sequence_1

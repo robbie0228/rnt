@@ -7,20 +7,21 @@ const int NUMPLAYERS = 2; // Number of players
 const int NUMLINKS = 8; // Number of links per player
 const int NUMABILITIES = 5; // Number of abilities per player
 const int MAXABILITYUSE = 1; // Limit of ability use per turn
+const int MAXCMDLINEARGS = 9; // Limit of command line arguments
 
 // Ability names
 enum class Ability {
     Firewall,
     Download,
-    Boost,
+    Boost,  // full name: Link Boost, note at initialization, first letter is L
     Scan,
     Polarize,
 
     Uber, 
-    Whey,
-    Cop,
+    Whey, 
+    Ambush,
 
-    NotAvailable
+    NoAbility
 };
 
 // Types of a Link
@@ -39,7 +40,7 @@ enum class Direction {
 }; 
 
 // Status of a Player
-enum class Status {
+enum class PlayStatus {
     Win, 
     Lose, 
     InPlay
