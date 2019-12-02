@@ -6,4 +6,4 @@ test_ability_firewall_1
 test_ability_polarize_1
 test_ability_scan_1
 test_cmd_1
-test_print_ability
+test_print_ability_1
