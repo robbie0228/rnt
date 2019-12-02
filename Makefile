@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++14 -g -Wall -MMD -Werror=vla
+CXXFLAGS = -std=c++14 -g -Wall -MMD -Werror=vla -L/usr/X11/lib -I/usr/X11/include
 EXEC = raiinet
 OBJECTS = main.o game.o grid.o cell.o player.o link.o subject.o text_display.o graphicsDisplay.o window.o
 DEPENDS = ${OBJECTS:.o=.d}
