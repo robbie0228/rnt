@@ -129,6 +129,19 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
                 throw "Invalid use of ability";
             }
             break;
+        case Ability::Firewall :
+            if ((abilityInfo[0] - '0' < 0) || 
+                (abilityInfo[0] - '0' >= GRIDSIZE) || 
+                (abilityInfo[1] - '0' < 0) || 
+                (abilityInfo[1] - '0' >= GRIDSIZE)) {
+
+                throw "Invalid use of ability";
+            }
+            break;
+        case Ability::Ambush :
+            if (!isMyLink(abilityInfo[0]) || !isEnemyLink(abilityInfo[1])) {
+                throw "Invalid use of ability";
+            }
         case Ability::Uber :
             if (!isMyLink(abilityInfo[0])) {
                 throw "Invalid use of ability";

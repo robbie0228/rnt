@@ -227,8 +227,13 @@ void Grid::useAbility(Ability a, vector<char> abilityInfo, int user) {
         if (!enemyWon) {
             cells[myRow][myCol].
                 moveCellHere(cells[enemyRow][enemyCol]);
+            locationOfLinks[enemyIndex][enemyLinkIndex] = make_pair(-1, -1);
             cells[enemyRow][enemyCol].removeLink();
+        } else {
+            locationOfLinks[myIndex][myLinkIndex] = make_pair(-1, -1);
         }
+
+        cells[myRow][myCol].useAbility(a, user);
 
     } else {
         char linkName = abilityInfo[0];
