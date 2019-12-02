@@ -96,7 +96,7 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
             if (!isMyLink(abilityInfo[0])) {
                 throw "Invalid use of ability";
             }
-            break;
+            break;   
         case Ability::Polarize :
             if (!isMyLink(abilityInfo[0]) && !isEnemyLink(abilityInfo[0])) {
                 throw "Invalid use of ability";
@@ -111,6 +111,11 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
             if (!isMyLink(abilityInfo[0]) && !isEnemyLink(abilityInfo[0])) {
                 throw "Invalid use of ability";
             }
+        case Ability::Whey :
+            if (!isMyLink(abilityInfo[0])) {
+                throw "Invalid use of ability";
+            }
+            break;
         default :
             break;
     }
