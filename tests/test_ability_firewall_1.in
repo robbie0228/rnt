@@ -1,9 +1,11 @@
 board
-ability 1 6 7
+abilities
+ability 2 6 7
 board
 move a down
 board
-ability 1 2 0
+abilities
+ability 2 2 0
 move H up
 board
 move a down

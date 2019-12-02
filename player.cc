@@ -9,9 +9,9 @@ Player::Player(int playerNumber):
                     downloadedDataCount{0}, 
                     downloadedVirusCount{0}, 
                     playerNumber{playerNumber} {
-    abilities = {make_pair(Ability::Firewall, 1),
+    abilities = {make_pair(Ability::Boost, 1),
+               make_pair(Ability::Firewall, 1),
                make_pair(Ability::Download, 1),
-               make_pair(Ability::Boost, 1),
                make_pair(Ability::Scan, 1),
                make_pair(Ability::Polarize, 1)
                };
