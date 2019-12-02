@@ -6,3 +6,4 @@ test_print_ability
 test_ability_download_1
 test_ability_firewall_1
 test_cmd
+test_ability_scan_1

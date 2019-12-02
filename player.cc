@@ -122,6 +122,10 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
                 throw "Invalid use of ability";
             }
             break;
+        case Ability::Scan :
+            if (!isMyLink(abilityInfo[0]) && !isEnemyLink(abilityInfo[0])) {
+                throw "Invalid use of ability";
+            }
         default :
             break;
     }

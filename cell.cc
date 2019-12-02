@@ -34,7 +34,7 @@ bool Cell::moveCellHere(Cell &cell) {
     }
 
     int attackPlayer = getPlayerNumFromLink(otherLink);
-    int defensePlayer = (attackPlayer + 1) % 2;
+    int defensePlayer = (attackPlayer % 2) + 1;
 
     if (serverPort) {
         if (serverPort == defensePlayer) {
@@ -49,17 +49,18 @@ bool Cell::moveCellHere(Cell &cell) {
         }
     } else if (firewall) {
         if (firewall == defensePlayer) {
+            link = otherLink;
+            setStateAndNotify(*this, -1, '.', LinkType::NoType,
+                              false, true, -1);
             if (otherLink->getType() == LinkType::Virus) {
+                link = nullptr;
                 setStateAndNotify(*this,
                                   attackPlayer,
                                   otherLink->getName(),
                                   otherLink->getType(),
-                                  true, false, -1);
+                                  false, false, -1);
                 return true;
             } else {
-                link = otherLink;
-                setStateAndNotify(*this, -1, '.', LinkType::NoType,
-                                  false, true, -1);
                 return false;
             }
         } else {
@@ -148,6 +149,10 @@ void Cell::useAbility(Ability a, int user) {
                               false, user);
             break;
         }
+        case Ability::Scan :
+            setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
+                              true, user);
+            break;
         default :
         {
             break;
