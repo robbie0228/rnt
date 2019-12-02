@@ -1,8 +1,22 @@
 #include "grid.h"
 #include "player.h"
 #include "enums.h"
+#include <time.h>
 
 using namespace std;
+
+void getIndicesFromName(char linkName, int &linkIndex, int &playerIndex) {
+    if ('a' <= linkName && linkName <= 'h') {
+        linkIndex = linkName - 'a';
+        playerIndex = 0;
+    } else if ('A' <= linkName && linkName <= 'H') {
+        linkIndex = linkName - 'A';
+        playerIndex = 1;
+    } else {
+        throw "Invalid link";
+    }
+    return;
+}
 
 Grid::Grid(vector<Player *> players, 
            vector<vector<Link *>> linkPointers, 
@@ -194,20 +208,45 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
         char linkName = v[0];
         int linkIndex;
         int playerIndex;
-        if ('a' <= linkName && linkName <= 'h') { 
-            linkIndex = linkName - 'a';
-            playerIndex = 0;   
-        } else if ('A' <= linkName && linkName <= 'H') {
-            linkIndex = linkName - 'A';
-            playerIndex = 1;   
-        } else {
-            throw "Invalid link";
-        }
+        getIndicesFromName(linkName, linkIndex, playerIndex);
 
         int rowOfLink = locationOfLinks[playerIndex][linkIndex].first;
         int colOfLink = locationOfLinks[playerIndex][linkIndex].second;
+        Cell &cellWithLink = cells[rowOfLink][colOfLink];
 
-        cells[rowOfLink][colOfLink].useAbility(a, user);
+        if (a == Ability::Uber) {
+            bool moveWorked = false;
+            int randomRow;
+            int randomCol;
+            bool linkStayedTheSame;
+            char otherCellName;
+            while (!moveWorked) {
+                srand (time(NULL));
+                randomRow = rand() % 8;
+                randomCol = rand() % 8;
+
+                Cell &moveToCell = cells[randomRow][randomCol];
+                otherCellName = moveToCell.getName();
+                try {
+                    linkStayedTheSame = moveToCell.moveCellHere(cellWithLink);
+                    moveWorked = true;
+                } catch (char const *e) {}
+            }
+            if (!linkStayedTheSame) {
+                if (('A' <= otherCellName && otherCellName <= 'H')
+                    || ('a' <= otherCellName && otherCellName <= 'h')) 
+                {
+                    locationOfLinks[(playerIndex + 1) % NUMPLAYERS][linkIndex] = make_pair(-1, -1);
+                }
+                locationOfLinks[playerIndex][linkIndex] =
+                    make_pair(randomRow, randomCol);
+            } else {
+                locationOfLinks[playerIndex][linkIndex] = make_pair(-1, -1);
+            }
+            cellWithLink.removeLink();
+        }
+
+        cellWithLink.useAbility(a, user);
 
         if (a == Ability::Download) {
             locationOfLinks[playerIndex][linkIndex] = make_pair(-1, -1);
