@@ -160,7 +160,7 @@ int getPlayerNumFromLink(char name) {
     return name < 'a' ? 2 : 1;
 }
 
-void Player::notify(Subject &whoFrom) {
+void Player::doNotify(Subject &whoFrom) {
     StateType state = whoFrom.getState();
     if (state.downloadingPlayer == playerNumber) {
         if (state.downloadingLinkType == LinkType::Data) {

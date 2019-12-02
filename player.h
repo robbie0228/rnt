@@ -49,7 +49,9 @@ class Player : public Observer {
         // marks the ability specified as used
         Ability useAbility(int abilityID, vector<char> abilityInfo);
 
-        void notify(Subject &whoFrom);
+    private:
+        // Notify called from cell
+        void doNotify(Subject &whoFrom);
 };
 
 #endif

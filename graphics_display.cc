@@ -18,7 +18,7 @@ GraphicsDisplay::GraphicsDisplay(
     abilityRemainingCounts = vector<int>(NUMPLAYERS, NUMABILITIES);
 }
 
-void GraphicsDisplay::notify(Subject &whoFrom) {
+void GraphicsDisplay::doNotify(Subject &whoFrom) {
     StateType state = whoFrom.getState();
     InfoType info = whoFrom.getInfo();
 

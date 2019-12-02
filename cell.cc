@@ -181,7 +181,7 @@ void Cell::setLink(Link *newLink) {
     link = newLink;
 }
 
-InfoType Cell::getInfo() const{
+InfoType Cell::doGetInfo() const{
     return {row, col, getName(),
             (link == nullptr ? LinkType::NoType : link->getType()),
             (link == nullptr ? -1 : link->getStrength())};

@@ -15,7 +15,7 @@ TextDisplay::TextDisplay(vector<vector<char>> grid,
     abilityRemainingCounts = vector<int>(NUMPLAYERS, NUMABILITIES);
 }
 
-void TextDisplay::notify(Subject &whoFrom) {
+void TextDisplay::doNotify(Subject &whoFrom) {
     StateType state = whoFrom.getState();
     InfoType info = whoFrom.getInfo();
 

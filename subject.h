@@ -50,8 +50,10 @@ class Subject {
 		void notifyObservers();
 		void setState(StateType newS);
 		StateType getState() const;
-		virtual InfoType getInfo() const = 0;
+		InfoType getInfo() const;
 		virtual ~Subject() {};
+	private:
+		virtual InfoType doGetInfo() const = 0;
 };
 
 #endif
