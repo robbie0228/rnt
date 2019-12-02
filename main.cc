@@ -45,7 +45,7 @@ vector<Link> cmdInitLinks(int playerNumber, string links) {
     for (int i = 0, j = 0; i < NUMLINKS * 2; i += 2, ++j) {
         LinkType linkTempType = (links[i] == 'D' ? LinkType::Data : 
                                                    LinkType::Virus);
-        int linkTempStrength = links[i + 1];
+        int linkTempStrength = links[i + 1] - '0';
         char linkTempName = (playerNumber == 1 ? 'a' : 'A') + j;
         linksInit.emplace_back(Link
                                 (linkTempType, linkTempStrength, linkTempName));
@@ -68,24 +68,52 @@ int main(int argc, char* argv[])
             if (arg == "-ability1") {
                 string abilities = argv[i + 1];
                 if (abilities.length() != NUMABILITIES) throw "Invalid abilities";
+                string sorted = abilities;
+                sort(sorted.begin(), sorted.end());
+                for (int j = 1; j < NUMABILITIES - 1; ++j) {
+                    if (sorted[j] == sorted[j - 1] && sorted[j] == sorted[j + 1]) 
+                        throw "Invalid abilities";
+                }
                 ++i;
                 allAbilities.emplace_back(make_pair(1, cmdInitAbilities(abilities)));
             }
             else if (arg == "-ability2") {
                 string abilities = argv[i + 1];
                 if (abilities.length() != NUMABILITIES) throw "Invalid abilities";
+                string sorted = abilities;
+                sort(sorted.begin(), sorted.end());
+                for (int j = 1; j < NUMABILITIES - 1; ++j) {
+                    if (sorted[j] == sorted[j - 1] && sorted[j] == sorted[j + 1])
+                        throw "Invalid abilities";
+                }
                 ++i;
                 allAbilities.emplace_back(make_pair(2, cmdInitAbilities(abilities)));
             }
             else if (arg == "-link1") {
                 string links = argv [i + 1];
                 if (links.length() != NUMLINKS * 2) throw "Invalid links";
+                vector<bool> verification = vector<bool>(NUMLINKS, false);
+                for (int j = 1; j < NUMLINKS * 2 ; j += 2) {
+                    if (links[j - 1] == 'D') verification[links[j] - '0' - 1] = true;
+                    else if (links[j - 1] == 'V') verification[links[j] - '0' + 3] = true;
+                }
+                for (int j = 0; j < NUMLINKS; ++j) {
+                    if (!verification[j]) throw "Invalid links";
+                }
                 ++i;
                 allLinks.emplace_back(make_pair(1, cmdInitLinks(1, links)));
             }
             else if (arg == "-link2") {
                 string links = argv [i + 1];
                 if (links.length() != NUMLINKS * 2) throw "Invalid links";
+                vector<bool> verification = vector<bool>(NUMLINKS, false);
+                for (int j = 1; j < NUMLINKS * 2 ; j += 2) {
+                    if (links[j - 1] == 'D') verification[links[j] - '0' - 1] = true;
+                    else if (links[j - 1] == 'V') verification[links[j] - '0' + 3] = true;
+                }
+                for (int j = 0; j < NUMLINKS; ++j) {
+                    if (!verification[j]) throw "Invalid links";
+                }
                 ++i;
                 allLinks.emplace_back(make_pair(2, cmdInitLinks(2, links)));
             }
