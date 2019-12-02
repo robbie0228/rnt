@@ -7,12 +7,13 @@
 #include "player.h"
 #include "enums.h"
 using std::pair;
+using std::vector;
 
 class Game {
         // grid is the Grid that the game takes place in
         std::unique_ptr<Grid> grid;
         // a vector of two Player's
-        std::vector<Player> players;
+        vector<Player> players;
         // an integer that holds info on the current Player
         int currentPlayer;
         // the number of abilities the current player has used in the turn
