@@ -43,7 +43,7 @@ vector<pair<Ability, bool>> cmdInitAbilities(string s){
 
 vector<Link> cmdInitLinks(int playerNumber, string links) {
     vector<Link> linksInit;
-    for (int i = 0, j = 0; i < NUMLINKS * 2; i += 2, ++j) {
+    for (int i = 0, j = 0; j < NUMLINKS; i += 2, ++j) {
         LinkType linkTempType = (links[i] == 'D' ? LinkType::Data : 
                                                    LinkType::Virus);
         int linkTempStrength = links[i + 1] - '0';
