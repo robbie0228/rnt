@@ -4,6 +4,19 @@
 
 using namespace std;
 
+void getIndicesFromName(char linkName, int &linkIndex, int &playerIndex) {
+    if ('a' <= linkName && linkName <= 'h') {
+        linkIndex = linkName - 'a';
+        playerIndex = 0;
+    } else if ('A' <= linkName && linkName <= 'H') {
+        linkIndex = linkName - 'A';
+        playerIndex = 1;
+    } else {
+        throw "Invalid link";
+    }
+    return;
+}
+
 Grid::Grid(vector<Player *> players, 
            vector<vector<Link *>> linkPointers, 
            bool useGraphics): useGraphics{useGraphics} {
