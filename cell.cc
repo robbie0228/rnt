@@ -49,27 +49,23 @@ bool Cell::moveCellHere(Cell &cell) {
         }
     } else if (firewall) {
         if (firewall == defensePlayer) {
+            Link *tempLink = link;
             link = otherLink;
             setStateAndNotify(*this, -1, '.', LinkType::NoType,
                               false, true, -1);
             if (otherLink->getType() == LinkType::Virus) {
-                link = nullptr;
+                link = tempLink;
                 setStateAndNotify(*this,
                                   attackPlayer,
                                   otherLink->getName(),
                                   otherLink->getType(),
-                                  false, false, -1);
+                                  true, false, -1);
                 return true;
-            } else {
-                return false;
             }
-        } else {
-            link = otherLink;
-            setStateAndNotify(*this, -1, '.', LinkType::NoType,
-                          false, false, -1);
-            return false;
+            link = tempLink;
         }
-    } else if (link == nullptr) {
+    }
+    if (link == nullptr) {
         link = cell.getLink();
         setStateAndNotify(*this, -1, '.', LinkType::NoType,
                           false, false, -1);
@@ -130,6 +126,9 @@ void Cell::useAbility(Ability a, int user) {
             LinkType currType = this->link->getType();
             if (currType == LinkType::Data) {
                 this->link->setType(LinkType::Virus);
+                if (firewall != getPlayerNumFromLink(link)) {
+                    removeAndDownload(getPlayerNumFromLink(link), false);
+                }
             } else {
                 this->link->setType(LinkType::Data);
             }
