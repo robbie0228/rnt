@@ -233,7 +233,7 @@ void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user) {
             locationOfLinks[myIndex][myLinkIndex] = make_pair(-1, -1);
         }
 
-        cells[myRow][myCol].useAbility(a, user);
+        cells[myRow][myCol].useAbility(abilityName, user);
 
     } else {
         char linkName = abilityInfo[0];
