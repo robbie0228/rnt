@@ -1,0 +1,130 @@
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 5
+a: D1   b: D2   c: D3   d: D4
+e: V1   f: V2   g: V3   h: V4
+========
+abcSSfgh
+...de...
+........
+........
+........
+........
+...DE...
+ABCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 5
+a: D1   b: D2   c: D3   d: D4
+e: V1   f: V2   g: V3   h: V4
+========
+abcSSfgh
+...de...
+........
+........
+........
+........
+...DE...
+ABCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 5
+a: D1   b: D2   c: D3   d: D4
+e: V1   f: V2   g: V3   h: V4
+========
+.bcSSfgh
+a..de...
+........
+........
+........
+........
+A..DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
+Invalid ability
+
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 4
+a: V1   b: D2   c: D3   d: D4
+e: V1   f: V2   g: V3   h: V4
+========
+.bcSSfgh
+a..de...
+........
+........
+........
+........
+A..DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 4
+a: V1   b: D2   c: D3   d: D4
+e: V1   f: V2   g: V3   h: V4
+========
+.bcSSfgh
+a..de...
+........
+........
+........
+........
+A..DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
+Cannot move opponent's piece
+
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 4
+a: V1   b: D2   c: D3   d: D4
+e: V1   f: V2   g: V3   h: V4
+========
+abcSSfgh
+...de...
+........
+........
+........
+........
+A..DEF..
+.BCSS.GH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: ?    B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
