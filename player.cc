@@ -126,10 +126,12 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
             if (!isMyLink(abilityInfo[0]) && !isEnemyLink(abilityInfo[0])) {
                 throw "Invalid use of ability";
             }
+            break;
         case Ability::Uber :
             if (!isMyLink(abilityInfo[0])) {
                 throw "Invalid use of ability";
             }
+            break;
         default :
             break;
     }
