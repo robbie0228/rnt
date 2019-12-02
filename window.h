@@ -22,6 +22,9 @@ public:
 	// Draws a rectangle
 	void fillRectangle(int x, int y, int width, int height, int colour=Black);
 
+	// Draws an arc
+	void fillArc(int x, int y, int width, int height, int angle1, int angle2, int colour=Black);
+
 	// Draws a string
 	void drawString(int x, int y, std::string msg);
 

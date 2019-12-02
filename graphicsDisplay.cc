@@ -18,22 +18,7 @@ GraphicsDisplay::GraphicsDisplay(
 	abilityRemainingCounts = vector<int>(NUMPLAYERS, NUMABILITIES);
 
 	// Create window
-    win = make_unique<Xwindow>(500, 1000);
-
-	// Create blue background
-	win->fillRectangle(0, 0, 500, 1000, 4);
-
-	// Create dividing lines
-	size_t pieceSize = 500 / GRIDSIZE;
-	size_t lineWidth = 2;
-	for (size_t i = 1; i < GRIDSIZE; ++i)
-	{
-		win->fillRectangle((i * pieceSize) - (lineWidth / 2), 250, lineWidth, 500, 3);
-	}
-	for (size_t i = 1; i < GRIDSIZE; ++i)
-	{
-		win->fillRectangle(0, 250 + (i * pieceSize) - (lineWidth / 2), 500, lineWidth, 3);
-	}
+    win = make_unique<Xwindow>(500, 700);
 }
 
 void GraphicsDisplay::notify(Subject &whoFrom) {
@@ -42,7 +27,7 @@ void GraphicsDisplay::notify(Subject &whoFrom) {
 
     int linkDownloader = state.downloadingPlayer - 1;
     // When a player is downloading a link
-    if (linkDownloader != -2) {
+    if (linkDownloader >= 0) {
         if (state.downloadingLinkType == LinkType::Data) {
             downloadedCounts[linkDownloader].first += 1;
         } else {
@@ -61,7 +46,7 @@ void GraphicsDisplay::notify(Subject &whoFrom) {
 
     int abilityUser = state.playerUsingAbility - 1;
     // When a player is using an ability
-    if (state.playerUsingAbility != -2) {
+    if (abilityUser >= 0) {
         abilityRemainingCounts[abilityUser] -= 1;
     }
 
@@ -92,79 +77,112 @@ void GraphicsDisplay::notify(Subject &whoFrom) {
     }
 }
 
+pair<size_t, size_t> getOffsetToCenterString(string s, size_t width, size_t height) {
+    size_t widthOfString = s.length() * 6;
+    size_t paddingWidth = (width - widthOfString) / 2;
+    size_t heightOfString = 8;
+    size_t paddingHeight = (width - heightOfString) / 2;
+    return make_pair(paddingWidth, paddingHeight);
+}
+
 void GraphicsDisplay::draw(int currentPlayer) {
-    string s = string("Player 1:") + "\n"
-        + "Downloaded: " + to_string(downloadedCounts[0].first) + "D, " 
-                          + to_string(downloadedCounts[0].second) + "V" + "\n"
-        + "Abilities: " + to_string(abilityRemainingCounts[0]) + "\n";
+    // Create background
+	win->fillRectangle(0, 0, 500, 7000, 0);
 
-    if (currentPlayer == 0) {
-        for (int i = 0; i < 8; ++i) {
-            s += links[0][i].first + ": " 
-                + links[0][i].second;
-            if (i == 3 || i == 7) s += "\n";
-            else s += "   ";
-        }
-    }
-    else if (currentPlayer == 1) {
-        for (int i = 0; i < 8; ++i) {
-            s += links[0][i].first + ": ";
-            if (knownLinks[1][i]) {
-                s += links[0][i].second;
-                if (i == 3 || i == 7) s += "\n";
-                else s += "   ";
-            } else {
-                s += "?";
-                if (i == 3 || i == 7) s += "\n";
-                else s += "    ";
-            }
-        }
-    }
-    else {
-        throw "this player does not exist";
-    }
+	// Create grid dividing lines
+	size_t pieceSize = 500 / GRIDSIZE;
+	size_t lineWidth = 2;
+	for (size_t i = 0; i < GRIDSIZE + 1; ++i)
+	{
+		win->fillRectangle((i * pieceSize) - (lineWidth / 2), 100, lineWidth, 500, 3);
+	}
+	for (size_t i = 0; i < GRIDSIZE + 1; ++i)
+	{
+		win->fillRectangle(0, 100 + (i * pieceSize) - (lineWidth / 2), 500, lineWidth, 3);
+	}
 
-    s += string(8, '=') + "\n";
-	win->drawString(0,0,s);
+    int playerInfoPadding = 10;
+    win->drawString(playerInfoPadding,
+                    playerInfoPadding + 10,
+                    "Player 1:");
+    string s = string("Downloaded: ") + 
+               to_string(downloadedCounts[0].first) + "D, " +
+               to_string(downloadedCounts[0].second) + "V";
+    win->drawString(playerInfoPadding,
+                    playerInfoPadding + 30,
+                    s);
+    s = "Abilities: " + to_string(abilityRemainingCounts[0]);
+    win->drawString(playerInfoPadding,
+                    playerInfoPadding + 50,
+                    s);
 
+    size_t paddingWidth = 10; // Size of padding around pieces
     for (int row = 0; row < GRIDSIZE; ++row) {
         for (int col = 0; col < GRIDSIZE; ++col) {
-            s = grid[row][col];
-        }
-        s = "\n";
-    }
-
-    s = string(8, '=') + "\n";
-
-    s = string("Player 2:") + "\n"
-        + "Downloaded: " + to_string(downloadedCounts[1].first) + "D, " 
-                          + to_string(downloadedCounts[1].second) + "V" + "\n"
-        + "Abilities: " + to_string(abilityRemainingCounts[1]) + "\n";
-
-    if (currentPlayer == 0) {
-        for (int i = 0; i < 8; ++i) {
-            s += links[1][i].first + ": ";
-            if (knownLinks[0][i]) {
-                s += links[1][i].second;
-                if (i == 3 || i == 7) s += "\n";
-                else s += "   ";
+            string name;
+            int colour;
+            if (grid[row][col] == '.') {
+                colour = 0;
+                name = "";
+            } else if ('a' <= grid[row][col] && grid[row][col] <= 'h') {
+                if (currentPlayer == 0) {
+                    if (links[0][grid[row][col] - 'a'].second < "E") {
+                        colour = 3;
+                    } else {
+                        colour = 2;
+                    }
+                    name = string(1, grid[row][col]) + ":" +
+                           links[0][grid[row][col] - 'a'].second;
+                } else {
+                    colour = 1;
+                    name = string(1, grid[row][col]);
+                }
+            } else if ('A' <= grid[row][col] && grid[row][col] <= 'H') {
+                if (currentPlayer == 1) {
+                    if (links[0][grid[row][col] - 'A'].second < "E") {
+                        colour = 3;
+                    } else {
+                        colour = 2;
+                    }
+                    name = string(1, grid[row][col]) + ":" +
+                           links[0][grid[row][col] - 'A'].second;
+                } else {
+                    colour = 1;
+                    name = string(1, grid[row][col]);
+                }
             } else {
-                s += "?";
-                if (i == 3 || i == 7) s += "\n";
-                else s += "    ";
+                colour = 1;
+                name = "";
             }
+
+            // Add rectangle with the notifying piece's colour
+            win->fillArc(pieceSize * col + paddingWidth, 
+                               100 + pieceSize * row + paddingWidth, 
+                               pieceSize - (2 * paddingWidth), 
+                               pieceSize - (2 * paddingWidth), 
+                               0, 23040,
+                               colour);
+            pair<size_t, size_t> offset = 
+                getOffsetToCenterString(name, 
+                                        pieceSize - (2 * paddingWidth),
+                                        pieceSize - (2 * paddingWidth));
+            win->drawString(pieceSize * col + paddingWidth + offset.first, 
+                            110 + pieceSize * row + paddingWidth + offset.second, 
+                            name);
         }
     }
-    else if (currentPlayer == 1) {
-        for (int i = 0; i < 8; ++i) {
-            s += links[1][i].first + ": " 
-                + links[1][i].second;
-            if (i == 3 || i == 7) s += "\n";
-            else s += "   ";
-        }
-    }
-    else {
-        throw "this player does not exist";
-    }
-	win->drawString(0,750,s);
+
+    win->drawString(playerInfoPadding,
+                    playerInfoPadding + 610,
+                    "Player 2:");
+    s = string("Downloaded: ") + 
+               to_string(downloadedCounts[1].first) + "D, " +
+               to_string(downloadedCounts[1].second) + "V";
+    win->drawString(playerInfoPadding,
+                    playerInfoPadding + 630,
+                    s);
+    s = "Abilities: " + to_string(abilityRemainingCounts[1]);
+    win->drawString(playerInfoPadding,
+                    playerInfoPadding + 650,
+                    s);
 }
