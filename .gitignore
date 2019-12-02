@@ -3,7 +3,7 @@
 *.o
 
 // Ignore compiled program
-raiinet
+RAIInet
 
 // Ignore zip
 a.zip

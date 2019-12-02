@@ -8,10 +8,10 @@ build:
   # instead of calling g++ directly you can also use some build toolkit like make
   # install the necessary build tools when needed
   script: 
-    - make raiinet
+    - make RAIInet
   artifacts:
     paths:
-      - raiinet
+      - RAIInet
 
 # run tests using the binary built before
 test:
