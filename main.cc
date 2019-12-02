@@ -182,7 +182,7 @@ int main(int argc, char* argv[])
                     game.useAbility(abilityID, useAbilityInfo);
                 }
                 else {
-                    cout << "Invalid ability" << endl;
+                    cout << "Ability unavailable" << endl;
                     cout << endl;
                 }
             }
