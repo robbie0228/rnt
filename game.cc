@@ -15,7 +15,7 @@ int charLinkToInt(char c) {
 //implementations
 
 Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
-           vector<pair<int, vector<Link>>> cmdAllLinks): 
+           vector<pair<int, vector<Link>>> cmdAllLinks, bool useGraphics): 
                 currentPlayer{0}, abilityUsedCount{0} {
 
     Player p1 = Player(1);
@@ -54,7 +54,7 @@ Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
         else allLinks.emplace_back(players[i].cmdInit(cmdAllLinks[cmdSchemeFoundAt].second));
     }
 
-    grid = make_unique<Grid>(playerPointers, allLinks);
+    grid = make_unique<Grid>(playerPointers, allLinks, useGraphics);
 }
 
 void Game::move(char link, Direction dir) {

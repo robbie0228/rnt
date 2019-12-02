@@ -5,13 +5,15 @@
 #include <iostream>
 #include <memory>
 #include <string>
-#include "text_display.h"
 #include "cell.h"
-#include "player.h"
+#include "text_display.h"
+#include "graphics_display.h"
 #include "enums.h"
 using std::vector;
 
+class Cell;
 class Link;
+class Player;
 
 class Grid {
         // 8*8 2D array of Cell's
@@ -23,10 +25,16 @@ class Grid {
 
         std::unique_ptr<TextDisplay> textDisplay;
 
+        std::unique_ptr<GraphicsDisplay> graphicsDisplay;
+
+        bool useGraphics; // Whether or not to use graphics
+
     public:
         // Constructor for a Grid
         //   Instantiates Cells in a size*size Grid
-        Grid(vector<Player *> players, vector<vector<Link *>> linkPointers);
+        Grid(vector<Player *> players, 
+             vector<vector<Link *>> linkPointers, 
+             bool useGraphics);
 
         // Moves Player (player + 1)'s Link (link + 1), towards Direction dir
         void move(int player, int link, Direction dir);

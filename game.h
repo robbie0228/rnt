@@ -24,7 +24,7 @@ class Game {
         //   Instantiates a grid and a vector of players
         //   Uses link information from each player to instantiate grid
         Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
-             vector<pair<int, vector<Link>>> cmdAllLinks);
+             vector<pair<int, vector<Link>>> cmdAllLinks, bool useGraphics);
 
         // Moves Link-link towards Direction dir;
         //   Parses link and calls Grid's move() with parsed information
