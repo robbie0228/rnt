@@ -8,7 +8,8 @@ using namespace std;
 Player::Player(int playerNumber): 
                     downloadedDataCount{0}, 
                     downloadedVirusCount{0}, 
-                    playerNumber{playerNumber} {
+                    playerNumber{playerNumber},
+                    abilityActivated{0} {
     abilities = {make_pair(Ability::Boost, 1),
                make_pair(Ability::Firewall, 1),
                make_pair(Ability::Download, 1),
@@ -152,7 +153,7 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
             break;
     }
     
-    abilities[abilityID - 1].second = false;
+    abilityActivated = abilityID;
     return abilities[abilityID - 1].first;
 }
 
@@ -183,5 +184,9 @@ void Player::notify(Subject &whoFrom) {
                     LinkType::NoType);
             }
         }
+    }
+    if (state.playerUsingAbility == playerNumber) {
+        abilities[abilityActivated - 1].second = false;
+        abilityActivated = 0;
     }
 }
