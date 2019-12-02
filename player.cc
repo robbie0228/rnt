@@ -65,15 +65,15 @@ bool Player::isEnemyLink(char linkName) {
     return false;
 }
 
-Status Player::checkStatus() {
+PlayStatus Player::checkStatus() {
     if (downloadedDataCount >= 4) {
-        return Status::Win;
+        return PlayStatus::Win;
     }
     else if (downloadedVirusCount >= 4) {
-        return Status::Lose;
+        return PlayStatus::Lose;
     }
     else {
-        return Status::InPlay;
+        return PlayStatus::InPlay;
     }
 }
 

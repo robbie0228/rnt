@@ -103,9 +103,9 @@ void Game::useAbility(int abilityID, vector<char> useAbilityInfo) {
 int Game::checkStatus() {
     int curStatus = -1;
     for (int i = 0; i < NUMPLAYERS; i++) {
-        if (players[i].checkStatus() == Status::Win) {
+        if (players[i].checkStatus() == PlayStatus::Win) {
             curStatus = i + 1;
-        } else if (players[i].checkStatus() == Status::Lose) {
+        } else if (players[i].checkStatus() == PlayStatus::Lose) {
             curStatus = (i + 1) % NUMPLAYERS + 1;
         }
     }

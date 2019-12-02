@@ -37,7 +37,7 @@ class Player : public Observer {
         bool isEnemyLink(char linkName);
 
         // Checks the current status of the Player
-        Status checkStatus();
+        PlayStatus checkStatus();
 
         // Print out the player's abilities, each with an ID number and a status
         //  of if it has been used
