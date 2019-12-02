@@ -3,19 +3,19 @@
 using namespace std;
 
 GraphicsDisplay::GraphicsDisplay(
-	vector<vector<char>> grid, 
+    vector<vector<char>> grid, 
     vector<vector<pair<char, string>>> links) {
-		
-	this->grid = grid;
-	this->links = links;
+        
+    this->grid = grid;
+    this->links = links;
 
-	knownLinks = vector<vector<bool>>(NUMPLAYERS,
-									  vector<bool>(NUMLINKS, false));
+    knownLinks = vector<vector<bool>>(NUMPLAYERS,
+                                      vector<bool>(NUMLINKS, false));
 
-	downloadedCounts = vector<pair<int, int>>(NUMPLAYERS,
-											  pair<int, int>(0, 0));
+    downloadedCounts = vector<pair<int, int>>(NUMPLAYERS,
+                                              pair<int, int>(0, 0));
 
-	abilityRemainingCounts = vector<int>(NUMPLAYERS, NUMABILITIES);
+    abilityRemainingCounts = vector<int>(NUMPLAYERS, NUMABILITIES);
 }
 
 void GraphicsDisplay::notify(Subject &whoFrom) {
@@ -83,27 +83,27 @@ pair<size_t, size_t> getOffsetToCenterString(string s, size_t width, size_t heig
 }
 
 void GraphicsDisplay::draw(int currentPlayer) {
-	if (!win) {
-		// Create window
-		win = make_unique<Xwindow>(500, 700);
+    if (!win) {
+        // Create window
+        win = make_unique<Xwindow>(500, 700);
 
-		draw(0);
-	}
+        draw(0);
+    }
 
     // Create background
-	win->fillRectangle(0, 0, 500, 7000, 0);
+    win->fillRectangle(0, 0, 500, 7000, 0);
 
-	// Create grid dividing lines
-	size_t pieceSize = 500 / GRIDSIZE;
-	size_t lineWidth = 2;
-	for (size_t i = 0; i < GRIDSIZE + 1; ++i)
-	{
-		win->fillRectangle((i * pieceSize) - (lineWidth / 2), 100, lineWidth, 500, 3);
-	}
-	for (size_t i = 0; i < GRIDSIZE + 1; ++i)
-	{
-		win->fillRectangle(0, 100 + (i * pieceSize) - (lineWidth / 2), 500, lineWidth, 3);
-	}
+    // Create grid dividing lines
+    size_t pieceSize = 500 / GRIDSIZE;
+    size_t lineWidth = 2;
+    for (size_t i = 0; i < GRIDSIZE + 1; ++i)
+    {
+        win->fillRectangle((i * pieceSize) - (lineWidth / 2), 100, lineWidth, 500, 3);
+    }
+    for (size_t i = 0; i < GRIDSIZE + 1; ++i)
+    {
+        win->fillRectangle(0, 100 + (i * pieceSize) - (lineWidth / 2), 500, lineWidth, 3);
+    }
 
     int playerInfoPadding = 10;
     win->drawString(playerInfoPadding,
