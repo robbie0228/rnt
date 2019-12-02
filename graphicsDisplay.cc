@@ -16,11 +16,6 @@ GraphicsDisplay::GraphicsDisplay(
 											  pair<int, int>(0, 0));
 
 	abilityRemainingCounts = vector<int>(NUMPLAYERS, NUMABILITIES);
-
-	// Create window
-    win = make_unique<Xwindow>(500, 700);
-
-    draw(0);
 }
 
 void GraphicsDisplay::notify(Subject &whoFrom) {
@@ -88,6 +83,13 @@ pair<size_t, size_t> getOffsetToCenterString(string s, size_t width, size_t heig
 }
 
 void GraphicsDisplay::draw(int currentPlayer) {
+	if (!win) {
+		// Create window
+		win = make_unique<Xwindow>(500, 700);
+
+		draw(0);
+	}
+
     // Create background
 	win->fillRectangle(0, 0, 500, 7000, 0);
 

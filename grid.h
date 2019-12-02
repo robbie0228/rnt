@@ -27,10 +27,14 @@ class Grid {
 
         std::unique_ptr<GraphicsDisplay> graphicsDisplay;
 
+        bool useGraphics; // Whether or not to use graphics
+
     public:
         // Constructor for a Grid
         //   Instantiates Cells in a size*size Grid
-        Grid(vector<Player *> players, vector<vector<Link *>> linkPointers);
+        Grid(vector<Player *> players, 
+             vector<vector<Link *>> linkPointers, 
+             bool useGraphics);
 
         // Moves Player (player + 1)'s Link (link + 1), towards Direction dir
         void move(int player, int link, Direction dir);

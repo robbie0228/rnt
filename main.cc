@@ -60,6 +60,9 @@ int main(int argc, char* argv[])
     vector<pair<int, vector<pair<Ability, bool>>>> allAbilities;
     // empty, 1 or 2 pairs of <playerNumber, 8 Links>
     vector<pair<int, vector<Link>>> allLinks;
+    // Whether or not to use graphics
+    bool useGraphics;
+    
     try {
         if (argc > MAXCMDLINEARGS + 1) {
             throw "Too many command line arguments given";
@@ -119,7 +122,7 @@ int main(int argc, char* argv[])
                 allLinks.emplace_back(make_pair(2, cmdInitLinks(2, links)));
             }
             else if (arg == "-graphics") {
-                //// Enable graphic display ////
+                useGraphics = true;
             }
             else throw "Invalid command line argument given";
         }
@@ -129,7 +132,7 @@ int main(int argc, char* argv[])
         exit(1);
     }
 
-    Game game(allAbilities, allLinks);
+    Game game(allAbilities, allLinks, useGraphics);
 
     string cmd;
 

@@ -4,7 +4,9 @@
 
 using namespace std;
 
-Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers) {
+Grid::Grid(vector<Player *> players, 
+           vector<vector<Link *>> linkPointers, 
+           bool useGraphics): useGraphics{useGraphics} {
     locationOfLinks = vector<vector<pair<int, int>>>(NUMPLAYERS,
                       vector<pair<int, int>>(NUMLINKS,
                       make_pair(-1, -1)));
@@ -215,5 +217,5 @@ void Grid::useAbility(Ability a, vector<char> v, int user) {
 
 void Grid::printBoard(int currentPlayer) {
     textDisplay->draw(currentPlayer);
-    graphicsDisplay->draw(currentPlayer);
+    if (useGraphics) graphicsDisplay->draw(currentPlayer);
 }
