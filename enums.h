@@ -18,11 +18,7 @@ enum class Ability {
     Polarize,
 
     Uber, 
-<<<<<<< enums.h
     Whey, 
-=======
-    Whey,
->>>>>>> enums.h
     Cop,
 
     NotAvailable
