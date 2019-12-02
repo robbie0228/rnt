@@ -43,7 +43,7 @@ Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
         int playerNumber = i + 1;
         int cmdSchemeFoundAt = -1;
         if (cmdAllLinks.size()) {
-            for (int j = 0; j < NUMPLAYERS; ++j) {
+            for (int j = 0; j < cmdAllLinks.size(); ++j) {
                 if (cmdAllLinks[j].first == playerNumber) {
                     cmdSchemeFoundAt = j;
                     break;
