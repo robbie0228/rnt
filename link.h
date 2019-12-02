@@ -1,15 +1,17 @@
 #ifndef LINK_H
 #define LINK_H
+
 #include "enums.h"
 
-class Link {
-        LinkType type;  // LinkType of Link
-        int speed;      // speed of Link
-        int strength;   // strength of Link
-        char name;      // 'a-h' for Player 1
-                        // 'A-H' for Player 2
+class Link
+{
+        LinkType type; // LinkType of Link
+        int speed;     // Speed of Link
+        int strength;  // Strength of Link
+        char name;     // 'a-h' for Player 1
+                       // 'A-H' for Player 2
 
-    public:
+public:
         // Constructor for a Link
         //   The Link has given type, strength and name
         Link(LinkType type, int strength, char name);
