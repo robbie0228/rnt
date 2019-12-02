@@ -21,7 +21,7 @@ void TextDisplay::notify(Subject &whoFrom) {
 
     int linkDownloader = state.downloadingPlayer - 1;
     // When a player is downloading a link
-    if (linkDownloader != -2) {
+    if (linkDownloader >= 0) {
         if (state.downloadingLinkType == LinkType::Data) {
             downloadedCounts[linkDownloader].first += 1;
         } else {
@@ -40,7 +40,7 @@ void TextDisplay::notify(Subject &whoFrom) {
 
     int abilityUser = state.playerUsingAbility - 1;
     // When a player is using an ability
-    if (state.playerUsingAbility != -2) {
+    if (state.playerUsingAbility >= 0) {
         abilityRemainingCounts[abilityUser] -= 1;
     }
 

@@ -73,7 +73,7 @@ void Player::printAbilities(ostream& out) const{
             case Ability::Firewall : abilityName = "Firewall"; break;
             case Ability::Polarize : abilityName = "Polarize"; break;
             case Ability::Scan     : abilityName = "Scan"; break;
-            case Ability::Steal    : abilityName = "Steal"; break;
+            case Ability::Cop : abilityName = "Cop"; break;
             case Ability::Uber     : abilityName = "Uber"; break;
             case Ability::Whey     : abilityName = "Whey"; break;
             default                : throw "ability unavailable";
@@ -107,6 +107,10 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
                 throw "Invalid use of ability";
             }
             break;
+        case Ability::Scan :
+            if (!isMyLink(abilityInfo[0]) && !isEnemyLink(abilityInfo[0])) {
+                throw "Invalid use of ability";
+            }
         default :
             break;
     }
