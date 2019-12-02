@@ -145,7 +145,7 @@ void Cell::useAbility(Ability abilityName, int user) {
         case Ability::Firewall : 
         {
             if (this->getName() != '.') {
-                throw "Cell is not empty! Cannot place Firewall";
+                throw "Cell is not empty, cannot place Firewall!";
             }
             this->firewall = user;
             setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
