@@ -204,7 +204,7 @@ void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user) {
             throw "Invalid use of ability";
         }
         cells[row][col].useAbility(Ability::Firewall, user);
-    } else if (a == Ability::Ambush) {
+    } else if (abilityName == Ability::Ambush) {
         int myLinkIndex;
         int myIndex;
         int enemyLinkIndex;
