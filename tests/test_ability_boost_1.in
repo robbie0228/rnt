@@ -1,10 +1,10 @@
 board
-ability 3 a
+ability 1 a
 move a down
 board
 move A up
 board
-ability 3 a
+ability 1 a
 move a down
 board
 quit

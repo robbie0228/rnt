@@ -6,27 +6,42 @@ using namespace std;
 // implementations
 
 Player::Player(int playerNumber): 
-    downloadedDataCount{0}, downloadedVirusCount{0}, 
-    playerNumber{playerNumber} {
-    abilities = {make_pair(Ability::Firewall, 1),
+                    downloadedDataCount{0}, 
+                    downloadedVirusCount{0}, 
+                    playerNumber{playerNumber} {
+    abilities = {make_pair(Ability::Boost, 1),
+               make_pair(Ability::Firewall, 1),
                make_pair(Ability::Download, 1),
-               make_pair(Ability::Boost, 1),
                make_pair(Ability::Scan, 1),
-               make_pair(Ability::Polarize, 1)};
+               make_pair(Ability::Polarize, 1)
+               };
 }
 
-std::vector<Link *> Player::init() {
+void Player::overrideAbilities(vector<pair<Ability, bool>> cmdAbilities) {
+    abilities = cmdAbilities;
+}
+
+vector<Link *> Player::init() {
     vector<Link *> linkPointers;
     for (int link = 0; link < NUMLINKS; ++link) {
         // Initialize link
         links.emplace_back(
-            Link((link < 4 ? LinkType::Data : LinkType::Virus),
+            Link((link < 4 ? LinkType::Virus : LinkType::Data),
                  (link % 4) + 1,
                  (char)((playerNumber == 1 ? 'a' : 'A') + link)
             )
         );
     }
-    for (unsigned int i = 0; i < links.size(); ++i) {
+    for (int i = 0; i < NUMLINKS; ++i) {
+        linkPointers.emplace_back(&(links[i]));
+    }
+    return linkPointers;
+}
+
+vector<Link *> Player::cmdInit(vector<Link> cmdLinks) {
+    vector<Link *> linkPointers;
+    links = cmdLinks;
+    for (int i = 0; i < NUMLINKS; ++i) {
         linkPointers.emplace_back(&(links[i]));
     }
     return linkPointers;
@@ -68,14 +83,14 @@ void Player::printAbilities(ostream& out) const{
         string abilityName;
 
         switch (abilities[i].first) {
-            case Ability::Boost    : abilityName = "Link Boost"; break;
-            case Ability::Download : abilityName = "Download"; break;
-            case Ability::Firewall : abilityName = "Firewall"; break;
-            case Ability::Polarize : abilityName = "Polarize"; break;
-            case Ability::Scan     : abilityName = "Scan"; break;
-            case Ability::Cop : abilityName = "Cop"; break;
-            case Ability::Uber     : abilityName = "Uber"; break;
-            case Ability::Whey     : abilityName = "Whey"; break;
+            case Ability::Boost    : abilityName = "Link Boost" ; break;
+            case Ability::Download : abilityName = "Download"   ; break;
+            case Ability::Firewall : abilityName = "Firewall"   ; break;
+            case Ability::Polarize : abilityName = "Polarize"   ; break;
+            case Ability::Scan     : abilityName = "Scan"       ; break;
+            case Ability::Cop      : abilityName = "Cop"        ; break;
+            case Ability::Uber     : abilityName = "Uber"       ; break;
+            case Ability::Whey     : abilityName = "Whey"       ; break;
             default                : throw "ability unavailable";
         }
 

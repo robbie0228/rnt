@@ -1,8 +1,8 @@
 Player 1:
 Downloaded: 0D, 0V
 Abilities: 5
-a: D1   b: D2   c: D3   d: D4
-e: V1   f: V2   g: V3   h: V4
+a: V1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
 ========
 abcSSfgh
 ...de...
@@ -22,8 +22,8 @@ E: ?    F: ?    G: ?    H: ?
 Player 1:
 Downloaded: 0D, 0V
 Abilities: 5
-a: D1   b: D2   c: D3   d: D4
-e: V1   f: V2   g: V3   h: V4
+a: V1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
 ========
 .bcSSfgh
 a..de...
