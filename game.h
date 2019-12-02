@@ -40,7 +40,12 @@ class Game {
         // Calls current player's printAbilities()
         void printAbilities(std::ostream& out);
 
+        // Prints all information about the game at that current time
         void printBoard();
+
+        // Checks the status of all players to see if any won/lost
+        //   Returns the player that won or -1 if still in play
+        int checkStatus();
 };
 
 #endif

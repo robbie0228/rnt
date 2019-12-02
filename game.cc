@@ -99,3 +99,15 @@ void Game::useAbility(int abilityID, vector<char> useAbilityInfo) {
         abilityUsedCount += 1;
     }
 }
+
+int Game::checkStatus() {
+    int curStatus = -1;
+    for (int i = 0; i < NUMPLAYERS; i++) {
+        if (players[i].checkStatus() == Status::Win) {
+            curStatus = i + 1;
+        } else if (players[i].checkStatus() == Status::Lose) {
+            curStatus = (i + 1) % NUMPLAYERS + 1;
+        }
+    }
+    return curStatus;
+}
