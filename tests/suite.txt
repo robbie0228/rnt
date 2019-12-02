@@ -7,4 +7,3 @@ test_ability_polarize_1
 test_ability_scan_1
 test_cmd_1
 test_print_ability_1
-test_sequence_1
