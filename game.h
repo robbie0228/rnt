@@ -32,7 +32,7 @@ class Game {
 
         // Verifies if the player has the specified ability, and returns
         //   how many chars of information the ability requires
-        std::pair<int, bool> verifyAbility(int abilityID);
+        pair<int, bool> verifyAbility(int abilityID);
 
         // Player consumes an ability
         void useAbility(int abilityID, vector<char> useAbilityInfo);
