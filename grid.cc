@@ -3,6 +3,23 @@
 
 using namespace std;
 
+// helper function
+void getIndicesFromName(char linkName, int &linkIndex, int &playerIndex) {
+    if ('a' <= linkName && linkName <= 'h') {
+        linkIndex = linkName - 'a';
+        playerIndex = 0;
+    } else if ('A' <= linkName && linkName <= 'H') {
+        linkIndex = linkName - 'A';
+        playerIndex = 1;
+    } else {
+        throw "Invalid link";
+    }
+    return;
+}
+
+
+//implementation
+
 Grid::Grid(vector<Player *> players, vector<vector<Link *>> linkPointers) {
     locationOfLinks = vector<vector<pair<int, int>>>(NUMPLAYERS,
                       vector<pair<int, int>>(NUMLINKS,
@@ -177,27 +194,49 @@ void Grid::move(int player, int link, Direction dir) {
     }
 }
 
-void Grid::useAbility(Ability a, vector<char> v, int user) {
+void Grid::useAbility(Ability a, vector<char> abilityInfo, int user) {
     if (a == Ability::Firewall) {
-        int row = v[0] - '0';
-        int col = v[1] - '0';
+        int row = abilityInfo[0] - '0';
+        int col = abilityInfo[1] - '0';
         if (row < 0 || row >= GRIDSIZE || col < 0 || col >= GRIDSIZE) {
             throw "Invalid use of ability";
         }
         cells[row][col].useAbility(Ability::Firewall, user);
+    } else if (a == Ability::Ambush) {
+        int myLinkIndex;
+        int myIndex;
+        int enemyLinkIndex;
+        int enemyIndex;
+
+        char myLink = abilityInfo[0];
+        char enemyLink = abilityInfo[1];
+
+        cout << myLink << enemyLink << endl;
+
+        getIndicesFromName(myLink, myLinkIndex, myIndex);
+        getIndicesFromName(enemyLink, enemyLinkIndex, enemyIndex);
+
+        cout << myIndex << enemyIndex << endl;
+
+        int enemyRow = locationOfLinks[enemyIndex][enemyLinkIndex].first;
+        int enemyCol = locationOfLinks[enemyIndex][enemyLinkIndex].second;
+        int myRow = locationOfLinks[myIndex][myLinkIndex].first;
+        int myCol = locationOfLinks[myIndex][myLinkIndex].second;
+
+        bool enemyWon = cells[enemyRow][enemyCol].
+                            moveCellHere(cells[myRow][myCol]);
+        cells[myRow][myCol].removeLink();
+        if (!enemyWon) {
+            cells[myRow][myCol].
+                moveCellHere(cells[enemyRow][enemyCol]);
+            cells[enemyRow][enemyCol].removeLink();
+        }
+
     } else {
-        char linkName = v[0];
+        char linkName = abilityInfo[0];
         int linkIndex;
         int playerIndex;
-        if ('a' <= linkName && linkName <= 'h') { 
-            linkIndex = linkName - 'a';
-            playerIndex = 0;   
-        } else if ('A' <= linkName && linkName <= 'H') {
-            linkIndex = linkName - 'A';
-            playerIndex = 1;   
-        } else {
-            throw "Invalid link";
-        }
+        getIndicesFromName(linkName, linkIndex, playerIndex);
 
         int rowOfLink = locationOfLinks[playerIndex][linkIndex].first;
         int colOfLink = locationOfLinks[playerIndex][linkIndex].second;
