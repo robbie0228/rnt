@@ -196,7 +196,7 @@ void Grid::move(int player, int link, Direction dir) {
     }
 }
 
-void Grid::useAbility(Ability a, vector<char> abilityInfo, int user) {
+void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user) {
     if (a == Ability::Firewall) {
         int row = abilityInfo[0] - '0';
         int col = abilityInfo[1] - '0';
