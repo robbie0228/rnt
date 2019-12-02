@@ -14,30 +14,47 @@ int charLinkToInt(char c) {
 
 //implementations
 
-Game::Game(): currentPlayer{0}, abilityUsedCount{0} {
+Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
+           vector<pair<int, vector<Link>>> cmdAllLinks): 
+                currentPlayer{0}, abilityUsedCount{0} {
+
     Player p1 = Player(1);
     Player p2 = Player(2);
+
+    if (cmdAllAbilities.size()){
+        for (int i = 0; i < NUMPLAYERS; ++i) {
+            if (cmdAllAbilities[i].first == 1) 
+                p1.overrideAbilities(cmdAllAbilities[i].second);
+            else if (cmdAllAbilities[i].first == 2)
+                p2.overrideAbilities(cmdAllAbilities[i].second);
+        }
+    }
 
     this->players.push_back(p1);
     this->players.push_back(p2);
 
     vector<Player *> playerPointers;
-    for (unsigned int i = 0; i < players.size(); ++i) {
+    for (int i = 0; i < NUMPLAYERS; ++i) {
         playerPointers.emplace_back(&(players[i]));
     }
+
     vector<vector<Link *>> allLinks;
-    for (unsigned int i = 0; i < players.size(); ++i) {
-        allLinks.emplace_back(players[i].init());
+    for (int i = 0; i < NUMPLAYERS; ++i) {
+        int playerNumber = i + 1;
+        int cmdSchemeFoundAt = -1;
+        if (cmdAllLinks.size()) {
+            for (int j = 0; j < NUMPLAYERS; ++j) {
+                if (cmdAllLinks[j].first == playerNumber) {
+                    cmdSchemeFoundAt = j;
+                    break;
+                }
+            }
+        }
+        if (cmdSchemeFoundAt == -1) allLinks.emplace_back(players[i].init());
+        else allLinks.emplace_back(players[i].cmdInit(cmdAllLinks[cmdSchemeFoundAt].second));
     }
+
     grid = make_unique<Grid>(playerPointers, allLinks);
-}
-
-void Game::cmdInitAbilities(int playerNumber, string abilities) {
-    players[playerNumber - 1].cmdInitAbilities(abilities);
-}
-
-void Game::cmdInitLinks(int playerNumber, string links) {
-    players[playerNumber - 1].cmdInitLinks(links);
 }
 
 void Game::move(char link, Direction dir) {

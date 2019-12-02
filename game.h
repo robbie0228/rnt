@@ -6,6 +6,7 @@
 #include "grid.h"
 #include "player.h"
 #include "enums.h"
+using std::pair;
 
 class Game {
         // grid is the Grid that the game takes place in
@@ -21,13 +22,9 @@ class Game {
         // Constructor for a Game
         //   Instantiates a grid and a vector of players
         //   Uses link information from each player to instantiate grid
-        Game();
+        Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
+             vector<pair<int, vector<Link>>> cmdAllLinks);
 
-        // Initialize custom abilities for the Player
-        void cmdInitAbilities(int playerNumber, string abilities);
-
-        // Initialize custom link positions for the Player
-        void cmdInitLinks(int playerNumber, string links);
         // Moves Link-link towards Direction dir;
         //   Parses link and calls Grid's move() with parsed information
         void move(char link, Direction dir);
