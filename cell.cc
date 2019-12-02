@@ -155,6 +155,8 @@ void Cell::useAbility(Ability a, int user) {
             break;
         default :
         {
+            setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
+                              false, user);
             break;
         }
     }

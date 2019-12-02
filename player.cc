@@ -49,9 +49,11 @@ vector<Link *> Player::cmdInit(vector<Link> cmdLinks) {
 
 bool Player::isMyLink(char linkName) {
     if (playerNumber == 1) {
-        return ('a' <= linkName && linkName <= 'h');
+        return ('a' <= linkName && linkName <= 'h') && 
+                links[linkName - 'a'].getType() != LinkType::NoType;
     } else {
-        return ('A' <= linkName && linkName <= 'H');
+        return ('A' <= linkName && linkName <= 'H') && 
+                links[linkName - 'A'].getType() != LinkType::NoType;
     }
     return false;
 }
@@ -126,12 +128,22 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
             if (!isMyLink(abilityInfo[0]) && !isEnemyLink(abilityInfo[0])) {
                 throw "Invalid use of ability";
             }
+            break;
+        case Ability::Uber :
+            if (!isMyLink(abilityInfo[0])) {
+                throw "Invalid use of ability";
+            }
+            break;
         default :
             break;
     }
     
     abilities[abilityID - 1].second = false;
     return abilities[abilityID - 1].first;
+}
+
+int getPlayerNumFromLink(char name) {
+    return name < 'a' ? 2 : 1;
 }
 
 void Player::notify(Subject &whoFrom) {
@@ -141,6 +153,21 @@ void Player::notify(Subject &whoFrom) {
             downloadedDataCount += 1;
         } else {
             downloadedVirusCount += 1;
+        }
+    }
+    if (('a' <= state.downloadingLinkName && 
+         state.downloadingLinkName <= 'h') || 
+        ('A' <= state.downloadingLinkName && 
+         state.downloadingLinkName <= 'H')) {
+        if (getPlayerNumFromLink(state.downloadingLinkName) == 
+            playerNumber) {
+            if (playerNumber == 1) {
+                links[state.downloadingLinkName - 'a'].setType(
+                    LinkType::NoType);
+            } else {
+                links[state.downloadingLinkName - 'A'].setType(
+                    LinkType::NoType);
+            }
         }
     }
 }
