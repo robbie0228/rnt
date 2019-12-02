@@ -26,7 +26,7 @@ vector<Link *> Player::init() {
     for (int link = 0; link < NUMLINKS; ++link) {
         // Initialize link
         links.emplace_back(
-            Link((link < 4 ? LinkType::Data : LinkType::Virus),
+            Link((link < 4 ? LinkType::Virus : LinkType::Data),
                  (link % 4) + 1,
                  (char)((playerNumber == 1 ? 'a' : 'A') + link)
             )
