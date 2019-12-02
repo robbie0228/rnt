@@ -7,7 +7,7 @@
 #include <string>
 #include "cell.h"
 #include "text_display.h"
-#include "graphicsDisplay.h"
+#include "graphics_display.h"
 #include "enums.h"
 using std::vector;
 

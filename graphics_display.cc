@@ -1,4 +1,4 @@
-#include "graphicsDisplay.h"
+#include "graphics_display.h"
 
 using namespace std;
 
