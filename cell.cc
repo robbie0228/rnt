@@ -4,6 +4,8 @@
 
 using namespace std;
 
+//helper function
+
 void setStateAndNotify(Cell &cell,
                        int downloadingPlayer, 
                        char downloadingLinkName, 
@@ -23,6 +25,8 @@ void setStateAndNotify(Cell &cell,
 int getPlayerNumFromLink(Link *link) {
     return link->getName() < 'a' ? 2 : 1;
 }
+
+// implementations
 
 Cell::Cell(int row, int col, Link *link, int serverPort):
     link{link}, row{row}, col{col}, firewall{0}, serverPort{serverPort} {}

@@ -32,20 +32,20 @@ class Game {
 
         // Verifies if the player has the specified ability, and returns
         //   how many chars of information the ability requires
-        pair<int, bool> verifyAbility(int abilityID);
+        pair<int, bool> verifyAbility(int abilityID) const;
 
         // Player consumes an ability
         void useAbility(int abilityID, vector<char> useAbilityInfo);
 
         // Calls current player's printAbilities()
-        void printAbilities(std::ostream& out);
+        void printAbilities(std::ostream& out) const;
 
         // Prints all information about the game at that current time
-        void printBoard();
+        void printBoard() const;
 
         // Checks the status of all players to see if any won/lost
         //   Returns the player that won or -1 if still in play
-        int checkStatus();
+        int checkStatus() const;
 };
 
 #endif
