@@ -5,9 +5,7 @@ using namespace std;
 
 // implementations
 
-Player::Player(int playerNumber) : downloadedDataCount{0},
-Player::Player(int playerNumber): 
-                    downloadedDataCount{0}, 
+Player::Player(int playerNumber): downloadedDataCount{0}, 
                     downloadedVirusCount{0}, 
                     playerNumber{playerNumber},
                     abilityActivated{0}

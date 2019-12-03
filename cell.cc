@@ -41,18 +41,12 @@ bool Cell::moveCellHere(Cell &cell)
 
     int attackerNumber = getPlayerNumFromLink(otherLink);
     int defenderNumber = (attackerNumber % 2) + 1;
-
-    if (serverPort) 
-    {
-        if (serverPort == defensePlayer) 
-        {
-                                            defensePlayer,
     if (serverPort)
     {
-        if (serverPort == defensePlayer)
+        if (serverPort == defenderNumber)
         {
             setStateAndNotify(*this,
-                              defensePlayer,
+                              defenderNumber,
                               otherLink->getName(),
                               otherLink->getType());
             return true;
@@ -60,7 +54,7 @@ bool Cell::moveCellHere(Cell &cell)
     }
     else if (firewall) 
     {
-        if (firewall == defensePlayer)
+        if (firewall == defenderNumber)
         {
             Link *tempLink = link;
             link = otherLink;
@@ -69,7 +63,7 @@ bool Cell::moveCellHere(Cell &cell)
             {
                 link = tempLink;
                 setStateAndNotify(*this,
-                                  attackPlayer,
+                                  attackerNumber,
                                   otherLink->getName(),
                                   otherLink->getType());
                 return true;
@@ -141,7 +135,7 @@ void Cell::useAbility(Ability abilityName, int user)
             setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
             break;
         }
-        else
+        case Ability::Polarize : 
         {
             LinkType currType = this->link->getType();
             if (currType == LinkType::Data)

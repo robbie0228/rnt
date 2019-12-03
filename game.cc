@@ -22,7 +22,7 @@ Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
 
     if (cmdAllAbilities.size())
     {
-        for (unsigned int i = 0; i < cmdAllAbilities.size(); ++i) {
+        for (unsigned int i = 0; i < cmdAllAbilities.size(); ++i)
         {
             if (cmdAllAbilities[i].first == 1)
                 p1.overrideAbilities(cmdAllAbilities[i].second);
@@ -47,7 +47,7 @@ Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
         int cmdSchemeFoundAt = -1;
         if (cmdAllLinks.size())
         {
-            for (unsigned int j = 0; j < cmdAllLinks.size(); ++j) {
+            for (unsigned int j = 0; j < cmdAllLinks.size(); ++j)
             {
                 if (cmdAllLinks[j].first == playerNumber)
                 {

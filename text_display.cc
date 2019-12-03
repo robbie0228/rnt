@@ -35,14 +35,13 @@ void TextDisplay::doNotify(Subject &whoFrom)
         }
 
         // When two links battle and the downloading link is revealed
-            if (state.downloadingLinkName - 'a' >= 0)
-            {
-            knownLinks[1][state.downloadingLinkName - 'a'] = true;
-            }
-            else
-            {
-            knownLinks[0][state.downloadingLinkName - 'A'] = true;
-            }
+        if (state.downloadingLinkName - 'a' >= 0)
+        {
+        knownLinks[1][state.downloadingLinkName - 'a'] = true;
+        }
+        else
+        {
+        knownLinks[0][state.downloadingLinkName - 'A'] = true;
         }
     }
 
