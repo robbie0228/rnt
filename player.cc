@@ -141,7 +141,7 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
             break;
         case Ability::Whey :
             if (!isMyLink(abilityInfo[0])) {
-                throw "Cannot use Whey on a link that is not yours!"
+                throw "Cannot use Whey on a link that is not yours!";
             }
             break;
         case Ability::Ambush :
