@@ -10,35 +10,37 @@ using namespace std;
 vector<pair<Ability, bool>> cmdInitAbilities(string cmdArg)
 {
     vector<pair<Ability, bool>> abilitiesInit;
-    for (int i = 0; i < NUMABILITIES; ++i) {
+    for (int i = 0; i < NUMABILITIES; ++i)
+    {
         char ability = cmdArg[i];
-        switch(ability) {
-            case 'F' : 
-                abilitiesInit.emplace_back(make_pair(Ability::Firewall, true));
-                break;
-            case 'D' :
-                abilitiesInit.emplace_back(make_pair(Ability::Download, true));
-                break;
-            case 'L' : 
-                abilitiesInit.emplace_back(make_pair(Ability::Boost, true));
-                break;
-            case 'S' : 
-                abilitiesInit.emplace_back(make_pair(Ability::Scan, true));
-                break;
-            case 'P' : 
-                abilitiesInit.emplace_back(make_pair(Ability::Polarize, true));
-                break;
-            case 'U' : 
-                abilitiesInit.emplace_back(make_pair(Ability::Uber, true));
-                break;
-            case 'W' : 
-                abilitiesInit.emplace_back(make_pair(Ability::Whey, true));
-                break;
-            case 'A' : 
-                abilitiesInit.emplace_back(make_pair(Ability::Ambush, true));
-                break;
-            default  :
-                throw "Invalid ability";
+        switch (ability)
+        {
+        case 'F':
+            abilitiesInit.emplace_back(make_pair(Ability::Firewall, true));
+            break;
+        case 'D':
+            abilitiesInit.emplace_back(make_pair(Ability::Download, true));
+            break;
+        case 'L':
+            abilitiesInit.emplace_back(make_pair(Ability::Boost, true));
+            break;
+        case 'S':
+            abilitiesInit.emplace_back(make_pair(Ability::Scan, true));
+            break;
+        case 'P':
+            abilitiesInit.emplace_back(make_pair(Ability::Polarize, true));
+            break;
+        case 'U':
+            abilitiesInit.emplace_back(make_pair(Ability::Uber, true));
+            break;
+        case 'W':
+            abilitiesInit.emplace_back(make_pair(Ability::Whey, true));
+            break;
+        case 'A':
+            abilitiesInit.emplace_back(make_pair(Ability::Ambush, true));
+            break;
+        default:
+            throw "Invalid ability";
         }
     }
     return abilitiesInit;
@@ -86,7 +88,9 @@ int main(int argc, char *argv[])
             {
                 string abilities = argv[i + 1];
                 if (abilities.length() != NUMABILITIES)
+                {
                     throw "Invalid abilities!";
+                }
 
                 string sorted = abilities;
                 sort(sorted.begin(), sorted.end());
@@ -94,7 +98,9 @@ int main(int argc, char *argv[])
                 {
                     if (sorted[j] == sorted[j - 1] &&
                         sorted[j] == sorted[j + 1])
+                    {
                         throw "Invalid abilities!";
+                    }
                 }
 
                 ++i;
@@ -106,7 +112,9 @@ int main(int argc, char *argv[])
             {
                 string abilities = argv[i + 1];
                 if (abilities.length() != NUMABILITIES)
+                {
                     throw "Invalid abilities!";
+                }
 
                 string sorted = abilities;
                 sort(sorted.begin(), sorted.end());
@@ -114,7 +122,9 @@ int main(int argc, char *argv[])
                 {
                     if (sorted[j] == sorted[j - 1] &&
                         sorted[j] == sorted[j + 1])
+                    {
                         throw "Invalid abilities!";
+                    }
                 }
 
                 ++i;
@@ -126,20 +136,28 @@ int main(int argc, char *argv[])
             {
                 string links = argv[i + 1];
                 if (links.length() != NUMLINKS * 2)
+                {
                     throw "Invalid links!";
+                }
 
                 vector<bool> verification = vector<bool>(NUMLINKS, false);
                 for (int j = 1; j < NUMLINKS * 2; j += 2)
                 {
                     if (links[j - 1] == 'D')
+                    {
                         verification[links[j] - '0' - 1] = true;
+                    }
                     else if (links[j - 1] == 'V')
+                    {
                         verification[links[j] - '0' + 3] = true;
+                    }
                 }
                 for (int j = 0; j < NUMLINKS; ++j)
                 {
                     if (!verification[j])
+                    {
                         throw "Invalid links!";
+                    }
                 }
 
                 ++i;
@@ -150,20 +168,28 @@ int main(int argc, char *argv[])
             {
                 string links = argv[i + 1];
                 if (links.length() != NUMLINKS * 2)
+                {
                     throw "Invalid links!";
+                }
 
                 vector<bool> verification = vector<bool>(NUMLINKS, false);
                 for (int j = 1; j < NUMLINKS * 2; j += 2)
                 {
                     if (links[j - 1] == 'D')
+                    {
                         verification[links[j] - '0' - 1] = true;
+                    }
                     else if (links[j - 1] == 'V')
+                    {
                         verification[links[j] - '0' + 3] = true;
+                    }
                 }
                 for (int j = 0; j < NUMLINKS; ++j)
                 {
                     if (!verification[j])
+                    {
                         throw "Invalid links!";
+                    }
                 }
 
                 ++i;
@@ -211,13 +237,21 @@ int main(int argc, char *argv[])
                 (*stream) >> dirtemp;
 
                 if (dirtemp == "left")
+                {
                     dir = Direction::Left;
+                }
                 else if (dirtemp == "right")
+                {
                     dir = Direction::Right;
+                }
                 else if (dirtemp == "up")
+                {
                     dir = Direction::Up;
+                }
                 else if (dirtemp == "down")
+                {
                     dir = Direction::Down;
+                }
                 else
                     throw "Invalid direction!";
 
@@ -245,7 +279,7 @@ int main(int argc, char *argv[])
                 {
                     game.useAbility(abilityID, useAbilityInfo);
                 }
-                else 
+                else
                 {
                     cout << "Ability is unavailable!" << endl;
                     cout << endl;

@@ -140,9 +140,13 @@ void Player::printAbilities(ostream &out) const
         out << i + 1 << ": " << abilityName << ", ";
 
         if (abilities[i].second)
+        {
             out << "Unused" << endl;
+        }
         else
+        {
             out << "Used" << endl;
+        }
     }
 }
 

@@ -18,14 +18,14 @@ void setStateAndNotify(Cell &cell,
     cell.notifyObservers();
 }
 
+// Helper function
 int getPlayerNumFromLink(Link *link)
 {
     return link->getName() < 'a' ? 2 : 1;
 }
 
-
-Cell::Cell(int row, int col, Link *link, int serverPort):
-    link{link}, row{row}, col{col}, firewall{0}, serverPort{serverPort} {}
+Cell::Cell(int row, int col, Link *link, int serverPort)
+    : link{link}, row{row}, col{col}, firewall{0}, serverPort{serverPort} {}
 
 bool Cell::moveCellHere(Cell &cell)
 {
@@ -106,13 +106,21 @@ bool Cell::moveCellHere(Cell &cell)
 char Cell::getName() const
 {
     if (link != nullptr)
+    {
         return link->getName();
+    }
     else if (serverPort != 0)
+    {
         return 'S';
+    }
     else if (firewall != 0)
+    {
         return firewall == 1 ? 'm' : 'w';
+    }
     else
+    {
         return '.';
+    }
 }
 
 Link *Cell::getLink() const

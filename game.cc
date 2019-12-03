@@ -5,11 +5,17 @@ using namespace std;
 int charLinkToInt(char c)
 {
     if ('a' <= c && c <= 'h')
+    {
         return c - 'a';
+    }
     else if ('A' <= c && c <= 'H')
+    {
         return c - 'A';
+    }
     else
+    {
         throw "!Invalid Link!";
+    }
 }
 
 Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
@@ -25,9 +31,13 @@ Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
         for (unsigned int i = 0; i < cmdAllAbilities.size(); ++i)
         {
             if (cmdAllAbilities[i].first == 1)
+            {
                 p1.overrideAbilities(cmdAllAbilities[i].second);
+            }
             else if (cmdAllAbilities[i].first == 2)
+            {
                 p2.overrideAbilities(cmdAllAbilities[i].second);
+            }
         }
     }
 
@@ -57,7 +67,9 @@ Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
             }
         }
         if (cmdSchemeFoundAt == -1)
+        {
             allLinks.emplace_back(players[i].init());
+        }
         else
             allLinks.emplace_back(players[i]
                                       .cmdInit(
@@ -90,9 +102,13 @@ void Game::move(char link, Direction dir)
     abilityUsedCount = 0;
 }
 
-pair<int, bool> Game::verifyAbility(int abilityID) const {
-    pair<Ability, bool> abilityPair = players[currentPlayer].getAbility(abilityID);
-    if (abilityPair.first == Ability::Firewall || abilityPair.first == Ability::Ambush) {
+pair<int, bool> Game::verifyAbility(int abilityID) const
+{
+    pair<Ability, bool> abilityPair =
+        players[currentPlayer].getAbility(abilityID);
+    if (abilityPair.first == Ability::Firewall ||
+        abilityPair.first == Ability::Ambush)
+    {
         return make_pair(2, abilityPair.second);
     }
     else if (abilityPair.first == Ability::Download ||
@@ -123,15 +139,18 @@ void Game::useAbility(int abilityID, vector<char> useAbilityInfo)
     }
 }
 
-void Game::printBoard() const {
+void Game::printBoard() const
+{
     grid->printBoard(currentPlayer);
 }
 
-void Game::printAbilities(ostream& out) const {
+void Game::printAbilities(ostream &out) const
+{
     players[currentPlayer].printAbilities(out);
 }
 
-int Game::checkStatus() const {
+int Game::checkStatus() const
+{
     int curStatus = -1;
     for (int i = 0; i < NUMPLAYERS; i++)
     {
@@ -144,6 +163,6 @@ int Game::checkStatus() const {
             curStatus = (i + 1) % NUMPLAYERS + 1;
         }
     }
-    
+
     return curStatus;
 }

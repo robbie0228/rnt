@@ -263,14 +263,17 @@ void Grid::move(int player, int link, Direction dir)
     }
 }
 
-void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user) {
-    if (abilityName == Ability::Firewall) {
+void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user)
+{
+    if (abilityName == Ability::Firewall)
+    {
         int row = abilityInfo[0] - '0';
         int col = abilityInfo[1] - '0';
 
         cells[row][col].useAbility(Ability::Firewall, user);
-
-    } else if (abilityName == Ability::Ambush) {
+    }
+    else if (abilityName == Ability::Ambush)
+    {
         int myLinkIndex;
         int myIndex;
         int enemyLinkIndex;
@@ -292,17 +295,21 @@ void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user) {
         bool enemyWon = cellWithEnemyLink.moveCellHere(cellWithMyLink);
         cellWithMyLink.removeLink();
 
-        if (!enemyWon) {
+        if (!enemyWon)
+        {
             cellWithMyLink.moveCellHere(cellWithEnemyLink);
             locationOfLinks[enemyIndex][enemyLinkIndex] = make_pair(-1, -1);
             cellWithEnemyLink.removeLink();
-        } else {
+        }
+        else
+        {
             locationOfLinks[myIndex][myLinkIndex] = make_pair(-1, -1);
         }
 
         cellWithMyLink.useAbility(abilityName, user);
-
-    } else {
+    }
+    else
+    {
         char linkName = abilityInfo[0];
         int linkIndex;
         int playerIndex;
@@ -312,7 +319,8 @@ void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user) {
         int colOfLink = locationOfLinks[playerIndex][linkIndex].second;
         Cell &cellWithLink = cells[rowOfLink][colOfLink];
 
-        if (abilityName == Ability::Uber) {
+        if (abilityName == Ability::Uber)
+        {
             bool moveWorked = false;
             int randomRow;
             int randomCol;
@@ -355,14 +363,18 @@ void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user) {
 
         cellWithLink.useAbility(abilityName, user);
 
-        if (abilityName == Ability::Download) {
+        if (abilityName == Ability::Download)
+        {
             locationOfLinks[playerIndex][linkIndex] = make_pair(-1, -1);
         }
     }
 }
 
-void Grid::printBoard(int currentPlayer) const {
+void Grid::printBoard(int currentPlayer) const
+{
     textDisplay->draw(currentPlayer);
     if (useGraphics)
+    {
         graphicsDisplay->draw(currentPlayer);
+    }
 }
