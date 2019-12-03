@@ -51,9 +51,6 @@ public:
         //   This is used in case of a Link crosses the opponent border
         void removeAndDownload(int downloadingPlayer, int playerUsingAbility);
 
-        // Set this Cell's link (pointer) to newLink
-        void setLink(Link *newLink);
-
 private:
         // Returns a set of information about this Cell contained in an InfoType
         InfoType doGetInfo() const;

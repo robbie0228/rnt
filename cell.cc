@@ -213,11 +213,6 @@ void Cell::removeAndDownload(int downloadingPlayer, int playerUsingAbility)
                       false, playerUsingAbility);
 }
 
-void Cell::setLink(Link *newLink)
-{
-    link = newLink;
-}
-
 InfoType Cell::doGetInfo() const
 {
     return {row, col, getName(),
