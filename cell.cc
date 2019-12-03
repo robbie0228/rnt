@@ -121,7 +121,7 @@ void Cell::useAbility(Ability abilityName, int user) {
             if (currType == LinkType::Data) {
                 this->link->setType(LinkType::Virus);
                 if (firewall == (getPlayerNumFromLink(link) % 2) + 1) {
-                    removeAndDownload(getPlayerNumFromLink(link), false);
+                    removeAndDownload(getPlayerNumFromLink(link), -1);
                 }
             } else {
                 this->link->setType(LinkType::Data);
