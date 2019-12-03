@@ -152,7 +152,7 @@ void Game::printAbilities(ostream &out) const
 int Game::checkStatus() const
 {
     int curStatus = -1;
-    for (int i = 0; i < NUMPLAYERS; i++)
+    for (int i = 0; i < NUMPLAYERS; ++i)
     {
         if (players[i].checkStatus() == PlayStatus::Win)
         {

@@ -270,7 +270,7 @@ int main(int argc, char *argv[])
                 char c;
                 vector<char> useAbilityInfo;
 
-                for (int i = 0; i < abilityInfo.first; i++)
+                for (int i = 0; i < abilityInfo.first; ++i)
                 {
                     (*stream) >> c;
                     useAbilityInfo.emplace_back(c);
