@@ -112,21 +112,12 @@ void GraphicsDisplay::draw(int currentPlayer)
     }
 
     // Create background
-    win->fillRectangle(0, 0, 500, 7000, 0);
+    win->fillRectangle(0, 0, 500, 700, Xwindow::Grey);
 
-    // Create grid dividing lines
+    // Create board
+    win ->fillRectangle(2, 100, 496, 496, Xwindow::Yellow);
+
     size_t pieceSize = 500 / GRIDSIZE;
-    size_t lineWidth = 2;
-    for (size_t i = 0; i < GRIDSIZE + 1; ++i)
-    {
-        win->fillRectangle((i * pieceSize) - (lineWidth / 2), 100,
-                           lineWidth, 500, 3);
-    }
-    for (size_t i = 0; i < GRIDSIZE + 1; ++i)
-    {
-        win->fillRectangle(0, 100 + (i * pieceSize) - (lineWidth / 2),
-                           500, lineWidth, 3);
-    }
 
     int playerInfoPadding = 10;
 
@@ -152,23 +143,26 @@ void GraphicsDisplay::draw(int currentPlayer)
         {
             string name;
             int colour;
+            bool isServerPort = false;
+
             if (grid[row][col] == '.')
             {
-                colour = 0;
+                colour = Xwindow::Yellow;
                 name = "";
             }
             else if ('a' <= grid[row][col] && grid[row][col] <= 'h')
             {
                 int linkIndex = grid[row][col] - 'a';
+
                 if (currentPlayer == 0)
                 {
                     if (links[0][linkIndex].second < "E")
                     {
-                        colour = 3;
+                        colour = Xwindow::Green;
                     }
                     else
                     {
-                        colour = 2;
+                        colour = Xwindow::Red;
                     }
                     name = string(1, grid[row][col]) + ":" +
                            links[0][linkIndex].second;
@@ -179,18 +173,18 @@ void GraphicsDisplay::draw(int currentPlayer)
                     {
                         if (links[0][linkIndex].second < "E")
                         {
-                            colour = 3;
+                            colour = Xwindow::Green;
                         }
                         else
                         {
-                            colour = 2;
+                            colour = Xwindow::Red;
                         }
                         name = string(1, grid[row][col]) + ":" +
                                links[0][linkIndex].second;
                     }
                     else
                     {
-                        colour = 1;
+                        colour = Xwindow::Blue;
                         name = string(1, grid[row][col]);
                     }
                 }
@@ -198,15 +192,16 @@ void GraphicsDisplay::draw(int currentPlayer)
             else if ('A' <= grid[row][col] && grid[row][col] <= 'H')
             {
                 int linkIndex = grid[row][col] - 'A';
+
                 if (currentPlayer == 1)
                 {
                     if (links[1][linkIndex].second < "E")
                     {
-                        colour = 3;
+                        colour = Xwindow::Green;
                     }
                     else
                     {
-                        colour = 2;
+                        colour = Xwindow::Red;
                     }
                     name = string(1, grid[row][col]) + ":" +
                            links[1][linkIndex].second;
@@ -217,40 +212,52 @@ void GraphicsDisplay::draw(int currentPlayer)
                     {
                         if (links[1][linkIndex].second < "E")
                         {
-                            colour = 3;
+                            colour = Xwindow::Green;
                         }
                         else
                         {
-                            colour = 2;
+                            colour = Xwindow::Red;
                         }
                         name = string(1, grid[row][col]) + ":" +
                                links[1][linkIndex].second;
                     }
                     else
                     {
-                        colour = 1;
+                        colour = Xwindow::Blue;
                         name = string(1, grid[row][col]);
                     }
                 }
             }
             else if (grid[row][col] == 'S')
             {
-                colour = 5;
+                colour = Xwindow::Turquoise;
+                isServerPort = true;
                 name = string(1, grid[row][col]);
             }
             else
             {
-                colour = 4;
+                colour = Xwindow::Pink;
                 name = string(1, grid[row][col]);
             }
 
-            // Add rectangle with the notifying piece's colour
-            win->fillArc(pieceSize * col + paddingWidth,
-                         100 + pieceSize * row + paddingWidth,
-                         pieceSize - (2 * paddingWidth),
-                         pieceSize - (2 * paddingWidth),
-                         0, 23040,
-                         colour);
+            if (isServerPort) 
+            {
+                win->fillRectangle(2 + pieceSize * col,
+                                   100 + pieceSize * row,
+                                   pieceSize,
+                                   pieceSize,
+                                   colour);
+            } 
+            else 
+            {
+                // Add circle with the notifying piece's colour
+                win->fillArc(pieceSize * col + paddingWidth,
+                            100 + pieceSize * row + paddingWidth,
+                            pieceSize - (2 * paddingWidth),
+                            pieceSize - (2 * paddingWidth),
+                            0, 23040,
+                            colour);
+            }
             pair<size_t, size_t> offset =
                 getOffsetToCenterString(name,
                                         pieceSize - (2 * paddingWidth),
@@ -260,6 +267,20 @@ void GraphicsDisplay::draw(int currentPlayer)
                                 paddingWidth + offset.second,
                             name);
         }
+    }
+
+    // Create grid dividing lines
+    
+    size_t lineWidth = 2;
+    for (size_t i = 0; i < GRIDSIZE + 1; ++i)
+    {
+        win->fillRectangle(2 + (i * pieceSize) - (lineWidth / 2), 100,
+                           lineWidth, 496, Xwindow::Black);
+    }
+    for (size_t i = 0; i < GRIDSIZE + 1; ++i)
+    {
+        win->fillRectangle(2, 100 + (i * pieceSize) - (lineWidth / 2),
+                           496, lineWidth, Xwindow::Black);
     }
 
     win->drawString(playerInfoPadding,

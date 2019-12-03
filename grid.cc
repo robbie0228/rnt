@@ -156,8 +156,14 @@ void Grid::move(int player, int link, Direction dir)
                 if (('A' <= otherCellName && otherCellName <= 'H') ||
                     ('a' <= otherCellName && otherCellName <= 'h'))
                 {
-                    locationOfLinks[(player + 1) % NUMPLAYERS]
-                                   [link] = make_pair(-1, -1);
+                    int otherPlayerIndex;
+                    int otherLinkIndex;
+                    getIndicesFromName(otherCellName, 
+                                       otherLinkIndex, 
+                                       otherPlayerIndex);
+                    
+                    locationOfLinks[otherPlayerIndex]
+                                   [otherLinkIndex] = make_pair(-1, -1);
                 }
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink + linkSpeed, colOfLink);
@@ -185,7 +191,14 @@ void Grid::move(int player, int link, Direction dir)
                 if (('A' <= otherCellName && otherCellName <= 'H') ||
                     ('a' <= otherCellName && otherCellName <= 'h'))
                 {
-                    locationOfLinks[(player + 1) % NUMPLAYERS][link] = make_pair(-1, -1);
+                    int otherPlayerIndex;
+                    int otherLinkIndex;
+                    getIndicesFromName(otherCellName, 
+                                       otherLinkIndex, 
+                                       otherPlayerIndex);
+                    
+                    locationOfLinks[otherPlayerIndex]
+                                   [otherLinkIndex] = make_pair(-1, -1);
                 }
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink, colOfLink - linkSpeed);
@@ -213,8 +226,14 @@ void Grid::move(int player, int link, Direction dir)
                 if (('A' <= otherCellName && otherCellName <= 'H') ||
                     ('a' <= otherCellName && otherCellName <= 'h'))
                 {
-                    locationOfLinks[(player + 1) % NUMPLAYERS]
-                                   [link] = make_pair(-1, -1);
+                    int otherPlayerIndex;
+                    int otherLinkIndex;
+                    getIndicesFromName(otherCellName, 
+                                       otherLinkIndex, 
+                                       otherPlayerIndex);
+                    
+                    locationOfLinks[otherPlayerIndex]
+                                   [otherLinkIndex] = make_pair(-1, -1);
                 }
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink, colOfLink + linkSpeed);
@@ -247,8 +266,14 @@ void Grid::move(int player, int link, Direction dir)
                 if (('A' <= otherCellName && otherCellName <= 'H') ||
                     ('a' <= otherCellName && otherCellName <= 'h'))
                 {
-                    locationOfLinks[(player + 1) % NUMPLAYERS]
-                                   [link] = make_pair(-1, -1);
+                    int otherPlayerIndex;
+                    int otherLinkIndex;
+                    getIndicesFromName(otherCellName, 
+                                       otherLinkIndex, 
+                                       otherPlayerIndex);
+                    
+                    locationOfLinks[otherPlayerIndex]
+                                   [otherLinkIndex] = make_pair(-1, -1);
                 }
                 locationOfLinks[player][link] =
                     make_pair(rowOfLink - linkSpeed, colOfLink);
@@ -259,6 +284,9 @@ void Grid::move(int player, int link, Direction dir)
             }
             cellWithLink.removeLink();
         }
+    }
+    if (useGraphics) {
+        graphicsDisplay->draw((player + 1) % 2);
     }
 }
 
@@ -366,6 +394,10 @@ void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user)
         {
             locationOfLinks[playerIndex][linkIndex] = make_pair(-1, -1);
         }
+    }
+    if (useGraphics)
+    {
+        graphicsDisplay->draw(user - 1);
     }
 }
 

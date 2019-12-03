@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include "cell.h"
+#include <iostream>
 using namespace std;
 
 // Helper function
