@@ -49,7 +49,7 @@ class Cell : public Subject {
         // Set this Cell's link (pointer) to newLink
         void setLink(Link *newLink);
 
-        InfoType getInfo() const;
+        InfoType doGetInfo() const;
 };
 
 #endif
