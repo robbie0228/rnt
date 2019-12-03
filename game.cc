@@ -22,7 +22,7 @@ Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
     Player p2 = Player(2);
 
     if (cmdAllAbilities.size()){
-        for (int i = 0; i < cmdAllAbilities.size(); ++i) {
+        for (unsigned int i = 0; i < cmdAllAbilities.size(); ++i) {
             if (cmdAllAbilities[i].first == 1) 
                 p1.overrideAbilities(cmdAllAbilities[i].second);
             else if (cmdAllAbilities[i].first == 2)
@@ -43,7 +43,7 @@ Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
         int playerNumber = i + 1;
         int cmdSchemeFoundAt = -1;
         if (cmdAllLinks.size()) {
-            for (int j = 0; j < cmdAllLinks.size(); ++j) {
+            for (unsigned int j = 0; j < cmdAllLinks.size(); ++j) {
                 if (cmdAllLinks[j].first == playerNumber) {
                     cmdSchemeFoundAt = j;
                     break;
@@ -85,7 +85,7 @@ pair<int, bool> Game::verifyAbility(int abilityID) {
         return make_pair(2, abilityPair.second);
     } else if (abilityPair.first == Ability::Download || abilityPair.first == Ability::Boost || 
                abilityPair.first == Ability::Scan || abilityPair.first == Ability::Polarize || 
-               abilityPair.first == Ability::Uber) {
+               abilityPair.first == Ability::Uber || abilityPair.first == Ability::Whey) {
         return make_pair(1, abilityPair.second);
     }
     return make_pair(0, false);

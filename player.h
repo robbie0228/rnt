@@ -17,6 +17,8 @@ class Player : public Observer {
 
         std::vector<std::pair<Ability, bool>> abilities;
 
+        int abilityActivated;
+
     public:
         // Constructor for a Player
         Player(int playerNumber);
