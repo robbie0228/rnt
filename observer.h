@@ -3,12 +3,15 @@
 
 class Subject;
 
-class Observer {
-    public:
-        void notify(Subject &whoFrom) { doNotify(whoFrom); };
-        virtual ~Observer() = default;
-    private:
-        virtual void doNotify(Subject &whoFrom) = 0;
+class Observer
+{
+public:
+    // pass the Subject that called the notify method
+    void notify(Subject &whoFrom) { doNotify(whoFrom); };
+    virtual ~Observer() = default;
+
+private:
+    virtual void doNotify(Subject &whoFrom) = 0;
 };
 
 #endif

@@ -7,15 +7,15 @@ for file in $(cat tests/suite.txt)
 do
     if [ -e "tests/$file.args" ]; then
         if [ -e "tests/$file.in" ]; then
-            echo "sequence tests/$file.in quit" | ./raiinet $(cat "tests/$file.args") > $temp
+            echo "sequence tests/$file.in quit" | ./RAIInet $(cat "tests/$file.args") > $temp
         else
-            ./raiinet $(cat "tests/$file.args") > $temp
+            ./RAIInet $(cat "tests/$file.args") > $temp
         fi
-    else 
+    else
         if [ -e "tests/$file.in" ]; then
-            echo "sequence tests/$file.in quit" | ./raiinet > $temp
+            echo "sequence tests/$file.in quit" | ./RAIInet > $temp
         else
-            ./raiinet > $temp
+            ./RAIInet > $temp
         fi
     fi
 
@@ -48,6 +48,6 @@ rm $temp
 
 if [ $failed -eq 1 ]; then
     exit 1
-else 
+else
     echo "All correct"
 fi

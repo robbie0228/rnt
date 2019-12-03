@@ -77,7 +77,7 @@ Player 2's Abilities:
 4: Scan, Unused
 5: Polarize, Unused
 
-Invalid move
+You cannot move a dead link!
 
 Player 1's Abilities:
 1: Link Boost, Unused
@@ -86,7 +86,7 @@ Player 1's Abilities:
 4: Scan, Unused
 5: Polarize, Unused
 
-Ability is unavailable
+Ability is unavailable!
 
 Player 1:
 Downloaded: 0D, 1V

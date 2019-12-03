@@ -4,7 +4,8 @@
 #include <iostream>
 #include <string>
 
-class Xwindow {
+class Xwindow
+{
 	Display *d;
 	Window w;
 	int s;
@@ -12,22 +13,32 @@ class Xwindow {
 	unsigned long colours[10];
 
 public:
-	Xwindow(int width=500, int height=500);  // Constructor; displays the window.
-	~Xwindow();                              // Destructor; destroys the window.
-	Xwindow(const Xwindow&) = delete;
-	Xwindow &operator=(const Xwindow&) = delete;
+	// Constructor; displays the window.
+	Xwindow(int width = 500, int height = 500);
 
-	enum {White=0, Black, Red, Green, Blue}; // Available colours.
+	// Destructor; destroys the window.
+	~Xwindow();
+
+	Xwindow(const Xwindow &) = delete;
+	Xwindow &operator=(const Xwindow &) = delete;
+
+	enum
+	{
+		White = 0,
+		Black,
+		Red,
+		Green,
+		Blue
+	}; // Available colours.
 
 	// Draws a rectangle
-	void fillRectangle(int x, int y, int width, int height, int colour=Black);
+	void fillRectangle(int x, int y, int width, int height, int colour = Black);
 
 	// Draws an arc
-	void fillArc(int x, int y, int width, int height, int angle1, int angle2, int colour=Black);
+	void fillArc(int x, int y, int width, int height, int angle1, int angle2, int colour = Black);
 
 	// Draws a string
 	void drawString(int x, int y, std::string msg);
-
 };
 
 #endif
