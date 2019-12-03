@@ -130,7 +130,7 @@ void Grid::move(int player, int link, Direction dir)
 
     if (rowOfLink == -1 && colOfLink == -1)
     {
-        throw "You cannot move a dead link!";
+        throw "Cannot move a dead link!";
     }
 
     Cell &cellWithLink = cells[rowOfLink][colOfLink];
@@ -141,7 +141,7 @@ void Grid::move(int player, int link, Direction dir)
         {
             if (player == 1)
             {
-                throw "Invalid move, you would be out of the border!";
+                throw "Cannot move link off this border!";
             }
             locationOfLinks[player][link] = make_pair(-1, -1);
             cellWithLink.removeAndDownload(player + 1, -1);
@@ -179,7 +179,7 @@ void Grid::move(int player, int link, Direction dir)
     {
         if (colOfLink - linkSpeed < 0)
         {
-            throw "Invalid move, you would be out of the border!";
+            throw "Cannot move link off this border!";
         }
         else
         {
@@ -214,7 +214,7 @@ void Grid::move(int player, int link, Direction dir)
     {
         if (colOfLink + linkSpeed >= GRIDSIZE)
         {
-            throw "Invalid move, you would be out of the border";
+            throw "Cannot move link off this border!";
         }
         else
         {
@@ -251,7 +251,7 @@ void Grid::move(int player, int link, Direction dir)
         {
             if (player == 0)
             {
-                throw "Invalid move, you would be out of the border!";
+                throw "Cannot move link off this border!";
             }
             locationOfLinks[player][link] = make_pair(-1, -1);
             cellWithLink.removeAndDownload(player + 1, -1);
@@ -316,6 +316,13 @@ void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user)
         int enemyCol = locationOfLinks[enemyIndex][enemyLinkIndex].second;
         int myRow = locationOfLinks[myIndex][myLinkIndex].first;
         int myCol = locationOfLinks[myIndex][myLinkIndex].second;
+
+        if ((enemyRow == -1 && enemyCol == -1) ||
+            (myRow == -1 && myCol == -1)) 
+        {
+            throw "Cannot use ability on a dead link!";
+        }
+
         Cell &cellWithMyLink = cells[myRow][myCol];
         Cell &cellWithEnemyLink = cells[enemyRow][enemyCol];
 
@@ -344,6 +351,11 @@ void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user)
 
         int rowOfLink = locationOfLinks[playerIndex][linkIndex].first;
         int colOfLink = locationOfLinks[playerIndex][linkIndex].second;
+
+        if (rowOfLink == -1 && colOfLink == -1) {
+            throw "Cannot use ability on a dead link!";
+        }
+
         Cell &cellWithLink = cells[rowOfLink][colOfLink];
 
         if (abilityName == Ability::Uber)
