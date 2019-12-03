@@ -3,7 +3,12 @@
 
 using namespace std;
 
-// implementations
+// Helper function
+
+int getPlayerNumFromLink(char name) {
+    return name < 'a' ? 2 : 1;
+}
+
 
 Player::Player(int playerNumber) : downloadedDataCount{0},
                                    downloadedVirusCount{0},
@@ -51,6 +56,7 @@ vector<Link *> Player::cmdInit(vector<Link> cmdLinks)
     return linkPointers;
 }
 
+<<<<<<< HEAD
 bool Player::isMyLink(char linkName)
 {
     if (playerNumber == 1)
@@ -62,14 +68,28 @@ bool Player::isMyLink(char linkName)
     {
         return ('A' <= linkName && linkName <= 'H') &&
                links[linkName - 'A'].getType() != LinkType::NoType;
+=======
+bool Player::isMyLink(char linkName) const {
+    if (playerNumber == 1) {
+        return ('a' <= linkName && linkName <= 'h') && 
+                links[linkName - 'a'].getType() != LinkType::NoType;
+    } else {
+        return ('A' <= linkName && linkName <= 'H') && 
+                links[linkName - 'A'].getType() != LinkType::NoType;
+>>>>>>> master
     }
     return false;
 }
 
+<<<<<<< HEAD
 bool Player::isEnemyLink(char linkName)
 {
     if (playerNumber == 1)
     {
+=======
+bool Player::isEnemyLink(char linkName) const {
+    if (playerNumber == 1) {
+>>>>>>> master
         return ('A' <= linkName && linkName <= 'H');
     }
     else
@@ -79,10 +99,15 @@ bool Player::isEnemyLink(char linkName)
     return false;
 }
 
+<<<<<<< HEAD
 PlayStatus Player::checkStatus()
 {
     if (downloadedDataCount >= 4)
     {
+=======
+PlayStatus Player::checkStatus() const {
+    if (downloadedDataCount >= 4) {
+>>>>>>> master
         return PlayStatus::Win;
     }
     else if (downloadedVirusCount >= 4)
@@ -95,8 +120,12 @@ PlayStatus Player::checkStatus()
     }
 }
 
+<<<<<<< HEAD
 void Player::printAbilities(ostream &out) const
 {
+=======
+void Player::printAbilities(ostream& out) const {
+>>>>>>> master
     out << "Player " << playerNumber << "'s Abilities:" << endl;
     for (int i = 0; i < 5; ++i)
     {
@@ -141,8 +170,12 @@ void Player::printAbilities(ostream &out) const
     }
 }
 
+<<<<<<< HEAD
 pair<Ability, bool> Player::getAbility(int abilityID)
 {
+=======
+pair<Ability, bool> Player::getAbility(int abilityID) const {
+>>>>>>> master
     return abilities[abilityID - 1];
 }
 
@@ -209,6 +242,7 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo)
     return abilities[abilityID - 1].first;
 }
 
+<<<<<<< HEAD
 int getPlayerNumFromLink(char name)
 {
     return name < 'a' ? 2 : 1;
@@ -216,6 +250,9 @@ int getPlayerNumFromLink(char name)
 
 void Player::doNotify(Subject &whoFrom)
 {
+=======
+void Player::doNotify(Subject &whoFrom) {
+>>>>>>> master
     StateType state = whoFrom.getState();
     if (state.downloadingPlayer == playerNumber)
     {

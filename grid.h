@@ -49,7 +49,7 @@ public:
     void useAbility(Ability a, vector<char> v, int user);
 
     // Calls any type of Display to draw
-    void printBoard(int currentPlayer);
+    void printBoard(int currentPlayer) const;
 };
 
 #endif

@@ -2,6 +2,7 @@
 #include "cell.h"
 using namespace std;
 
+// Helper function
 void setStateAndNotify(Cell &cell,
                        int downloadingPlayer = -1,
                        char downloadingLinkName = '.',
@@ -22,14 +23,9 @@ int getPlayerNumFromLink(Link *link)
     return link->getName() < 'a' ? 2 : 1;
 }
 
-Cell::Cell(int row,
-           int col,
-           Link *link,
-           int serverPort) : link{link},
-                             row{row},
-                             col{col},
-                             firewall{0},
-                             serverPort{serverPort} {}
+
+Cell::Cell(int row, int col, Link *link, int serverPort):
+    link{link}, row{row}, col{col}, firewall{0}, serverPort{serverPort} {}
 
 bool Cell::moveCellHere(Cell &cell)
 {

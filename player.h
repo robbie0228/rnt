@@ -39,20 +39,20 @@ public:
     std::vector<Link *> cmdInit(vector<Link> cmdLinks);
 
     // Returns true if the link specified by linkName is the player's
-    bool isMyLink(char linkName);
+    bool isMyLink(char linkName) const;
 
     // Returns true if the link specified by linkName is the other player's
-    bool isEnemyLink(char linkName);
+    bool isEnemyLink(char linkName) const;
 
     // Checks the current status of the Player
-    PlayStatus checkStatus();
+    PlayStatus checkStatus() const;
 
     // Print out the player's abilities, each with an ID number and a status
     //  of if it has been used
     void printAbilities(std::ostream &out) const;
 
-    // Returns the ability that is associated with the ID
-    std::pair<Ability, bool> getAbility(int abilityID);
+    // returns the ability that is associated with the ID
+    std::pair<Ability, bool> getAbility(int abilityID) const;
 
     // Marks the ability specified as used
     Ability useAbility(int abilityID, vector<char> abilityInfo);

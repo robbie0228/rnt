@@ -90,17 +90,7 @@ void Game::move(char link, Direction dir)
     abilityUsedCount = 0;
 }
 
-void Game::printBoard()
-{
-    grid->printBoard(currentPlayer);
-}
-
-void Game::printAbilities(ostream &out)
-{
-    players[currentPlayer].printAbilities(out);
-}
-
-pair<int, bool> Game::verifyAbility(int abilityID) {
+pair<int, bool> Game::verifyAbility(int abilityID) const {
     pair<Ability, bool> abilityPair = players[currentPlayer].getAbility(abilityID);
     if (abilityPair.first == Ability::Firewall || abilityPair.first == Ability::Ambush) {
         return make_pair(2, abilityPair.second);
@@ -133,8 +123,15 @@ void Game::useAbility(int abilityID, vector<char> useAbilityInfo)
     }
 }
 
-int Game::checkStatus()
-{
+void Game::printBoard() const {
+    grid->printBoard(currentPlayer);
+}
+
+void Game::printAbilities(ostream& out) const {
+    players[currentPlayer].printAbilities(out);
+}
+
+int Game::checkStatus() const {
     int curStatus = -1;
     for (int i = 0; i < NUMPLAYERS; i++)
     {
