@@ -263,21 +263,51 @@ void Grid::move(int player, int link, Direction dir)
     }
 }
 
-void Grid::useAbility(Ability a, vector<char> v, int user)
-{
-    if (a == Ability::Firewall)
-    {
-        int row = v[0] - '0';
-        int col = v[1] - '0';
-        if (row < 0 || row >= GRIDSIZE || col < 0 || col >= GRIDSIZE)
-        {
+void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user) {
+    if (abilityName == Ability::Firewall) {
+        int row = abilityInfo[0] - '0';
+        int col = abilityInfo[1] - '0';
+
+        if (row < 0 || row >= GRIDSIZE || col < 0 || col >= GRIDSIZE) {
             throw "Invalid use of ability";
         }
+
         cells[row][col].useAbility(Ability::Firewall, user);
-    }
-    else
-    {
-        char linkName = v[0];
+
+    } else if (abilityName == Ability::Ambush) {
+        int myLinkIndex;
+        int myIndex;
+        int enemyLinkIndex;
+        int enemyIndex;
+
+        char myLink = abilityInfo[0];
+        char enemyLink = abilityInfo[1];
+
+        getIndicesFromName(myLink, myLinkIndex, myIndex);
+        getIndicesFromName(enemyLink, enemyLinkIndex, enemyIndex);
+
+        int enemyRow = locationOfLinks[enemyIndex][enemyLinkIndex].first;
+        int enemyCol = locationOfLinks[enemyIndex][enemyLinkIndex].second;
+        int myRow = locationOfLinks[myIndex][myLinkIndex].first;
+        int myCol = locationOfLinks[myIndex][myLinkIndex].second;
+        Cell &cellWithMyLink = cells[myRow][myCol];
+        Cell &cellWithEnemyLink = cells[enemyRow][enemyCol];
+
+        bool enemyWon = cellWithEnemyLink.moveCellHere(cellWithMyLink);
+        cellWithMyLink.removeLink();
+
+        if (!enemyWon) {
+            cellWithMyLink.moveCellHere(cellWithEnemyLink);
+            locationOfLinks[enemyIndex][enemyLinkIndex] = make_pair(-1, -1);
+            cellWithEnemyLink.removeLink();
+        } else {
+            locationOfLinks[myIndex][myLinkIndex] = make_pair(-1, -1);
+        }
+
+        cellWithMyLink.useAbility(abilityName, user);
+
+    } else {
+        char linkName = abilityInfo[0];
         int linkIndex;
         int playerIndex;
         getIndicesFromName(linkName, linkIndex, playerIndex);
@@ -286,8 +316,7 @@ void Grid::useAbility(Ability a, vector<char> v, int user)
         int colOfLink = locationOfLinks[playerIndex][linkIndex].second;
         Cell &cellWithLink = cells[rowOfLink][colOfLink];
 
-        if (a == Ability::Uber)
-        {
+        if (abilityName == Ability::Uber) {
             bool moveWorked = false;
             int randomRow;
             int randomCol;
@@ -328,10 +357,9 @@ void Grid::useAbility(Ability a, vector<char> v, int user)
             cellWithLink.removeLink();
         }
 
-        cellWithLink.useAbility(a, user);
+        cellWithLink.useAbility(abilityName, user);
 
-        if (a == Ability::Download)
-        {
+        if (abilityName == Ability::Download) {
             locationOfLinks[playerIndex][linkIndex] = make_pair(-1, -1);
         }
     }

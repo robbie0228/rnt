@@ -18,9 +18,9 @@ enum class Ability
     Scan,
     Polarize,
 
-    Uber,
-    Whey,
-    Cop,
+    Uber, 
+    Whey, 
+    Ambush,
 
     NotAvailable
 };

@@ -1,5 +1,6 @@
 test_1
 test_2
+test_ability_ambush_1
 test_ability_boost_1
 test_ability_download_1
 test_ability_firewall_1

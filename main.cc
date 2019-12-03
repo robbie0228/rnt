@@ -3,43 +3,42 @@
 #include <fstream>
 #include <string>
 #include <utility>
+#include <algorithm>
 using namespace std;
 
 // Helper functions
 vector<pair<Ability, bool>> cmdInitAbilities(string cmdArg)
 {
     vector<pair<Ability, bool>> abilitiesInit;
-    for (int i = 0; i < NUMABILITIES; ++i)
-    {
+    for (int i = 0; i < NUMABILITIES; ++i) {
         char ability = cmdArg[i];
-        switch (ability)
-        {
-        case 'F':
-            abilitiesInit.emplace_back(make_pair(Ability::Firewall, true));
-            break;
-        case 'D':
-            abilitiesInit.emplace_back(make_pair(Ability::Download, true));
-            break;
-        case 'L':
-            abilitiesInit.emplace_back(make_pair(Ability::Boost, true));
-            break;
-        case 'S':
-            abilitiesInit.emplace_back(make_pair(Ability::Scan, true));
-            break;
-        case 'P':
-            abilitiesInit.emplace_back(make_pair(Ability::Polarize, true));
-            break;
-        case 'U':
-            abilitiesInit.emplace_back(make_pair(Ability::Uber, true));
-            break;
-        case 'W':
-            abilitiesInit.emplace_back(make_pair(Ability::Whey, true));
-            break;
-        case 'C':
-            abilitiesInit.emplace_back(make_pair(Ability::Cop, true));
-            break;
-        default:
-            throw "Invalid ability";
+        switch(ability) {
+            case 'F' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Firewall, true));
+                break;
+            case 'D' :
+                abilitiesInit.emplace_back(make_pair(Ability::Download, true));
+                break;
+            case 'L' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Boost, true));
+                break;
+            case 'S' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Scan, true));
+                break;
+            case 'P' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Polarize, true));
+                break;
+            case 'U' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Uber, true));
+                break;
+            case 'W' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Whey, true));
+                break;
+            case 'A' : 
+                abilitiesInit.emplace_back(make_pair(Ability::Ambush, true));
+                break;
+            default  :
+                throw "Invalid ability";
         }
     }
     return abilitiesInit;
@@ -246,9 +245,9 @@ int main(int argc, char *argv[])
                 {
                     game.useAbility(abilityID, useAbilityInfo);
                 }
-                else
+                else 
                 {
-                    cout << "Invalid ability" << endl;
+                    cout << "Ability is unavailable" << endl;
                     cout << endl;
                 }
             }

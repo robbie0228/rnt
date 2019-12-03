@@ -1,0 +1,135 @@
+Player 1's Abilities:
+1: Ambush, Unused
+2: Ambush, Unused
+3: Link Boost, Unused
+4: Download, Unused
+5: Firewall, Unused
+
+Player 1:
+Downloaded: 0D, 1V
+Abilities: 4
+a: V1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
+========
+abcSSfgh
+...de...
+........
+........
+........
+........
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: V1   B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: ?
+
+Player 1:
+Downloaded: 0D, 1V
+Abilities: 4
+a: V1   b: ?    c: ?    d: ?
+e: ?    f: ?    g: ?    h: ?
+========
+.bcSSfgh
+a..de...
+........
+........
+........
+........
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: V1   B: V2   C: V3   D: V4
+E: D1   F: D2   G: D3   H: D4
+
+Player 1:
+Downloaded: 0D, 1V
+Abilities: 4
+a: V1   b: ?    c: ?    d: ?
+e: ?    f: ?    g: ?    h: ?
+========
+.bcSSfgh
+...de...
+........
+........
+........
+........
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 1V
+Abilities: 4
+A: V1   B: V2   C: V3   D: V4
+E: D1   F: D2   G: D3   H: D4
+
+Player 1:
+Downloaded: 0D, 1V
+Abilities: 4
+a: V1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
+========
+.bcSSfgh
+...de...
+........
+........
+........
+........
+...DE..H
+.BCSSFG.
+========
+Player 2:
+Downloaded: 0D, 1V
+Abilities: 4
+A: V1   B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: D4
+
+Player 1:
+Downloaded: 0D, 1V
+Abilities: 3
+a: V1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
+========
+..cSSfgh
+...de...
+........
+........
+........
+........
+...DE..H
+.BCSSFG.
+========
+Player 2:
+Downloaded: 0D, 2V
+Abilities: 4
+A: V1   B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: D4
+
+Invalid move
+
+Player 1:
+Downloaded: 0D, 1V
+Abilities: 3
+a: V1   b: V2   c: V3   d: V4
+e: D1   f: D2   g: D3   h: D4
+========
+..cSSfgh
+...de...
+........
+........
+........
+........
+...DE..H
+.BCSSFG.
+========
+Player 2:
+Downloaded: 0D, 2V
+Abilities: 4
+A: V1   B: ?    C: ?    D: ?
+E: ?    F: ?    G: ?    H: D4
+

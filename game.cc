@@ -100,13 +100,9 @@ void Game::printAbilities(ostream &out)
     players[currentPlayer].printAbilities(out);
 }
 
-pair<int, bool> Game::verifyAbility(int abilityID)
-{
-    pair<Ability, bool> abilityPair = players[currentPlayer]
-                                          .getAbility(abilityID);
-
-    if (abilityPair.first == Ability::Firewall)
-    {
+pair<int, bool> Game::verifyAbility(int abilityID) {
+    pair<Ability, bool> abilityPair = players[currentPlayer].getAbility(abilityID);
+    if (abilityPair.first == Ability::Firewall || abilityPair.first == Ability::Ambush) {
         return make_pair(2, abilityPair.second);
     }
     else if (abilityPair.first == Ability::Download ||
