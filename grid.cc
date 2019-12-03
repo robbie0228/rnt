@@ -285,7 +285,7 @@ void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user) {
     }
 }
 
-void Grid::printBoard(int currentPlayer) {
+void Grid::printBoard(int currentPlayer) const {
     textDisplay->draw(currentPlayer);
     if (useGraphics) graphicsDisplay->draw(currentPlayer);
 }

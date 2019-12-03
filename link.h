@@ -15,19 +15,19 @@ class Link {
         Link(LinkType type, int strength, char name);
 
         // Accessor/setter for type
-        LinkType getType();
+        LinkType getType() const;
         void setType(LinkType newType);
 
         // Accessor/setter for speed;
-        int getSpeed();
+        int getSpeed() const;
         void setSpeed(int newSpeed);
 
         // Accessor/setter for strength
-        int getStrength();
+        int getStrength() const;
         void setStrength(int newStrength);
 
         // Accessor for name
-        char getName();
+        char getName() const;
 };
 
 #endif

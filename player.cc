@@ -3,6 +3,12 @@
 
 using namespace std;
 
+// helper functions
+
+int getPlayerNumFromLink(char name) {
+    return name < 'a' ? 2 : 1;
+}
+
 // implementations
 
 Player::Player(int playerNumber): 
@@ -48,7 +54,7 @@ vector<Link *> Player::cmdInit(vector<Link> cmdLinks) {
     return linkPointers;
 }
 
-bool Player::isMyLink(char linkName) {
+bool Player::isMyLink(char linkName) const {
     if (playerNumber == 1) {
         return ('a' <= linkName && linkName <= 'h') && 
                 links[linkName - 'a'].getType() != LinkType::NoType;
@@ -59,7 +65,7 @@ bool Player::isMyLink(char linkName) {
     return false;
 }
 
-bool Player::isEnemyLink(char linkName) {
+bool Player::isEnemyLink(char linkName) const {
     if (playerNumber == 1) {
         return ('A' <= linkName && linkName <= 'H');
     } else {
@@ -68,7 +74,7 @@ bool Player::isEnemyLink(char linkName) {
     return false;
 }
 
-PlayStatus Player::checkStatus() {
+PlayStatus Player::checkStatus() const {
     if (downloadedDataCount >= 4) {
         return PlayStatus::Win;
     }
@@ -80,7 +86,7 @@ PlayStatus Player::checkStatus() {
     }
 }
 
-void Player::printAbilities(ostream& out) const{
+void Player::printAbilities(ostream& out) const {
     out << "Player " << playerNumber << "'s Abilities:" << endl;
     for (int i = 0; i < 5; ++i) {
         string abilityName;
@@ -104,7 +110,7 @@ void Player::printAbilities(ostream& out) const{
     }
 }
 
-pair<Ability, bool> Player::getAbility(int abilityID) {
+pair<Ability, bool> Player::getAbility(int abilityID) const {
     return abilities[abilityID - 1];
 }
 
@@ -160,10 +166,6 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo) {
     
     abilityActivated = abilityID;
     return abilities[abilityID - 1].first;
-}
-
-int getPlayerNumFromLink(char name) {
-    return name < 'a' ? 2 : 1;
 }
 
 void Player::doNotify(Subject &whoFrom) {
