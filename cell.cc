@@ -5,16 +5,14 @@
 using namespace std;
 
 void setStateAndNotify(Cell &cell,
-                       int downloadingPlayer, 
-                       char downloadingLinkName, 
-                       LinkType downloadingLinkType, 
-                       bool downloadingLinkIsRevealed, 
-                       bool linkIsRevealed, 
-                       int playerUsingAbility) {
+                       int downloadingPlayer = -1, 
+                       char downloadingLinkName = '.', 
+                       LinkType downloadingLinkType = LinkType::NoType,
+                       bool linkIsRevealed = false, 
+                       int playerUsingAbility = -1) {
     cell.setState(StateType{downloadingPlayer,
                         downloadingLinkName,
                         downloadingLinkType,
-                        downloadingLinkIsRevealed,
                         linkIsRevealed,
                         playerUsingAbility});
     cell.notifyObservers();
@@ -41,8 +39,7 @@ bool Cell::moveCellHere(Cell &cell) {
             setStateAndNotify(*this,
                               defensePlayer,
                               otherLink->getName(),
-                              otherLink->getType(),
-                              true, false, -1);
+                              otherLink->getType());
             return true;
         } else {
             throw "Invalid move";
@@ -52,14 +49,13 @@ bool Cell::moveCellHere(Cell &cell) {
             Link *tempLink = link;
             link = otherLink;
             setStateAndNotify(*this, -1, '.', LinkType::NoType,
-                              false, true, -1);
+                              true);
             if (otherLink->getType() == LinkType::Virus) {
                 link = tempLink;
                 setStateAndNotify(*this,
                                   attackPlayer,
                                   otherLink->getName(),
-                                  otherLink->getType(),
-                                  true, false, -1);
+                                  otherLink->getType());
                 return true;
             }
             link = tempLink;
@@ -67,8 +63,7 @@ bool Cell::moveCellHere(Cell &cell) {
     }
     if (link == nullptr) {
         link = cell.getLink();
-        setStateAndNotify(*this, -1, '.', LinkType::NoType,
-                          false, false, -1);
+        setStateAndNotify(*this);
         return false;
     } else {
         if (abs(otherLink->getName() - link->getName()) < NUMLINKS) {
@@ -82,14 +77,14 @@ bool Cell::moveCellHere(Cell &cell) {
                               attackPlayer,
                               downloadLinkName,
                               downloadLinkType,
-                              true, true, -1);
+                              true);
             return false;
         } else {
             setStateAndNotify(*this,
                               defensePlayer,
                               otherLink->getName(),
                               otherLink->getType(),
-                              true, true, -1);
+                              true);
             return true;
         }
     }
@@ -117,8 +112,7 @@ void Cell::useAbility(Ability a, int user) {
         {
             int currSpeed = this->link->getSpeed();
             this->link->setSpeed(1 + currSpeed);
-            setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
-                              false, user);
+            setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
             break;
         }
         case Ability::Polarize :
@@ -132,8 +126,7 @@ void Cell::useAbility(Ability a, int user) {
             } else {
                 this->link->setType(LinkType::Data);
             }
-            setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
-                              false, user);
+            setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
             break;
         }
         case Ability::Download :
@@ -144,18 +137,15 @@ void Cell::useAbility(Ability a, int user) {
         case Ability::Firewall : 
         {
             this->firewall = user;
-            setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
-                              false, user);
+            setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
             break;
         }
         case Ability::Scan :
-            setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
-                              true, user);
+            setStateAndNotify(*this, -1, '.', LinkType::NoType, true, user);
             break;
         default :
         {
-            setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
-                              false, user);
+            setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
             break;
         }
     }
@@ -163,8 +153,7 @@ void Cell::useAbility(Ability a, int user) {
 
 void Cell::removeLink() {
     link = nullptr;
-    setStateAndNotify(*this, -1, '.', LinkType::NoType,
-                      false, false, -1);
+    setStateAndNotify(*this);
 }
 
 void Cell::removeAndDownload(int downloadingPlayer, int playerUsingAbility) {
@@ -174,7 +163,7 @@ void Cell::removeAndDownload(int downloadingPlayer, int playerUsingAbility) {
     setStateAndNotify(*this, downloadingPlayer,
                       linkName,
                       linkType,
-                      false, false, playerUsingAbility);
+                      false, playerUsingAbility);
 }
 
 void Cell::setLink(Link *newLink) {
