@@ -6,7 +6,7 @@ if [ "$#" -ne 2 ]; then
 	exit 1
 fi
 
-# posuite, ./poprogram 
+# posuite, ./poprogram
 for s in $(cat ${1}); do
 	if [ -e "tests/$s.args" ]; then
 		${2} $(cat "tests/$s.args") < "tests/$s.in" > "tests/$s.out"

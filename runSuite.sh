@@ -11,7 +11,7 @@ do
         else
             ./RAIInet $(cat "tests/$file.args") > $temp
         fi
-    else 
+    else
         if [ -e "tests/$file.in" ]; then
             echo "sequence tests/$file.in quit" | ./RAIInet > $temp
         else
@@ -48,6 +48,6 @@ rm $temp
 
 if [ $failed -eq 1 ]; then
     exit 1
-else 
+else
     echo "All correct"
 fi
