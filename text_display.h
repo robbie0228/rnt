@@ -30,7 +30,7 @@ public:
     TextDisplay(vector<vector<char>> grid,
                 vector<vector<std::pair<char, std::string>>> links);
     // Commence cout sequence
-    void draw(int currentPlayer);
+    void draw(std::ostream &out, int currentPlayer);
 
 private:
     // Being notified

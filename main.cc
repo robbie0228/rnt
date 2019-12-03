@@ -284,7 +284,7 @@ int main(int argc, char *argv[])
             }
             else if (cmd == "board")
             {
-                game.printBoard();
+                game.printBoard(cout);
                 cout << endl;
             }
             else if (cmd == "sequence")
