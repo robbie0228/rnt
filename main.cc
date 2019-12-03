@@ -250,8 +250,9 @@ int main(int argc, char *argv[])
                     dir = Direction::Down;
                 }
                 else
+                {
                     throw "Invalid direction!";
-
+                }
                 game.move(link, dir);
             }
             else if (cmd == "abilities")
@@ -263,6 +264,12 @@ int main(int argc, char *argv[])
             {
                 int abilityID;
                 (*stream) >> abilityID;
+                if (!(*stream))
+                {
+                    (*stream).clear();
+                    (*stream).ignore();
+                    throw "Invalid ability!";
+                }
                 pair<int, bool> abilityInfo = game.verifyAbility(abilityID);
                 char c;
                 vector<char> useAbilityInfo;
