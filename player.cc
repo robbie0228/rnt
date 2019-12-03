@@ -3,11 +3,15 @@
 
 using namespace std;
 
+// implementations
+
 Player::Player(int playerNumber) : downloadedDataCount{0},
-                                   downloadedVirusCount{0},
-                                   playerNumber{playerNumber}
+Player::Player(int playerNumber): 
+                    downloadedDataCount{0}, 
+                    downloadedVirusCount{0}, 
+                    playerNumber{playerNumber},
+                    abilityActivated{0}
 {
-    // BFDSP: default sequence of Abilities
     abilities = {make_pair(Ability::Boost, 1),
                  make_pair(Ability::Firewall, 1),
                  make_pair(Ability::Download, 1),
@@ -151,25 +155,25 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo)
     case Ability::Boost:
         if (!isMyLink(abilityInfo[0]))
         {
-            throw "Invalid use of ability";
+                throw "Cannot use Link Boost on a link that is not yours!";
         }
         break;
     case Ability::Polarize:
         if (!isMyLink(abilityInfo[0]) && !isEnemyLink(abilityInfo[0]))
         {
-            throw "Invalid use of ability";
+                throw "Cannot use Polarize on an invalid link!";
         }
         break;
     case Ability::Download:
         if (!isEnemyLink(abilityInfo[0]))
         {
-            throw "Invalid use of ability";
+                throw "Cannot use Download on a link that is not your opponent's!";
         }
         break;
     case Ability::Scan:
         if (!isMyLink(abilityInfo[0]) && !isEnemyLink(abilityInfo[0]))
         {
-            throw "Invalid use of ability";
+                throw "Cannot use Scan on an invalid link!";
         }
         break;
     case Ability::Firewall :
@@ -182,23 +186,28 @@ Ability Player::useAbility(int abilityID, vector<char> abilityInfo)
             throw "Invalid use of ability";
         }
         break;
+        case Ability::Whey :
+            if (!isMyLink(abilityInfo[0])) {
+                throw "Cannot use Whey on a link that is not yours!";
+            }
+            break;
     case Ability::Ambush :
         if (!isMyLink(abilityInfo[0]) || !isEnemyLink(abilityInfo[1])) 
         {
-            throw "Invalid use of ability";
+                throw "Cannot use Ambush with the specified links!";
         }
         break;
     case Ability::Uber:
         if (!isMyLink(abilityInfo[0]))
         {
-            throw "Invalid use of ability";
+                throw "Cannot use Uber on a link that is not yours!";
         }
         break;
     default:
         break;
     }
-
-    abilities[abilityID - 1].second = false;
+    
+    abilityActivated = abilityID;
     return abilities[abilityID - 1].first;
 }
 
@@ -207,8 +216,7 @@ int getPlayerNumFromLink(char name)
     return name < 'a' ? 2 : 1;
 }
 
-void Player::notify(Subject &whoFrom)
-{
+void Player::doNotify(Subject &whoFrom) {
     StateType state = whoFrom.getState();
     if (state.downloadingPlayer == playerNumber)
     {
@@ -240,5 +248,9 @@ void Player::notify(Subject &whoFrom)
                     LinkType::NoType);
             }
         }
+    }
+    if (state.playerUsingAbility == playerNumber) {
+        abilities[abilityActivated - 1].second = false;
+        abilityActivated = 0;
     }
 }

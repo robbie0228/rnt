@@ -22,7 +22,7 @@ enum class Ability
     Whey, 
     Ambush,
 
-    NotAvailable
+    NoAbility
 };
 
 // Types of a Link

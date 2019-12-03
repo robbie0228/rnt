@@ -1,0 +1,24 @@
+board
+abilities
+ability 1 A
+ability 1 a
+board
+move a down
+abilities
+ability 1 a
+ability 1 A
+board
+move A up
+board
+ability 2 a
+move a down
+board
+ability 2 A
+move A up
+board
+ability 4 a
+move a down
+board
+move A up
+board
+quit

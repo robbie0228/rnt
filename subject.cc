@@ -20,3 +20,5 @@ StateType Subject::getState() const
 {
   return state;
 }
+
+InfoType Subject::getInfo() const { return doGetInfo(); }

@@ -35,8 +35,10 @@ class GraphicsDisplay : public Observer
 public:
     GraphicsDisplay(vector<vector<char>> grid,
                     vector<vector<std::pair<char, std::string>>> links);
-    void notify(Subject &whoFrom);
     void draw(int currentPlayer);
+private:
+   // Notify function called from cell
+    void doNotify(Subject &whoFrom);
 };
 
 #endif

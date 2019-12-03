@@ -31,10 +31,12 @@ public:
     // Constructor
     TextDisplay(vector<vector<char>> grid,
                 vector<vector<std::pair<char, std::string>>> links);
-    // Being notified
-    void notify(Subject &whoFrom);
     // Commence cout sequence 
     void draw(int currentPlayer);
+        
+    private:
+    // Being notified
+        void doNotify(Subject &whoFrom);
 };
 
 #endif

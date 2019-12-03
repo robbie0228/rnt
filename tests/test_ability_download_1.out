@@ -26,7 +26,7 @@ Player 1's Abilities:
 4: Scan, Unused
 5: Polarize, Unused
 
-Invalid use of ability
+Cannot use Download on a link that is not your opponent's!
 
 Player 1:
 Downloaded: 0D, 1V
@@ -46,7 +46,7 @@ abcSSfgh
 Player 2:
 Downloaded: 0D, 0V
 Abilities: 5
-A: ?    B: ?    C: ?    D: ?
+A: V1   B: ?    C: ?    D: ?
 E: ?    F: ?    G: ?    H: ?
 
 Player 1:
@@ -106,6 +106,6 @@ e: D1   f: D2   g: D3   h: D4
 Player 2:
 Downloaded: 0D, 1V
 Abilities: 4
-A: ?    B: ?    C: ?    D: ?
+A: V1   B: ?    C: ?    D: ?
 E: ?    F: ?    G: ?    H: ?
 

@@ -55,7 +55,7 @@ public:
         void setLink(Link *newLink);
 
         // Returns a set of information about this Cell contained in an InfoType
-        InfoType getInfo() const;
+        InfoType doGetInfo() const;
 };
 
 #endif

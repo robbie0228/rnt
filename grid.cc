@@ -268,10 +268,6 @@ void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user) {
         int row = abilityInfo[0] - '0';
         int col = abilityInfo[1] - '0';
 
-        if (row < 0 || row >= GRIDSIZE || col < 0 || col >= GRIDSIZE) {
-            throw "Invalid use of ability";
-        }
-
         cells[row][col].useAbility(Ability::Firewall, user);
 
     } else if (abilityName == Ability::Ambush) {
