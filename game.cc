@@ -85,7 +85,7 @@ pair<int, bool> Game::verifyAbility(int abilityID) {
         return make_pair(2, abilityPair.second);
     } else if (abilityPair.first == Ability::Download || abilityPair.first == Ability::Boost || 
                abilityPair.first == Ability::Scan || abilityPair.first == Ability::Polarize || 
-               abilityPair.first == Ability::Uber) {
+               abilityPair.first == Ability::Uber || abilityPair.first == Ability::Whey) {
         return make_pair(1, abilityPair.second);
     }
     return make_pair(0, false);

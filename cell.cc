@@ -153,9 +153,19 @@ void Cell::useAbility(Ability abilityName, int user) {
             break;
         }
         case Ability::Scan :
+        {
             setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
                               true, user);
             break;
+        }
+        case Ability::Whey :
+        {
+            int currStrength = this->link->getStrength();
+            this->link->setStrength(1 + currStrength);
+            setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
+                              false, user);
+            break;
+        }
         default :
         {
             setStateAndNotify(*this, -1, '.', LinkType::NoType, false,
