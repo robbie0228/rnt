@@ -23,9 +23,6 @@ struct StateType {
 	//   LinkType::NoType if no link
 	LinkType downloadingLinkType;
 
-	// Whether or not the link being downloaded is being revealed
-	bool downloadingLinkIsRevealed;
-
 	// Whether or not the link at this cell is being revealed
 	bool linkIsRevealed;
 
@@ -50,8 +47,10 @@ class Subject {
 		void notifyObservers();
 		void setState(StateType newS);
 		StateType getState() const;
-		virtual InfoType getInfo() const = 0;
+		InfoType getInfo() const;
 		virtual ~Subject() {};
+	private:
+		virtual InfoType doGetInfo() const = 0;
 };
 
 #endif

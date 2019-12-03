@@ -11,3 +11,5 @@ void Subject::notifyObservers() {
 void Subject::setState(StateType newS) { state = newS; }
 
 StateType Subject::getState() const { return state; }
+
+InfoType Subject::getInfo() const { return doGetInfo(); }

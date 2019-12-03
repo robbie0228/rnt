@@ -33,8 +33,10 @@ class TextDisplay : public Observer {
     public:
         TextDisplay(vector<vector<char>> grid, 
                     vector<vector<std::pair<char, std::string>>> links);
-        void notify(Subject &whoFrom);
         void draw(int currentPlayer);
+        
+    private:
+        void doNotify(Subject &whoFrom);
 };
 
 #endif

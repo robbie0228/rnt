@@ -18,7 +18,7 @@ GraphicsDisplay::GraphicsDisplay(
     abilityRemainingCounts = vector<int>(NUMPLAYERS, NUMABILITIES);
 }
 
-void GraphicsDisplay::notify(Subject &whoFrom) {
+void GraphicsDisplay::doNotify(Subject &whoFrom) {
     StateType state = whoFrom.getState();
     InfoType info = whoFrom.getInfo();
 
@@ -32,12 +32,10 @@ void GraphicsDisplay::notify(Subject &whoFrom) {
         }
 
         // When two links battle and the downloading link is revealed
-        if (state.downloadingLinkIsRevealed) {
-            if (state.downloadingLinkName - 'a' >= 0) {
-                knownLinks[linkDownloader][state.downloadingLinkName - 'a'] = true;
-            } else {
-                knownLinks[linkDownloader][state.downloadingLinkName - 'A'] = true;
-            }
+        if (state.downloadingLinkName - 'a' >= 0) {
+            knownLinks[1][state.downloadingLinkName - 'a'] = true;
+        } else {
+            knownLinks[0][state.downloadingLinkName - 'A'] = true;
         }
     }
 
