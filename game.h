@@ -1,12 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <vector>
-#include <iostream>
-#include <memory>
 #include "grid.h"
 #include "player.h"
-#include "enums.h"
 using std::pair;
 using std::vector;
 

@@ -9,7 +9,6 @@
 #include "cell.h"
 #include "text_display.h"
 #include "graphics_display.h"
-#include "enums.h"
 using std::vector;
 
 class Cell;

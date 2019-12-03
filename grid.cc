@@ -1,6 +1,5 @@
 #include "grid.h"
 #include "player.h"
-#include "enums.h"
 #include <time.h>
 
 using namespace std;

@@ -1,10 +1,8 @@
 #ifndef TEXT_H
 #define TEXT_H
 
-#include <vector>
 #include <iostream>
 #include <utility>
-#include <string>
 #include "subject.h"
 using std::vector;
 

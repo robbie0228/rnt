@@ -2,11 +2,9 @@
 #define GRAPHICSDISPLAY_H
 
 #include <iostream>
-#include <vector>
 #include <utility>
 #include <memory>
 #include "subject.h"
-#include "enums.h"
 #include "window.h"
 using std::vector;
 

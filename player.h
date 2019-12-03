@@ -2,9 +2,7 @@
 #define PLAYER_H
 
 #include <iostream>
-#include <vector>
 #include "subject.h"
-#include "enums.h"
 
 class Link;
 

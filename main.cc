@@ -1,8 +1,5 @@
 #include "game.h"
-#include <iostream>
 #include <fstream>
-#include <string>
-#include <utility>
 #include <algorithm>
 using namespace std;
 
