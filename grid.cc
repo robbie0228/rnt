@@ -285,7 +285,8 @@ void Grid::move(int player, int link, Direction dir)
             cellWithLink.removeLink();
         }
     }
-    if (useGraphics) {
+    if (useGraphics) 
+    {
         graphicsDisplay->draw((player + 1) % 2);
     }
 }
@@ -352,7 +353,8 @@ void Grid::useAbility(Ability abilityName, vector<char> abilityInfo, int user)
         int rowOfLink = locationOfLinks[playerIndex][linkIndex].first;
         int colOfLink = locationOfLinks[playerIndex][linkIndex].second;
 
-        if (rowOfLink == -1 && colOfLink == -1) {
+        if (rowOfLink == -1 && colOfLink == -1) 
+        {
             throw "Cannot use ability on a dead link!";
         }
 

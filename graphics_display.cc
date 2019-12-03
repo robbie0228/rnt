@@ -252,11 +252,11 @@ void GraphicsDisplay::draw(int currentPlayer)
             {
                 // Add circle with the notifying piece's colour
                 win->fillArc(pieceSize * col + paddingWidth,
-                            100 + pieceSize * row + paddingWidth,
-                            pieceSize - (2 * paddingWidth),
-                            pieceSize - (2 * paddingWidth),
-                            0, 23040,
-                            colour);
+                             100 + pieceSize * row + paddingWidth,
+                             pieceSize - (2 * paddingWidth),
+                             pieceSize - (2 * paddingWidth),
+                             0, 23040,
+                             colour);
             }
             pair<size_t, size_t> offset =
                 getOffsetToCenterString(name,
