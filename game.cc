@@ -85,7 +85,7 @@ void Game::move(char link, Direction dir)
     if ((link < 'a' && currentPlayer == 0) ||
         (link >= 'a' && currentPlayer == 1))
     {
-        throw "Cannot move opponent's piece!";
+        throw "Invalid link!";
     }
 
     this->grid->move(currentPlayer, charLinkToInt(link), dir);

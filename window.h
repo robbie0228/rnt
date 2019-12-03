@@ -28,7 +28,11 @@ public:
 		Black,
 		Red,
 		Green,
-		Blue
+		Blue,
+		Pink,
+		Turquoise,
+		Yellow,
+		Grey
 	}; // Available colours.
 
 	// Draws a rectangle
