@@ -139,9 +139,9 @@ void Game::useAbility(int abilityID, vector<char> useAbilityInfo)
     }
 }
 
-void Game::printBoard() const
+void Game::printBoard(ostream &out) const
 {
-    grid->printBoard(currentPlayer);
+    grid->printBoard(out, currentPlayer);
 }
 
 void Game::printAbilities(ostream &out) const

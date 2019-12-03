@@ -1,11 +1,8 @@
 #ifndef GRID_H
 #define GRID_H
 
-#include <vector>
 #include <utility>
-#include <iostream>
 #include <memory>
-#include <string>
 #include "cell.h"
 #include "text_display.h"
 #include "graphics_display.h"
@@ -48,7 +45,7 @@ public:
     void useAbility(Ability a, vector<char> v, int user);
 
     // Calls any type of Display to draw
-    void printBoard(int currentPlayer) const;
+    void printBoard(std::ostream &out, int currentPlayer) const;
 };
 
 #endif

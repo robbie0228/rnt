@@ -87,45 +87,45 @@ void TextDisplay::doNotify(Subject &whoFrom)
     }
 }
 
-void TextDisplay::draw(int currentPlayer)
+void TextDisplay::draw(ostream &out, int currentPlayer)
 {
-    cout << "Player 1:" << endl
-         << "Downloaded: " << downloadedCounts[0].first << "D, "
-         << downloadedCounts[0].second << "V" << endl
-         << "Abilities: " << abilityRemainingCounts[0] << endl;
+    out << "Player 1:" << endl
+        << "Downloaded: " << downloadedCounts[0].first << "D, "
+        << downloadedCounts[0].second << "V" << endl
+        << "Abilities: " << abilityRemainingCounts[0] << endl;
 
     if (currentPlayer == 0)
     {
         for (int i = 0; i < 8; ++i)
         {
-            cout << links[0][i].first << ": "
-                 << links[0][i].second;
+            out << links[0][i].first << ": "
+                << links[0][i].second;
             if (i == 3 || i == 7)
-                cout << endl;
+                out << endl;
             else
-                cout << "   ";
+                out << "   ";
         }
     }
     else if (currentPlayer == 1)
     {
         for (int i = 0; i < 8; ++i)
         {
-            cout << links[0][i].first << ": ";
+            out << links[0][i].first << ": ";
             if (knownLinks[1][i])
             {
-                cout << links[0][i].second;
+                out << links[0][i].second;
                 if (i == 3 || i == 7)
-                    cout << endl;
+                    out << endl;
                 else
-                    cout << "   ";
+                    out << "   ";
             }
             else
             {
-                cout << "?";
+                out << "?";
                 if (i == 3 || i == 7)
-                    cout << endl;
+                    out << endl;
                 else
-                    cout << "    ";
+                    out << "    ";
             }
         }
     }
@@ -134,44 +134,44 @@ void TextDisplay::draw(int currentPlayer)
         throw "!This player does not exist!";
     }
 
-    cout << string(8, '=') << endl;
+    out << string(8, '=') << endl;
 
     for (int row = 0; row < GRIDSIZE; ++row)
     {
         for (int col = 0; col < GRIDSIZE; ++col)
         {
-            cout << grid[row][col];
+            out << grid[row][col];
         }
-        cout << endl;
+        out << endl;
     }
 
-    cout << string(8, '=') << endl;
+    out << string(8, '=') << endl;
 
-    cout << "Player 2:" << endl
-         << "Downloaded: " << downloadedCounts[1].first << "D, "
-         << downloadedCounts[1].second << "V" << endl
-         << "Abilities: " << abilityRemainingCounts[1] << endl;
+    out << "Player 2:" << endl
+        << "Downloaded: " << downloadedCounts[1].first << "D, "
+        << downloadedCounts[1].second << "V" << endl
+        << "Abilities: " << abilityRemainingCounts[1] << endl;
 
     if (currentPlayer == 0)
     {
         for (int i = 0; i < 8; ++i)
         {
-            cout << links[1][i].first << ": ";
+            out << links[1][i].first << ": ";
             if (knownLinks[0][i])
             {
-                cout << links[1][i].second;
+                out << links[1][i].second;
                 if (i == 3 || i == 7)
-                    cout << endl;
+                    out << endl;
                 else
-                    cout << "   ";
+                    out << "   ";
             }
             else
             {
-                cout << "?";
+                out << "?";
                 if (i == 3 || i == 7)
-                    cout << endl;
+                    out << endl;
                 else
-                    cout << "    ";
+                    out << "    ";
             }
         }
     }
@@ -179,12 +179,12 @@ void TextDisplay::draw(int currentPlayer)
     {
         for (int i = 0; i < 8; ++i)
         {
-            cout << links[1][i].first << ": "
-                 << links[1][i].second;
+            out << links[1][i].first << ": "
+                << links[1][i].second;
             if (i == 3 || i == 7)
-                cout << endl;
+                out << endl;
             else
-                cout << "   ";
+                out << "   ";
         }
     }
     else
