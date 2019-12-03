@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
     // empty, 1 or 2 pairs of <playerNumber, 8 Links>
     vector<pair<int, vector<Link>>> allLinks;
     // Whether or not to use graphics
-    bool useGraphics;
+    bool useGraphics = false;
 
     try
     {
