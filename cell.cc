@@ -47,6 +47,10 @@ bool Cell::moveCellHere(Cell &cell)
                               otherLink->getType());
             return true;
         }
+        else
+        {
+            throw "Cannot move into your own server ports!";
+        }
     }
     else if (firewall)
     {

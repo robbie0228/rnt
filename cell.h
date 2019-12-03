@@ -54,6 +54,7 @@ public:
         // Set this Cell's link (pointer) to newLink
         void setLink(Link *newLink);
 
+private:
         // Returns a set of information about this Cell contained in an InfoType
         InfoType doGetInfo() const;
 };
