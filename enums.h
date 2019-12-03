@@ -18,8 +18,8 @@ enum class Ability
     Scan,
     Polarize,
 
-    Uber, 
-    Whey, 
+    Uber,
+    Whey,
     Ambush,
 
     NoAbility

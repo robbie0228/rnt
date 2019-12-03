@@ -19,7 +19,7 @@ void getIndicesFromName(char linkName, int &linkIndex, int &playerIndex)
     }
     else
     {
-        throw "Invalid link";
+        throw "!Invalid link!";
     }
     return;
 }

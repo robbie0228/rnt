@@ -3,17 +3,17 @@
 using namespace std;
 
 void setStateAndNotify(Cell &cell,
-                       int downloadingPlayer = -1, 
-                       char downloadingLinkName = '.', 
+                       int downloadingPlayer = -1,
+                       char downloadingLinkName = '.',
                        LinkType downloadingLinkType = LinkType::NoType,
-                       bool linkIsRevealed = false, 
-                       int playerUsingAbility = -1) 
+                       bool linkIsRevealed = false,
+                       int playerUsingAbility = -1)
 {
     cell.setState(StateType{downloadingPlayer,
-                        downloadingLinkName,
-                        downloadingLinkType,
-                        linkIsRevealed,
-                        playerUsingAbility});
+                            downloadingLinkName,
+                            downloadingLinkType,
+                            linkIsRevealed,
+                            playerUsingAbility});
     cell.notifyObservers();
 }
 
@@ -52,14 +52,14 @@ bool Cell::moveCellHere(Cell &cell)
             return true;
         }
     }
-    else if (firewall) 
+    else if (firewall)
     {
         if (firewall == defenderNumber)
         {
             Link *tempLink = link;
             link = otherLink;
             setStateAndNotify(*this, -1, '.', LinkType::NoType, true);
-            if (otherLink->getType() == LinkType::Virus) 
+            if (otherLink->getType() == LinkType::Virus)
             {
                 link = tempLink;
                 setStateAndNotify(*this,
@@ -71,7 +71,7 @@ bool Cell::moveCellHere(Cell &cell)
             link = tempLink;
         }
     }
-    if (link == nullptr) 
+    if (link == nullptr)
     {
         link = cell.getLink();
         setStateAndNotify(*this);
@@ -128,63 +128,63 @@ void Cell::useAbility(Ability abilityName, int user)
 {
     switch (abilityName)
     {
-        case Ability::Boost :
+    case Ability::Boost:
+    {
+        int currSpeed = this->link->getSpeed();
+        this->link->setSpeed(1 + currSpeed);
+        setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
+        break;
+    }
+    case Ability::Polarize:
+    {
+        LinkType currType = this->link->getType();
+        if (currType == LinkType::Data)
         {
-            int currSpeed = this->link->getSpeed();
-            this->link->setSpeed(1 + currSpeed);
-            setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
-            break;
-        }
-        case Ability::Polarize : 
-        {
-            LinkType currType = this->link->getType();
-            if (currType == LinkType::Data)
+            this->link->setType(LinkType::Virus);
+            if (firewall == (getPlayerNumFromLink(link) % 2) + 1)
             {
-                this->link->setType(LinkType::Virus);
-                if (firewall == (getPlayerNumFromLink(link) % 2) + 1)
-                {
-                    removeAndDownload(getPlayerNumFromLink(link), -1);
-                }
-            } 
-            else
-            {
-                this->link->setType(LinkType::Data);
+                removeAndDownload(getPlayerNumFromLink(link), -1);
             }
-            setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
-            break;
         }
-        case Ability::Download :
+        else
         {
-            this->removeAndDownload(user, user);
-            break;
+            this->link->setType(LinkType::Data);
         }
-        case Ability::Firewall : 
+        setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
+        break;
+    }
+    case Ability::Download:
+    {
+        this->removeAndDownload(user, user);
+        break;
+    }
+    case Ability::Firewall:
+    {
+        if (this->getName() != '.')
         {
-            if (this->getName() != '.')
-            {
-                throw "Cell is not empty, cannot place Firewall!";
-            }
-            this->firewall = user;
-            setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
-            break;
+            throw "Cell is not empty, cannot place Firewall!";
         }
-        case Ability::Scan :
-        {
-            setStateAndNotify(*this, -1, '.', LinkType::NoType, true, user);
-            break;
-        }
-        case Ability::Whey :
-        {
-            int currStrength = this->link->getStrength();
-            this->link->setStrength(1 + currStrength);
-            setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
-            break;
-        }
-        default :
-        {
-            setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
-            break;
-        }
+        this->firewall = user;
+        setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
+        break;
+    }
+    case Ability::Scan:
+    {
+        setStateAndNotify(*this, -1, '.', LinkType::NoType, true, user);
+        break;
+    }
+    case Ability::Whey:
+    {
+        int currStrength = this->link->getStrength();
+        this->link->setStrength(1 + currStrength);
+        setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
+        break;
+    }
+    default:
+    {
+        setStateAndNotify(*this, -1, '.', LinkType::NoType, false, user);
+        break;
+    }
     }
 }
 

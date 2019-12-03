@@ -36,8 +36,9 @@ public:
     GraphicsDisplay(vector<vector<char>> grid,
                     vector<vector<std::pair<char, std::string>>> links);
     void draw(int currentPlayer);
+
 private:
-   // Notify function called from cell
+    // Notify function called from cell
     void doNotify(Subject &whoFrom);
 };
 

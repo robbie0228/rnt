@@ -55,10 +55,11 @@ public:
 	void notifyObservers();
 	void setState(StateType newS);
 	StateType getState() const;
-		InfoType getInfo() const;
+	InfoType getInfo() const;
 	virtual ~Subject(){};
-	private:
-		virtual InfoType doGetInfo() const = 0;
+
+private:
+	virtual InfoType doGetInfo() const = 0;
 };
 
 #endif

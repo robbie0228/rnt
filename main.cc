@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
     {
         if (argc > MAXCMDLINEARGS + 1)
         {
-            throw "Too many command line arguments given";
+            throw "Too many command line arguments given!";
         }
         for (int i = 1; i < argc; ++i)
         {
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
             {
                 string abilities = argv[i + 1];
                 if (abilities.length() != NUMABILITIES)
-                    throw "Invalid abilities";
+                    throw "Invalid abilities!";
 
                 string sorted = abilities;
                 sort(sorted.begin(), sorted.end());
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
                 {
                     if (sorted[j] == sorted[j - 1] &&
                         sorted[j] == sorted[j + 1])
-                        throw "Invalid abilities";
+                        throw "Invalid abilities!";
                 }
 
                 ++i;
@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
             {
                 string abilities = argv[i + 1];
                 if (abilities.length() != NUMABILITIES)
-                    throw "Invalid abilities";
+                    throw "Invalid abilities!";
 
                 string sorted = abilities;
                 sort(sorted.begin(), sorted.end());
@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
                 {
                     if (sorted[j] == sorted[j - 1] &&
                         sorted[j] == sorted[j + 1])
-                        throw "Invalid abilities";
+                        throw "Invalid abilities!";
                 }
 
                 ++i;
@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
             {
                 string links = argv[i + 1];
                 if (links.length() != NUMLINKS * 2)
-                    throw "Invalid links";
+                    throw "Invalid links!";
 
                 vector<bool> verification = vector<bool>(NUMLINKS, false);
                 for (int j = 1; j < NUMLINKS * 2; j += 2)
@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
                 for (int j = 0; j < NUMLINKS; ++j)
                 {
                     if (!verification[j])
-                        throw "Invalid links";
+                        throw "Invalid links!";
                 }
 
                 ++i;
@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
             {
                 string links = argv[i + 1];
                 if (links.length() != NUMLINKS * 2)
-                    throw "Invalid links";
+                    throw "Invalid links!";
 
                 vector<bool> verification = vector<bool>(NUMLINKS, false);
                 for (int j = 1; j < NUMLINKS * 2; j += 2)
@@ -163,7 +163,7 @@ int main(int argc, char *argv[])
                 for (int j = 0; j < NUMLINKS; ++j)
                 {
                     if (!verification[j])
-                        throw "Invalid links";
+                        throw "Invalid links!";
                 }
 
                 ++i;
@@ -175,7 +175,7 @@ int main(int argc, char *argv[])
                 useGraphics = true;
             }
             else
-                throw "Invalid command line argument given";
+                throw "Invalid command line argument given!";
         }
     }
     catch (char const *e)
@@ -219,7 +219,7 @@ int main(int argc, char *argv[])
                 else if (dirtemp == "down")
                     dir = Direction::Down;
                 else
-                    throw "invalid direction";
+                    throw "Invalid direction!";
 
                 game.move(link, dir);
             }
@@ -247,7 +247,7 @@ int main(int argc, char *argv[])
                 }
                 else 
                 {
-                    cout << "Ability is unavailable" << endl;
+                    cout << "Ability is unavailable!" << endl;
                     cout << endl;
                 }
             }
@@ -269,7 +269,7 @@ int main(int argc, char *argv[])
             }
             else
             {
-                throw "invalid command";
+                throw "Invalid command!";
             }
         }
         catch (char const *e)

@@ -23,7 +23,7 @@ class Player : public Observer
     // The Player's 5 pairs of <abilityName, notUsed?>
     std::vector<std::pair<Ability, bool>> abilities;
 
-        int abilityActivated;
+    int abilityActivated;
 
 public:
     // Constructor for a Player
@@ -57,9 +57,9 @@ public:
     // Marks the ability specified as used
     Ability useAbility(int abilityID, vector<char> abilityInfo);
 
-    private:
+private:
     // Player gets notified by a Subject
-        void doNotify(Subject &whoFrom);
+    void doNotify(Subject &whoFrom);
 };
 
 #endif

@@ -9,7 +9,7 @@ int charLinkToInt(char c)
     else if ('A' <= c && c <= 'H')
         return c - 'A';
     else
-        throw "Invalid Link";
+        throw "!Invalid Link!";
 }
 
 Game::Game(vector<pair<int, vector<pair<Ability, bool>>>> cmdAllAbilities,
