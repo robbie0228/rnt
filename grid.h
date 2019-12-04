@@ -42,7 +42,9 @@ public:
     void move(int player, int link, Direction dir);
 
     // Uses ability
-    void useAbility(Ability a, vector<char> v, int user);
+    void useAbility(Ability abilityName, 
+                    vector<char> abilityInfo, 
+                    int user);
 
     // Calls any type of Display to draw
     void printBoard(std::ostream &out, int currentPlayer) const;
