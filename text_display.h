@@ -12,7 +12,6 @@ class TextDisplay : public Observer
     vector<vector<char>> grid;
 
     // 2 player's 8 of pair(a-hA-H, D/V1-8)
-    //   note that Copping 2 to have 4 steroids makes a max strength of 8
     vector<vector<std::pair<char, std::string>>> links;
 
     // 2 player's 8 of the other player's links' reveal status
